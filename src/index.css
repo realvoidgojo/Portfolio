@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+html,
+body,
+#root {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #111827;
+    /* bg-gray-900 */
+    color: white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;
+    /* bg-gray-800 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0d9488;
+    /* teal-600 */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0f766e;
+    /* teal-700 */
+}
+
+/* Container sizing for consistency */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Enhanced focus styling */
+:focus {
+    outline: 2px solid #14b8a6;
+    /* teal-500 */
+    outline-offset: 2px;
+}
+
+/* Improved link styling */
+a {
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Glass effect utility classes */
+.glass-effect {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(31, 41, 55, 0.7);
+    /* bg-gray-800 with opacity */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animation utilities */
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Text gradient utility */
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #5eead4, #14b8a6);
+    /* teal-300 to teal-500 */
+}
+
+/* For the navbar active state */
+.nav-link.active {
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #0d9488;
+    /* teal-600 */
+    border-radius: 4px;
+}
+
+/* Card hover effects */
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(20, 184, 166, 0.3);
+    /* teal-500 with opacity */
+}
+
+/* Remove any pointer-events: none that might be affecting the entire document */
+html,
+body {
+    pointer-events: auto !important;
+}
+
+/* Ensure buttons and inputs are clickable */
+button,
+a,
+input,
+textarea,
+select {
+    pointer-events: auto !important;
+}
+
+/* Fix for motion.div potentially blocking interactions */
+.motion-div {
+    pointer-events: auto !important;
+}

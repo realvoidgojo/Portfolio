@@ -1,0 +1,319 @@
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { GithubIcon, ExternalLink, Code, X } from "lucide-react";
+
+interface Project {
+  title: string;
+  description: string;
+  detailedDescription?: string;
+  tags: string[];
+  image: string;
+  githubLink: string;
+  liveLink: string;
+  features?: string[];
+}
+
+const projects: Project[] = [
+  {
+    title: "Video Analytics Platform",
+    description:
+      "Real-time video surveillance system built for Cyberthon 2025 with object detection and heatmap analytics.",
+    detailedDescription:
+      "This video analytics platform was my finalist entry for Cyberthon 2025. It features YOLOv8-based object detection, heatmap analytics for movement tracking, real-time WebSocket streaming, and a modern React frontend with a Flask+Celery backend for efficient processing.",
+    tags: ["Python", "Flask", "Celery", "YOLOv8", "React"],
+    // Replace with a more reliable image
+    image:
+      "https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/VideoAnalytics-Cyberthon",
+    liveLink: "",
+    features: [
+      "YOLOv8-based object detection",
+      "Real-time heatmap analytics",
+      "WebSocket streaming",
+      "Flask+Celery backend",
+      "React frontend dashboard",
+    ],
+  },
+  {
+    title: "RTO Lookup India",
+    description:
+      "A lightweight React web app to look up Indian RTO and vehicle data from registration numbers.",
+    detailedDescription:
+      "RTO Lookup India is a minimalist React application designed to quickly retrieve details about Indian vehicles from their registration numbers. It features a clean UI for fast access, responsive design, and comprehensive data about RTOs across India.",
+    tags: ["React", "JavaScript", "Web Development"],
+    // Replace with a more reliable image
+    image:
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/rto-lookup",
+    liveLink: "https://india-rto-lookup.netlify.app/",
+    features: [
+      "Registration number lookup",
+      "State and district information",
+      "Vehicle category details",
+      "Clean, minimal UI",
+      "Fast response time",
+    ],
+  },
+  {
+    title: "NatasX CTF Solver",
+    description:
+      "Python-based automation script solving all levels (0-34) of the OverTheWire Natas challenge.",
+    detailedDescription:
+      "NatasX is a comprehensive automation tool that solves all 34 levels of the popular OverTheWire Natas web security challenge. It demonstrates practical understanding of web vulnerabilities, session management, and automation techniques using Python.",
+    tags: ["Python", "Cybersecurity", "CTF", "Automation"],
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/natas-x",
+    liveLink: "",
+    features: [
+      "Session-based navigation",
+      "Regex parsing and bypass logic",
+      "Automated exploitation",
+      "Web security concept demonstrations",
+      "Educational purpose documentation",
+    ],
+  },
+];
+
+const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const openProject = (project: Project) => {
+    setSelectedProject(project);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeProject = () => {
+    setSelectedProject(null);
+    document.body.style.overflow = "auto";
+  };
+
+  // Explicit click handler to ensure event fires
+  const handleProjectClick = (e: React.MouseEvent, project: Project) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openProject(project);
+  };
+
+  // Explicit close handler
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeProject();
+  };
+
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="py-20 bg-gray-900"
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center justify-center mb-16">
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="bg-teal-500/20 p-3 rounded-full mb-4"
+          >
+            <Code className="w-8 h-8 text-teal-400" />
+          </motion.div>
+          <h2 className="text-4xl font-bold text-white mb-4 text-center">
+            Featured Projects
+          </h2>
+          <p className="text-gray-400 max-w-2xl text-center">
+            Here are some of my recent works. Each project reflects my passion
+            for creating intuitive and functional web applications.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 h-full flex flex-col"
+              whileHover={{ y: -10 }}
+              style={{ pointerEvents: "auto" }}
+            >
+              <div className="h-48 overflow-hidden relative group">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-teal-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <button
+                    onClick={(e) => handleProjectClick(e, project)}
+                    className="bg-white text-teal-800 px-4 py-2 rounded-lg font-medium transform scale-0 group-hover:scale-100 transition-transform duration-300"
+                    style={{ pointerEvents: "auto" }}
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+              <div className="p-6 flex-grow">
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {project.title}
+                </h3>
+                <p className="text-gray-300 mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-xs rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="p-6 pt-0 mt-auto">
+                <div className="flex space-x-4">
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-gray-300 hover:text-teal-400 transition-colors"
+                    style={{ pointerEvents: "auto" }}
+                  >
+                    <GithubIcon size={18} className="mr-1" />
+                    <span>Code</span>
+                  </a>
+                  {project.liveLink && ( // Only show live demo link if it exists
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-300 hover:text-teal-400 transition-colors"
+                      style={{ pointerEvents: "auto" }}
+                    >
+                      <ExternalLink size={18} className="mr-1" />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="flex justify-center mt-12">
+          <motion.a
+            href="/more-projects"
+            className="inline-flex items-center bg-transparent border border-teal-500 text-teal-400 px-6 py-3 rounded-lg hover:bg-teal-500/10 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{ pointerEvents: "auto" }}
+          >
+            <span>View All Projects</span>
+            <ExternalLink size={18} className="ml-2" />
+          </motion.a>
+        </div>
+      </div>
+
+      {/* Project Details Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            onClick={handleCloseClick}
+            style={{ pointerEvents: "auto" }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+              style={{ pointerEvents: "auto" }}
+            >
+              <div className="h-72 md:h-80 relative">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  onClick={handleCloseClick}
+                  className="absolute top-4 right-4 bg-black/80 hover:bg-teal-800 text-white p-2 rounded-full transition-colors"
+                  aria-label="Close modal"
+                  style={{ pointerEvents: "auto" }}
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="p-8">
+                <h2 className="text-3xl font-bold text-white mb-2">
+                  {selectedProject.title}
+                </h2>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedProject.tags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-sm rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+                  {selectedProject.detailedDescription}
+                </p>
+
+                <div className="mb-8">
+                  <h3 className="text-xl font-semibold text-white mb-4">
+                    Key Features
+                  </h3>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {selectedProject.features?.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="bg-teal-500/20 p-1 rounded-full mr-3 mt-1">
+                          <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
+                        </div>
+                        <span className="text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex space-x-4">
+                  <a
+                    href={selectedProject.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+                    style={{ pointerEvents: "auto" }}
+                  >
+                    <GithubIcon size={18} className="mr-2" />
+                    <span>View Source Code</span>
+                  </a>
+                  {selectedProject.liveLink && ( // Only show live demo button if there's a link
+                    <a
+                      href={selectedProject.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg transition-colors"
+                      style={{ pointerEvents: "auto" }}
+                    >
+                      <ExternalLink size={18} className="mr-2" />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.section>
+  );
+};
+
+export default Projects;
