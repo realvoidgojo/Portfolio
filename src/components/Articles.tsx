@@ -20,7 +20,7 @@ const articles: Article[] = [
     date: "September 10, 2024",
     image:
       "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    link: "https://medium.com/@realvoidogojo/cygenix-ctf-2024-the-encrypted-trilogy-writeup",
+    link: "https://medium.com/@realvoidogojo/cygenix-ctf-2024-the-encrypted-trilogy-writeup-c50f74011369",
     tags: ["CTF", "Cryptography", "Writeup"],
   },
   {
@@ -31,7 +31,7 @@ const articles: Article[] = [
     date: "July 20, 2024",
     image:
       "https://images.unsplash.com/photo-1551645120-d70bfe84c826?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    link: "https://medium.com/@realvoidogojo/the-real-cause-behind-recent-windows-outages",
+    link: "https://medium.com/@realvoidogojo/the-real-cause-behind-recent-windows-outages-a-deep-dive-into-crowdstrikes-faulty-update-f243d740ff7e",
     tags: ["Cybersecurity", "Windows", "CrowdStrike"],
   },
   {
@@ -41,7 +41,7 @@ const articles: Article[] = [
     date: "June 10, 2024",
     image:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    link: "https://medium.com/@realvoidogojo/how-to-setup-vulnhub-machine-vmdk-in-oracle-virtualbox",
+    link: "https://medium.com/@realvoidogojo/how-to-setup-vulnhub-machine-vmdk-in-oracle-virtualbox-0a602ec550e4",
     tags: ["Tutorial", "VulnHub", "VirtualBox"],
   },
   {
@@ -51,7 +51,7 @@ const articles: Article[] = [
     date: "May 20, 2024",
     image:
       "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    link: "https://medium.com/@realvoidogojo/difference-between-cve-cwe",
+    link: "https://medium.com/@realvoidogojo/difference-b-w-cve-cwe-618ccdb00749",
     tags: ["Cybersecurity", "CVE", "CWE"],
   },
 ];

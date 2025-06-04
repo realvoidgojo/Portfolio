@@ -25,7 +25,8 @@ interface CodingProfile {
   description: string; // Added description field
 }
 
-const codingProfiles: CodingProfile[] = [
+// Renamed from Profiles to profilesData to avoid naming conflict
+const profilesData: CodingProfile[] = [
   {
     platform: "GitHub",
     username: "realvoidgojo",
@@ -80,7 +81,7 @@ const codingProfiles: CodingProfile[] = [
       "Technical Guides",
     ],
     stats: {},
-    link: "https://medium.com/@realvoidgojo", // Fixed typo here
+    link: "https://medium.com/@realvoidgojo",
     icon: <BookOpen />,
     color: "from-green-500 to-green-700",
     description:
@@ -88,7 +89,7 @@ const codingProfiles: CodingProfile[] = [
   },
 ];
 
-const CodingProfiles = () => {
+const Profiles = () => {
   // Animation variants for children elements
   const containerVariants = {
     animate: {
@@ -111,7 +112,7 @@ const CodingProfiles = () => {
 
   return (
     <PageLayout
-      title="Coding Profiles"
+      title="Profiles"
       icon={<Code className="w-8 h-8 text-teal-400" />}
     >
       <div className="mb-10 text-center max-w-2xl mx-auto">
@@ -125,7 +126,7 @@ const CodingProfiles = () => {
         variants={containerVariants}
         className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
       >
-        {codingProfiles.map((profile, index) => (
+        {profilesData.map((profile, index) => (
           <motion.div
             key={index}
             variants={itemVariants}
@@ -179,4 +180,4 @@ const CodingProfiles = () => {
   );
 };
 
-export default CodingProfiles;
+export default Profiles;

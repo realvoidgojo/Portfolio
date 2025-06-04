@@ -15,6 +15,8 @@ body {
     /* bg-gray-900 */
     color: white;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+    /* Prevent horizontal overflow */
 }
 
 #root {
@@ -30,9 +32,14 @@ body {
     flex-shrink: 0;
 }
 
-/* Custom scrollbar */
+/* Enhanced smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar with smoother appearance */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -43,7 +50,8 @@ body {
 ::-webkit-scrollbar-thumb {
     background: #0d9488;
     /* teal-600 */
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 2px solid #1f2937;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -71,18 +79,25 @@ a {
     transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-/* Glass effect utility classes */
+/* Enhanced glass effect utility classes */
 .glass-effect {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(31, 41, 55, 0.7);
-    /* bg-gray-800 with opacity */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(31, 41, 55, 0.65);
+    /* No border to remove the white line */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.16);
+}
+
+.glass-effect-light {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Animation utilities */
 .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -91,7 +106,7 @@ a {
     }
 
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-12px);
     }
 
     100% {
@@ -99,47 +114,113 @@ a {
     }
 }
 
-/* Text gradient utility */
+/* Enhanced text gradient utility */
 .text-gradient {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to right, #5eead4, #14b8a6);
-    /* teal-300 to teal-500 */
+    background-image: linear-gradient(to right, #5eead4, #14b8a6, #0d9488);
+    /* teal-300 to teal-600 */
 }
 
-/* For the navbar active state */
+/* Enhanced card hover effects */
+.card-hover {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px -5px rgba(20, 184, 166, 0.25),
+        0 8px 15px -6px rgba(20, 184, 166, 0.1);
+}
+
+/* Reveal animations */
+.reveal-top {
+    animation: reveal-top 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+    opacity: 0;
+}
+
+@keyframes reveal-top {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced button styles */
+.button-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.button-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: skewX(-25deg);
+    transition: 0.75s ease;
+}
+
+.button-effect:hover::after {
+    left: 100%;
+}
+
+/* For particles effect */
+#tsparticles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Improved blur effect for modals */
+.modal-backdrop {
+    backdrop-filter: blur(8px);
+    background-color: rgba(10, 15, 30, 0.75);
+}
+
+/* Improved navbar active state with subtle animation */
 .nav-link.active {
     position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
     width: 100%;
     height: 2px;
-    background: #0d9488;
-    /* teal-600 */
+    background: linear-gradient(90deg, #0d9488, #2dd4bf, #0d9488);
     border-radius: 4px;
+    animation: pulse 2s infinite;
 }
 
-/* Card hover effects */
-.card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
 
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(20, 184, 166, 0.3);
-    /* teal-500 with opacity */
-}
+    50% {
+        opacity: 1;
+    }
 
-/* Remove any pointer-events: none that might be affecting the entire document */
-html,
-body {
-    pointer-events: auto !important;
+    100% {
+        opacity: 0.7;
+    }
 }
 
 /* Ensure buttons and inputs are clickable */
@@ -151,7 +232,67 @@ select {
     pointer-events: auto !important;
 }
 
-/* Fix for motion.div potentially blocking interactions */
-.motion-div {
-    pointer-events: auto !important;
+/* Card effect with subtle shimmer */
+.card-shimmer {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-shimmer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to bottom right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    transform: rotate(-45deg);
+    animation: shimmer 8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: rotate(-45deg) translateX(-50%);
+    }
+
+    100% {
+        transform: rotate(-45deg) translateX(100%);
+    }
+}
+
+/* Typing animation enhancement - fix vertical alignment */
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background-color: #2dd4bf;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    /* Changed from text-top to middle for better alignment */
+    position: relative;
+    top: -1px;
+    /* Fine-tuning vertical position */
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Extra small text for mobile */
+.text-2xs {
+    font-size: 0.65rem;
+    line-height: 0.85rem;
 }

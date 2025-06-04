@@ -20,7 +20,7 @@ const projects: Project[] = [
       "Real-time video surveillance system built for Cyberthon 2025 with object detection and heatmap analytics.",
     detailedDescription:
       "This video analytics platform was my finalist entry for Cyberthon 2025. It features YOLOv8-based object detection, heatmap analytics for movement tracking, real-time WebSocket streaming, and a modern React frontend with a Flask+Celery backend for efficient processing.",
-    tags: ["Python", "Flask", "Celery", "YOLOv8", "React"],
+    tags: ["Python", "Flask", "Celery", "YOLOv11", "React"],
     // Replace with a more reliable image
     image:
       "https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
@@ -40,7 +40,7 @@ const projects: Project[] = [
       "A lightweight React web app to look up Indian RTO and vehicle data from registration numbers.",
     detailedDescription:
       "RTO Lookup India is a minimalist React application designed to quickly retrieve details about Indian vehicles from their registration numbers. It features a clean UI for fast access, responsive design, and comprehensive data about RTOs across India.",
-    tags: ["React", "JavaScript", "Web Development"],
+    tags: ["JavaScript", "Web Development"],
     // Replace with a more reliable image
     image:
       "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
@@ -134,21 +134,25 @@ const Projects = () => {
               key={index}
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 h-full flex flex-col"
-              whileHover={{ y: -10 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-500 h-full flex flex-col card-shimmer"
+              whileHover={{
+                y: -10,
+                transition: { duration: 0.3, ease: "easeOut" },
+              }}
               style={{ pointerEvents: "auto" }}
             >
               <div className="h-48 overflow-hidden relative group">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-teal-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-teal-900/70 opacity-0 group-hover:opacity-90 transition-all duration-300 flex items-center justify-center">
                   <button
                     onClick={(e) => handleProjectClick(e, project)}
-                    className="bg-white text-teal-800 px-4 py-2 rounded-lg font-medium transform scale-0 group-hover:scale-100 transition-transform duration-300"
+                    className="bg-white text-teal-800 px-4 py-2 rounded-lg font-medium transform scale-0 group-hover:scale-100 transition-transform duration-300 shadow-lg hover:bg-teal-50"
                     style={{ pointerEvents: "auto" }}
                   >
                     View Details
@@ -164,7 +168,7 @@ const Projects = () => {
                   {project.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-xs rounded-full"
+                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-xs rounded-full border border-teal-800/30"
                     >
                       {tag}
                     </span>
@@ -183,7 +187,7 @@ const Projects = () => {
                     <GithubIcon size={18} className="mr-1" />
                     <span>Code</span>
                   </a>
-                  {project.liveLink && ( // Only show live demo link if it exists
+                  {project.liveLink && (
                     <a
                       href={project.liveLink}
                       target="_blank"
@@ -203,7 +207,9 @@ const Projects = () => {
 
         <div className="flex justify-center mt-12">
           <motion.a
-            href="/more-projects"
+            href="https://github.com/realvoidgojo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center bg-transparent border border-teal-500 text-teal-400 px-6 py-3 rounded-lg hover:bg-teal-500/10 transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -222,15 +228,16 @@ const Projects = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 modal-backdrop flex items-center justify-center z-50 p-4"
             onClick={handleCloseClick}
             style={{ pointerEvents: "auto" }}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 10 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto card-shimmer"
               onClick={(e) => e.stopPropagation()}
               style={{ pointerEvents: "auto" }}
             >
@@ -240,24 +247,27 @@ const Projects = () => {
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-70"></div>
                 <button
                   onClick={handleCloseClick}
-                  className="absolute top-4 right-4 bg-black/80 hover:bg-teal-800 text-white p-2 rounded-full transition-colors"
+                  className="absolute top-4 right-4 bg-black/60 hover:bg-teal-800 text-white p-2 rounded-full transition-colors shadow-lg"
                   aria-label="Close modal"
                   style={{ pointerEvents: "auto" }}
                 >
                   <X size={24} />
                 </button>
+                <div className="absolute bottom-0 left-0 p-6 w-full">
+                  <h2 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+                    {selectedProject.title}
+                  </h2>
+                </div>
               </div>
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-white mb-2">
-                  {selectedProject.title}
-                </h2>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {selectedProject.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-sm rounded-full"
+                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-sm rounded-full border border-teal-800/30"
                     >
                       {tag}
                     </span>
@@ -268,7 +278,10 @@ const Projects = () => {
                 </p>
 
                 <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-4">
+                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
+                    <span className="bg-teal-500/20 p-1 rounded-full mr-2">
+                      <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
+                    </span>
                     Key Features
                   </h3>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -283,28 +296,38 @@ const Projects = () => {
                   </ul>
                 </div>
 
-                <div className="flex space-x-4">
-                  <a
+                <div className="flex flex-wrap gap-4">
+                  <motion.a
                     href={selectedProject.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+                    className="flex items-center bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-4 py-2 rounded-lg transition-all duration-300 shadow-md"
+                    whileHover={{
+                      y: -3,
+                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.3)",
+                    }}
+                    whileTap={{ scale: 0.98 }}
                     style={{ pointerEvents: "auto" }}
                   >
                     <GithubIcon size={18} className="mr-2" />
                     <span>View Source Code</span>
-                  </a>
-                  {selectedProject.liveLink && ( // Only show live demo button if there's a link
-                    <a
+                  </motion.a>
+                  {selectedProject.liveLink && (
+                    <motion.a
                       href={selectedProject.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg transition-colors"
+                      className="flex items-center bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white px-4 py-2 rounded-lg transition-all duration-300 shadow-md"
+                      whileHover={{
+                        y: -3,
+                        boxShadow: "0 10px 25px -5px rgba(20, 184, 166, 0.3)",
+                      }}
+                      whileTap={{ scale: 0.98 }}
                       style={{ pointerEvents: "auto" }}
                     >
                       <ExternalLink size={18} className="mr-2" />
                       <span>Live Demo</span>
-                    </a>
+                    </motion.a>
                   )}
                 </div>
               </div>

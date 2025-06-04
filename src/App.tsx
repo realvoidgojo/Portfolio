@@ -13,7 +13,7 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import Certificates from "./components/Certificates";
 import Articles from "./components/Articles";
-import CodingProfiles from "./components/CodingProfiles";
+import Profiles from "./components/Profiles";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ParticlesBackground from "./components/ParticlesBackground";
@@ -30,7 +30,8 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/certificates" element={<Certificates />} />
         <Route path="/articles" element={<Articles />} />
-        <Route path="/coding-profiles" element={<CodingProfiles />} />
+        <Route path="/profiles" element={<Profiles />} />{" "}
+        {/* Updated from /coding-profiles to /profiles */}
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </AnimatePresence>

@@ -15,6 +15,7 @@ const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState({
     name: "",
+    email: "", // Add email field to the form state
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -35,12 +36,12 @@ const Contact = () => {
     setError("");
     setSuccess(false);
 
-    // Create template parameters with fixed email
+    // Create template parameters using the provided email as reply_to
     const templateParams = {
       from_name: form.name,
       to_name: "Harish",
-      reply_to: "dir.harishsivaraman@gmail.com", // Fixed email address
-      message: form.message,
+      reply_to: form.email, // Use the email provided by the user
+      message: `Email: ${form.email}\n\n${form.message}`, // Include email in the message body too
     };
 
     emailjs
@@ -57,6 +58,7 @@ const Contact = () => {
           setSuccess(true);
           setForm({
             name: "",
+            email: "",
             message: "",
           });
 
@@ -132,7 +134,7 @@ const Contact = () => {
                 <h3 className="text-2xl font-semibold text-white mb-6">
                   Send Me a Message
                 </h3>
-              
+
                 <AnimatePresence>
                   {success && (
                     <motion.div
@@ -166,18 +168,21 @@ const Contact = () => {
                   ref={formRef}
                   onSubmit={handleSubmit}
                   style={{ pointerEvents: "auto" }}
+                  className="space-y-6"
                 >
                   <div className="space-y-5">
                     <motion.div
                       variants={itemVariants}
                       className="relative"
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.2 }}
                       style={{ pointerEvents: "auto" }}
                     >
                       <label
                         htmlFor="name"
-                        className={`absolute left-3 transition-all duration-200 pointer-events-none ${
+                        className={`absolute left-3 transition-all duration-300 pointer-events-none ${
                           focusedField === "name" || form.name
-                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400"
+                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400 font-medium"
                             : "top-3 text-gray-400"
                         }`}
                       >
@@ -186,12 +191,12 @@ const Contact = () => {
                       <input
                         type="text"
                         id="name"
-                        name="name" // This must match your template variable
+                        name="name"
                         value={form.name}
                         onChange={handleChange}
                         onFocus={() => setFocusedField("name")}
                         onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 transition-colors"
+                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-sm"
                         required
                         style={{ pointerEvents: "auto" }}
                       />
@@ -200,13 +205,46 @@ const Contact = () => {
                     <motion.div
                       variants={itemVariants}
                       className="relative"
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.2 }}
+                      style={{ pointerEvents: "auto" }}
+                    >
+                      <label
+                        htmlFor="email"
+                        className={`absolute left-3 transition-all duration-300 pointer-events-none ${
+                          focusedField === "email" || form.email
+                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400 font-medium"
+                            : "top-3 text-gray-400"
+                        }`}
+                      >
+                        Your Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField("email")}
+                        onBlur={() => setFocusedField(null)}
+                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-sm"
+                        required
+                        style={{ pointerEvents: "auto" }}
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      variants={itemVariants}
+                      className="relative"
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.2 }}
                       style={{ pointerEvents: "auto" }}
                     >
                       <label
                         htmlFor="message"
-                        className={`absolute left-3 transition-all duration-200 pointer-events-none ${
+                        className={`absolute left-3 transition-all duration-300 pointer-events-none ${
                           focusedField === "message" || form.message
-                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400"
+                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400 font-medium"
                             : "top-3 text-gray-400"
                         }`}
                       >
@@ -214,13 +252,13 @@ const Contact = () => {
                       </label>
                       <textarea
                         id="message"
-                        name="message" // This must match your template variable
+                        name="message"
                         value={form.message}
                         onChange={handleChange}
                         onFocus={() => setFocusedField("message")}
                         onBlur={() => setFocusedField(null)}
                         rows={5}
-                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 transition-colors resize-none"
+                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-sm resize-none"
                         required
                         style={{ pointerEvents: "auto" }}
                       />
@@ -229,11 +267,14 @@ const Contact = () => {
                     <motion.div
                       variants={itemVariants}
                       style={{ pointerEvents: "auto" }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
+                        className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center relative overflow-hidden button-effect"
                         style={{ pointerEvents: "auto" }}
                       >
                         {loading ? (
@@ -256,10 +297,7 @@ const Contact = () => {
                   variants={itemVariants}
                   className="mt-6 text-center text-sm text-gray-400 border-t border-gray-700 pt-4"
                   style={{ pointerEvents: "auto" }}
-                >
-                 
-               
-                </motion.div>
+                ></motion.div>
               </div>
             </motion.div>
 
@@ -279,8 +317,10 @@ const Contact = () => {
                   <motion.div
                     variants={itemVariants}
                     className="flex items-start"
+                    whileHover={{ y: -5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
                   >
-                    <div className="bg-teal-600/20 p-3 rounded-xl mr-4">
+                    <div className="bg-gradient-to-br from-teal-500/20 to-teal-700/20 p-3 rounded-xl mr-4 shadow-inner">
                       <Mail className="w-7 h-7 text-teal-400" />
                     </div>
                     <div>
@@ -298,8 +338,10 @@ const Contact = () => {
                   <motion.div
                     variants={itemVariants}
                     className="flex items-start"
+                    whileHover={{ y: -5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
                   >
-                    <div className="bg-teal-600/20 p-3 rounded-xl mr-4">
+                    <div className="bg-gradient-to-br from-teal-500/20 to-teal-700/20 p-3 rounded-xl mr-4 shadow-inner">
                       <Phone className="w-7 h-7 text-teal-400" />
                     </div>
                     <div>
@@ -317,8 +359,10 @@ const Contact = () => {
                   <motion.div
                     variants={itemVariants}
                     className="flex items-start"
+                    whileHover={{ y: -5 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
                   >
-                    <div className="bg-teal-600/20 p-3 rounded-xl mr-4">
+                    <div className="bg-gradient-to-br from-teal-500/20 to-teal-700/20 p-3 rounded-xl mr-4 shadow-inner">
                       <MapPin className="w-7 h-7 text-teal-400" />
                     </div>
                     <div>

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Github,
   Linkedin,
@@ -43,28 +42,16 @@ const Footer = () => {
     { name: "Projects", path: "/projects" },
     { name: "Certificates", path: "/certificates" },
     { name: "Articles", path: "/articles" },
-    { name: "Coding Profiles", path: "/coding-profiles" },
+    { name: "Profiles", path: "/profiles" }, // Changed from /coding-profiles to /profiles
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <footer className="bg-gray-900 border-t border-gray-800">
-      {/* Wave decoration */}
-      <div className="relative h-16 overflow-hidden">
-        <div className="absolute w-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-            className="text-teal-900 fill-current"
-          >
-            <path d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-          </svg>
-        </div>
-      </div>
-
       <div className="container mx-auto px-4 pt-10 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About column */}
+        {/* Adjusted grid with better spacing distribution */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {/* About column - make it slightly larger */}
           <div className="md:col-span-1">
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
               <Code className="w-6 h-6 text-teal-500 mr-2" />
@@ -72,7 +59,8 @@ const Footer = () => {
             </h2>
             <p className="text-gray-400 mb-4">
               Cybersecurity enthusiast and software developer focused on CTFs,
-              OSINT, and automation.
+              OSINT, and automation. Building innovative solutions with Python,
+              React, and more.
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((link, i) => (
@@ -91,7 +79,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Navigation column */}
+          {/* Navigation columns - keep their widths */}
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold text-white mb-4">
               Navigation
@@ -137,30 +125,6 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-
-          {/* Newsletter column */}
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Stay Updated
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Subscribe for the latest cybersecurity insights and project
-              updates
-            </p>
-            <form className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="px-3 py-2 bg-gray-800 text-white rounded-l-md w-full outline-none focus:ring-1 focus:ring-teal-500"
-              />
-              <button
-                type="submit"
-                className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-r-md transition-colors"
-              >
-                Go
-              </button>
-            </form>
-          </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
@@ -171,9 +135,9 @@ const Footer = () => {
           <div className="flex items-center mt-4 md:mt-0">
             <span className="text-gray-500 text-sm flex items-center">
               Made with{" "}
-              <Heart size={14} className="mx-1 text-red-500 fill-current" />{" "}
+              <Heart size={14} className="mx-1 text-teal-500 fill-current" />{" "}
               using
-              <span className="text-teal-400 ml-1">React</span>
+              <span className="text-teal-400 ml-1">ReactJS</span>
             </span>
           </div>
         </div>

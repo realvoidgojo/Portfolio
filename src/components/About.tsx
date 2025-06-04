@@ -18,11 +18,15 @@ const About = () => {
     },
     {
       category: "Frameworks & Tools",
-      items: ["Flask", "Celery", "YOLOv11", "OpenCV", "WebSockets"],
+      items: ["Flask", "Requests", "Celery", "OpenCV", "WebSockets"],
     },
     {
       category: "DevOps & Others",
-      items: ["Linux", "Git", "Docker", "Postman", "Adobe Suite"],
+      items: ["Linux", "Git", "Docker", "Postman", "Nmap", "Burp Suite"],
+    },
+    {
+      category: "Creative & Design",
+      items: ["Figma", "Canva", "Premier", "Photoshop", "Illustrator"],
     },
   ];
 
@@ -30,7 +34,7 @@ const About = () => {
     {
       position: "Cyberthon 2025 Finalist",
       company: "National Cybersecurity Hackathon",
-      period: "2025",
+      period: "March 2025",
       description:
         "Built a real-time video surveillance system with YOLOv11-based object detection, heatmap analytics, WebSocket streaming, Flask and React.",
       technologies: ["Python", "Flask", "Celery", "YOLOv11", "React"],
@@ -46,9 +50,9 @@ const About = () => {
     {
       position: "Content Creator",
       company: "RockYou YouTube Channel",
-      period: "2023 - Present",
+      period: "2024 - Present",
       description:
-        "Produced 50+ educational videos on CTF walkthroughs, OSINT techniques, Python automation, and cybersecurity tool demos.",
+        "Produced educational videos on CTF walkthroughs, OSINT techniques, Python automation, and cybersecurity tool demos.",
       technologies: ["Cybersecurity", "CTF", "OSINT", "Python"],
     },
   ];
@@ -192,13 +196,16 @@ const About = () => {
               >
                 <div className="flex items-center mb-4">
                   {index === 0 && (
-                    <Palette className="w-6 h-6 text-teal-500 mr-3" />
+                    <Code2 className="w-6 h-6 text-teal-500 mr-3" />
                   )}
                   {index === 1 && (
                     <Database className="w-6 h-6 text-teal-500 mr-3" />
                   )}
                   {index === 2 && (
                     <Code2 className="w-6 h-6 text-teal-500 mr-3" />
+                  )}
+                  {index === 3 && (
+                    <Palette className="w-6 h-6 text-teal-500 mr-3" />
                   )}
                   <h4 className="text-xl font-semibold text-white">
                     {skillSet.category}
