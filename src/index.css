@@ -276,10 +276,6 @@ select {
     margin-left: 2px;
     animation: blink 1s step-end infinite;
     vertical-align: middle;
-    /* Changed from text-top to middle for better alignment */
-    position: relative;
-    top: -1px;
-    /* Fine-tuning vertical position */
 }
 
 @keyframes blink {

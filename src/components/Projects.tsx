@@ -19,7 +19,7 @@ const projects: Project[] = [
     description:
       "Real-time video surveillance system built for Cyberthon 2025 with object detection and heatmap analytics.",
     detailedDescription:
-      "This video analytics platform was my finalist entry for Cyberthon 2025. It features YOLOv8-based object detection, heatmap analytics for movement tracking, real-time WebSocket streaming, and a modern React frontend with a Flask+Celery backend for efficient processing.",
+      "This video analytics platform was my finalist entry for Cyberthon 2025. It features YOLOv11-based object detection, heatmap analytics for movement tracking, real-time WebSocket streaming, and a modern React frontend with a Flask+Celery backend for efficient processing.",
     tags: ["Python", "Flask", "Celery", "YOLOv11", "React"],
     // Replace with a more reliable image
     image:
@@ -27,11 +27,70 @@ const projects: Project[] = [
     githubLink: "https://github.com/realvoidgojo/VideoAnalytics-Cyberthon",
     liveLink: "",
     features: [
-      "YOLOv8-based object detection",
+      "YOLOv11-based object detection",
       "Real-time heatmap analytics",
       "WebSocket streaming",
       "Flask+Celery backend",
       "React frontend dashboard",
+    ],
+  },
+  {
+    title: "CyTools - Cybersecurity Toolkit",
+    description:
+      "A collection of 5 essential cybersecurity tools built with Python and Tkinter for educational purposes.",
+    detailedDescription:
+      "CyTools is a comprehensive cybersecurity toolkit featuring 5 distinct utilities: Caesar Cipher for encryption/decryption, Keylogger for keystroke monitoring, Network Packet Analyzer for traffic inspection, Password Complexity checker, and Pixel Manipulation for steganography applications.",
+    tags: ["Python", "Tkinter", "Cybersecurity", "Educational"],
+    image:
+      "https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/Internship",
+    liveLink: "",
+    features: [
+      "Caesar Cipher encryption tool",
+      "Keylogger for monitoring keystrokes",
+      "Network Packet Analyzer for traffic monitoring",
+      "Password Complexity assessment tool",
+      "Pixel Manipulation for image steganography",
+    ],
+  },
+  {
+    title: "XD Chat App",
+    description:
+      "Real-time chat application with group and private messaging built with JavaScript, PHP, and MySQL.",
+    detailedDescription:
+      "XD Chat App is a feature-rich real-time messaging platform designed to connect people globally. It supports both group conversations and private messaging with a focus on speed, ease of use, and security. Built with a JavaScript frontend and PHP/MySQL backend.",
+    tags: ["JavaScript", "PHP", "MySQL", "AJAX"],
+    image:
+      "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/XD-Chat-App",
+    liveLink: "https://xd-app.infinityfreeapp.com/",
+    features: [
+      "Real-time messaging with WebSockets",
+      "Group chat functionality",
+      "Private one-on-one conversations",
+      "User account management",
+      "Message history storage",
+      "Responsive design for mobile and desktop",
+    ],
+  },
+  {
+    title: "CTF Challenges Repository",
+    description:
+      "Comprehensive collection of completed CTF challenges from platforms like OverTheWire, VulnHub, TryHackMe, and HackTheBox.",
+    detailedDescription:
+      "A curated repository of Capture The Flag (CTF) challenge solutions from multiple platforms including OverTheWire, VulnHub, TryHackMe and HackTheBox. This repository documents my progress through various cybersecurity challenges, serving as both a learning resource and a demonstration of my skills.",
+    tags: ["CTF", "Cybersecurity", "OverTheWire", "VulnHub"],
+    image:
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/CTF-Challenges",
+    liveLink: "",
+    features: [
+      "OverTheWire challenges (Bandit 0-33, Leviathan 0-7, Natas 0-33)",
+      "Krypton (0-7) and Narnia (0-9) challenges",
+      "VulnHub machines (Kioptrix 1-5, Metasploitable 1-2)",
+      "ColddBox and MrRobot walkthroughs",
+      "Detailed documentation of solutions and methodologies",
+      "Wide range of cybersecurity techniques demonstrated",
     ],
   },
   {

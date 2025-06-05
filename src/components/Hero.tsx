@@ -17,7 +17,7 @@ const Hero = () => {
   const [showAlternateName, setShowAlternateName] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "Cybersecurity & Developer";
+  const fullText = "CyberSec Enthusiast & Dev";
 
   // Add effect for responsive icon sizing
   useEffect(() => {

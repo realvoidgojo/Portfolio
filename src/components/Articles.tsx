@@ -142,7 +142,7 @@ const Articles = () => {
 
       <div className="text-center mt-12">
         <a
-          href="https://medium.com/@realvoidogojo"
+          href="https://medium.com/@realvoidgojo"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
