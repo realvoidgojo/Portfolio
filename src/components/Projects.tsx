@@ -56,14 +56,15 @@ const projects: Project[] = [
   {
     title: "XD Chat App",
     description:
-      "Real-time chat application with group and private messaging built with JavaScript, PHP, and MySQL.",
+      "Real-time chat application with group and private messaging built with JavaScript, PHP, and PostgreSQL.",
     detailedDescription:
-      "XD Chat App is a feature-rich real-time messaging platform designed to connect people globally. It supports both group conversations and private messaging with a focus on speed, ease of use, and security. Built with a JavaScript frontend and PHP/MySQL backend.",
-    tags: ["JavaScript", "PHP", "MySQL", "AJAX"],
+      "XD Chat App is a feature-rich real-time messaging platform designed to connect people globally. It supports both group conversations and private messaging with a focus on speed, ease of use, and security. Built with a JavaScript frontend and PHP/PostgreSQL backend.",
+    tags: ["JavaScript", "PHP", "PostgreSQL", "WebSockets"],
     image:
       "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     githubLink: "https://github.com/realvoidgojo/XD-Chat-App",
-    liveLink: "https://xd-app.infinityfreeapp.com/",
+    liveLink:
+      "https://60f61206-62cd-4f8b-b4f8-1967cba42acb-00-14d4pb3dbzacy.sisko.replit.dev/",
     features: [
       "Real-time messaging with WebSockets",
       "Group chat functionality",
