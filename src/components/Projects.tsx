@@ -64,7 +64,7 @@ const projects: Project[] = [
       "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     githubLink: "https://github.com/realvoidgojo/XD-Chat-App",
     liveLink:
-      "https://60f61206-62cd-4f8b-b4f8-1967cba42acb-00-14d4pb3dbzacy.sisko.replit.dev/",
+      "https://dbaf4e81-4770-4c38-b10c-c06db8875fd5-00-2alc9fdscx266.sisko.replit.dev:5000/",
     features: [
       "Real-time messaging with WebSockets",
       "Group chat functionality",
