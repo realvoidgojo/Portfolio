@@ -13,13 +13,13 @@ interface Article {
 
 const articles: Article[] = [
   {
-    title: "NahamCon 2025 CTF: Breaking New Ground in Cybersecurity Challenges",
+    title: "NahamCon 2025 CTF: Writeup",
     description:
       "A comprehensive analysis of the innovative challenges at NahamCon 2025 CTF, including my approach to solving them and lessons learned from the competition.",
-    date: "October 15, 2024",
+    date: "7 June 15, 2025",
     image:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    link: "https://medium.com/@realvoidogojo/nahamcon-2025-ctf-breaking-new-ground-in-cybersecurity-challenges",
+    link: "https://medium.com/@realvoidgojo/nahamcon-2025-ctf-writeup-c87be2850378",
     tags: ["CTF", "NahamCon", "Cybersecurity", "Writeup"],
   },
   {
