@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { BookOpen, ExternalLink } from "lucide-react";
 import PageLayout from "./PageLayout";
@@ -13,6 +12,16 @@ interface Article {
 }
 
 const articles: Article[] = [
+  {
+    title: "NahamCon 2025 CTF: Breaking New Ground in Cybersecurity Challenges",
+    description:
+      "A comprehensive analysis of the innovative challenges at NahamCon 2025 CTF, including my approach to solving them and lessons learned from the competition.",
+    date: "October 15, 2024",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "https://medium.com/@realvoidogojo/nahamcon-2025-ctf-breaking-new-ground-in-cybersecurity-challenges",
+    tags: ["CTF", "NahamCon", "Cybersecurity", "Writeup"],
+  },
   {
     title: "Cygenix CTF 2024: The Encrypted Trilogy Writeup",
     description:
