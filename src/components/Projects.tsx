@@ -15,6 +15,26 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "FlaskEdit - Secure Image Converter",
+    description:
+      "A robust, secure single-page image conversion web application built with Flask and Pillow for universal format support.",
+    detailedDescription:
+      "FlaskEdit is a comprehensive image conversion tool that allows users to convert between PNG, JPEG, GIF, BMP, WEBP, and TIFF formats with optimized settings for each conversion. It features smart format filtering to exclude source formats from conversion options, automatic file deletion after 1 hour for privacy, and a responsive design that works perfectly on both mobile and desktop.",
+    tags: ["Python", "Flask", "Pillow", "Web Development"],
+    image:
+      "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    githubLink: "https://github.com/realvoidgojo/FlaskEdit",
+    liveLink: "https://flask-edit.onrender.com",
+    features: [
+      "Universal Format Support (PNG, JPEG, GIF, BMP, WEBP, TIFF)",
+      "Smart Format Filtering",
+      "High-Quality Conversions",
+      "Auto-Deletion after 1 hour",
+      "Responsive Design",
+      "Secure File Handling",
+    ],
+  },
+  {
     title: "Video Analytics Platform",
     description:
       "Real-time video surveillance system built for Cyberthon 2025 with object detection and heatmap analytics.",
@@ -56,10 +76,10 @@ const projects: Project[] = [
   {
     title: "XD Chat App",
     description:
-      "Real-time chat application with group and private messaging built with JavaScript, PHP, and PostgreSQL.",
+      "Real-time chat application with group and private messaging built with JavaScript, PHP, and PostgreSQL/Supabase.",
     detailedDescription:
-      "XD Chat App is a feature-rich real-time messaging platform designed to connect people globally. It supports both group conversations and private messaging with a focus on speed, ease of use, and security. Built with a JavaScript frontend and PHP/PostgreSQL backend.",
-    tags: ["JavaScript", "PHP", "PostgreSQL", "WebSockets"],
+      "XD Chat App is a feature-rich real-time messaging platform designed to connect people globally. It supports both group conversations and private messaging with a focus on speed, ease of use, and security. Built with a JavaScript frontend and PHP backend using Supabase for PostgreSQL database management.",
+    tags: ["JavaScript", "PHP", "PostgreSQL", "Supabase", "WebSockets"],
     image:
       "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     githubLink: "https://github.com/realvoidgojo/XD-Chat-App",
@@ -70,7 +90,7 @@ const projects: Project[] = [
       "Group chat functionality",
       "Private one-on-one conversations",
       "User account management",
-      "Message history storage",
+      "Message history storage with Supabase/PostgreSQL",
       "Responsive design for mobile and desktop",
     ],
   },
