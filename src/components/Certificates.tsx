@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import PageLayout from "./PageLayout";
 
-// Keep the imports for your certificate PDFs
+// Import certificates 
 import fullStackCert from "../assets/certifications/full-stack-cert.pdf";
 import unityCert from "../assets/certifications/unity-game-dev.pdf";
 import javaCert from "../assets/certifications/java-nptel.pdf";
@@ -360,9 +360,9 @@ const Certificates = () => {
               <img
                 src={certificate.image}
                 alt={certificate.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />
-              <div className="absolute top-3 right-3 bg-gray-900/80 p-2 rounded-full">
+              <div className="absolute top-3 right-3 bg-gray-900/70 p-2 rounded-full">
                 {certificate.icon}
               </div>
             </div>
@@ -423,15 +423,15 @@ const Certificates = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ type: "spring", damping: 25 }}
-              className={`bg-gray-800 rounded-xl overflow-hidden flex flex-col card-shimmer ${
+              className={`bg-gray-800 rounded-xl overflow-hidden flex flex-col ${
                 isMobile
                   ? "w-[98%] h-[90vh] max-h-[90vh]"
-                  : "max-w-[90%] w-[1200px] h-[92vh]"
+                  : "max-w-[90%] w-[1100px] h-[92vh]"
               }`}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header - Simplified for mobile */}
-              <div className="p-1.5 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 border-b border-gray-700/50 flex justify-between items-center shadow-sm">
+              {/* Header - Simplified */}
+              <div className="p-1.5 bg-gray-700 border-b border-gray-700/50 flex justify-between items-center">
                 <h2
                   className={`font-bold text-white truncate pl-2 ${
                     isMobile ? "text-xs max-w-[60%]" : "text-sm max-w-[70%]"
@@ -440,31 +440,25 @@ const Certificates = () => {
                   {selectedCertificate?.title}
                 </h2>
                 <div className="flex items-center space-x-1">
-                  {/* Control buttons - Adjusted for mobile */}
+                  {/* Simplified control buttons */}
                   <motion.button
                     onClick={zoomOut}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-700/70 transition-colors"
+                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
                     title="Zoom out"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
                   >
                     <ZoomOut size={isMobile ? 12 : 14} />
                   </motion.button>
                   <motion.button
                     onClick={resetZoom}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-700/70 transition-colors"
+                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
                     title="Reset zoom"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
                   >
                     <RotateCw size={isMobile ? 12 : 14} />
                   </motion.button>
                   <motion.button
                     onClick={zoomIn}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-700/70 transition-colors"
+                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
                     title="Zoom in"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
                   >
                     <ZoomIn size={isMobile ? 12 : 14} />
                   </motion.button>
@@ -472,21 +466,17 @@ const Certificates = () => {
                   <motion.a
                     href={selectedCertificate?.pdfFile}
                     download
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-700/70 transition-colors"
+                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                     title="Download certificate"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
                   >
                     <Download size={isMobile ? 12 : 14} />
                   </motion.a>
 
                   <motion.button
                     onClick={closeCertificate}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-700/70 transition-colors ml-1"
+                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors ml-1"
                     title="Close"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
                   >
                     <X size={isMobile ? 14 : 16} />
                   </motion.button>

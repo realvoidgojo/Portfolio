@@ -25,11 +25,11 @@ const Navbar = () => {
     { to: "/projects", icon: <Briefcase size={18} />, label: "Projects" },
     { to: "/certificates", icon: <Award size={18} />, label: "Certificates" },
     { to: "/articles", icon: <BookOpen size={18} />, label: "Articles" },
-    { to: "/profiles", icon: <Code size={18} />, label: "Profiles" }, // Changed from /coding-profiles to /profiles
+    { to: "/profiles", icon: <Code size={18} />, label: "Profiles" },
     { to: "/contact", icon: <Phone size={18} />, label: "Contact" },
   ];
 
-  // Track scroll position to change navbar appearance
+  // Makes navbar animation on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -57,7 +57,7 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Enhanced animation variants
+  // animations for mobile-menu
   const mobileMenuVariants = {
     closed: {
       opacity: 0,
@@ -93,16 +93,18 @@ const Navbar = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0, 0.55, 0.45, 1] }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className={`fixed w-full z-50 transition-all duration-300 ${
-          isScrolled ? "glass-effect py-2" : "bg-transparent py-4"
+          isScrolled
+            ? "bg-gray-900/80 backdrop-blur-sm py-2 shadow-md"
+            : "bg-transparent py-4"
         }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            {/* Logo with animated name switching */}
-            <NavLink to="/" className="flex items-center space-x-3 group">
-              <div className="bg-gradient-to-br from-teal-500 to-teal-700 p-2 rounded-lg shadow-lg transform transition-transform group-hover:scale-110 duration-300">
+            {/* logo and title animation */}
+            <NavLink to="/" className="flex items-center space-x-3">
+              <div className="bg-teal-600 p-2 rounded-lg">
                 <Code size={20} className="text-white" />
               </div>
               <div
@@ -113,31 +115,31 @@ const Navbar = () => {
                   {showAlternateName ? (
                     <motion.span
                       key="realvoidgojo"
-                      initial={{ y: 30, opacity: 0 }}
+                      initial={{ y: 10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -30, opacity: 0 }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="text-xl font-bold text-white absolute left-0"
                     >
-                      realvoidgojo
+                      @realvoidgojo
                     </motion.span>
                   ) : (
                     <motion.span
                       key="harish"
-                      initial={{ y: 30, opacity: 0 }}
+                      initial={{ y: 10, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -30, opacity: 0 }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="text-xl font-bold text-white absolute left-0"
                     >
-                      Harish Sivaraman
+                      Harish S.
                     </motion.span>
                   )}
                 </AnimatePresence>
               </div>
             </NavLink>
 
-            {/* Desktop Navigation with improved hover and active states */}
+            {/* Desktop Navigation : hover */}
             <div className="hidden md:flex space-x-1">
               {navItems.map((item) => (
                 <NavLink
@@ -162,7 +164,7 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button with improved animations */}
+            {/* Mobile MenuButton-anim */}
             <motion.button
               className="md:hidden text-white p-2 focus:outline-none bg-gray-800/50 rounded-lg hover:bg-gray-700/60 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -197,7 +199,7 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Enhanced Mobile Navigation Menu */}
+      {/* Mobile-NavMenu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div

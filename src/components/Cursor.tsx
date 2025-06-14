@@ -13,9 +13,8 @@ const Cursor = () => {
 
   const [cursorVariant, setCursorVariant] = useState("default");
   const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
-    // Add cursor styling to document head
+    // Quick hack to disable cursor on mobile (not needed there)
     const style = document.createElement("style");
     style.textContent = `
       @media (min-width: 769px) {
@@ -28,9 +27,9 @@ const Cursor = () => {
     `;
     document.head.appendChild(style);
 
-    // Use passive event listener for better performance
+    // Using passive for better scrolling performance
     const onMouseMove = (e: MouseEvent) => {
-      // Update motion values directly without setState to reduce renders
+      // Update values directly - setState is too slow for cursor movement
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
       if (!isVisible) setIsVisible(true);

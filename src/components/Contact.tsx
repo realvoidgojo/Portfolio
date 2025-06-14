@@ -15,7 +15,7 @@ const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState({
     name: "",
-    email: "", // Add email field to the form state
+    email: "", 
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -29,19 +29,18 @@ const Contact = () => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     setSuccess(false);
 
-    // Create template parameters using the provided email as reply_to
+    // Using EmailJS
     const templateParams = {
       from_name: form.name,
       to_name: "Harish",
-      reply_to: form.email, // Use the email provided by the user
-      message: `Email: ${form.email}\n\n${form.message}`, // Include email in the message body too
+      reply_to: form.email,
+      message: `Email: ${form.email}\n\n${form.message}`,
     };
 
     emailjs
@@ -235,16 +234,14 @@ const Contact = () => {
 
                     <motion.div
                       variants={itemVariants}
-                      className="relative"
-                      whileHover={{ scale: 1.01 }}
-                      transition={{ duration: 0.2 }}
+                      className="relative mb-6"
                       style={{ pointerEvents: "auto" }}
                     >
                       <label
                         htmlFor="message"
-                        className={`absolute left-3 transition-all duration-300 pointer-events-none ${
+                        className={`absolute transition-all duration-200 px-1 ${
                           focusedField === "message" || form.message
-                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400 font-medium"
+                            ? "-top-2.5 text-xs bg-gray-800 text-teal-400 font-medium"
                             : "top-3 text-gray-400"
                         }`}
                       >
@@ -258,38 +255,23 @@ const Contact = () => {
                         onFocus={() => setFocusedField("message")}
                         onBlur={() => setFocusedField(null)}
                         rows={5}
-                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-sm resize-none"
+                        className="w-full px-4 py-3 bg-gray-700/80 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/30 transition-all shadow-sm resize-none"
                         required
                         style={{ pointerEvents: "auto" }}
                       />
                     </motion.div>
 
-                    <motion.div
+                    <motion.button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-3 bg-teal-600 hover:bg-teal-500 text-white rounded-lg font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                       variants={itemVariants}
-                      style={{ pointerEvents: "auto" }}
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.98 }}
-                      transition={{ duration: 0.2 }}
+                      style={{ pointerEvents: "auto" }}
                     >
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center relative overflow-hidden button-effect"
-                        style={{ pointerEvents: "auto" }}
-                      >
-                        {loading ? (
-                          <>
-                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            <Send className="w-5 h-5 mr-2" />
-                            Send Message
-                          </>
-                        )}
-                      </button>
-                    </motion.div>
+                      {loading ? "Sending..." : "Send Message"}
+                    </motion.button>
                   </div>
                 </form>
 

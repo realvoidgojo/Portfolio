@@ -19,7 +19,6 @@ const Hero = () => {
   const [isTyping, setIsTyping] = useState(true);
   const fullText = "CyberSec Enthusiast & Dev";
 
-  // Add effect for responsive icon sizing
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -30,7 +29,6 @@ const Hero = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Toggle between names at intervals
   useEffect(() => {
     const interval = setInterval(() => {
       setShowAlternateName((prev) => !prev);
@@ -39,7 +37,6 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Typing animation effect
   useEffect(() => {
     if (isTyping) {
       if (typedText.length < fullText.length) {
@@ -48,7 +45,6 @@ const Hero = () => {
         }, 100);
         return () => clearTimeout(timeout);
       } else {
-        // Text is fully typed, wait a bit before starting to erase
         const timeout = setTimeout(() => {
           setIsTyping(false);
         }, 3000);
@@ -61,7 +57,6 @@ const Hero = () => {
         }, 50);
         return () => clearTimeout(timeout);
       } else {
-        // Text is fully erased, start typing again
         const timeout = setTimeout(() => {
           setIsTyping(true);
         }, 1000);
@@ -70,12 +65,8 @@ const Hero = () => {
     }
   }, [typedText, isTyping, fullText]);
 
-  // Scroll to next section when the chevron is clicked
   const handleScrollDown = () => {
-    // Get the height of the viewport
     const viewportHeight = window.innerHeight;
-
-    // Scroll down by the height of the viewport with smooth animation
     window.scrollTo({
       top: viewportHeight,
       behavior: "smooth",
@@ -109,7 +100,6 @@ const Hero = () => {
     },
   ];
 
-  // Enhanced animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -171,24 +161,23 @@ const Hero = () => {
       className="min-h-screen flex flex-col justify-center items-center relative px-5 py-16 sm:py-24 md:py-32"
     >
       <div className="text-center w-full max-w-4xl z-10">
-        {/* Enhanced profile image with better glow effect */}
+        {/*profile img glow effect */}
         <motion.div
           className="inline-block mb-6 md:mb-8 relative"
           variants={profileVariants}
         >
-          {/* Enhanced glow effect */}
+          {/*glow effect */}
           <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-teal-400 rounded-full blur-2xl opacity-40 z-10 transform scale-110 translate-y-5 sm:translate-y-7 animate-pulse"></div>
 
-          {/* Profile image with improved styling */}
           <motion.div
-            className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-teal-500/80 mx-auto relative z-20 translate-y-5 sm:translate-y-7 shadow-lg shadow-teal-900/30"
-            initial={{ rotate: -8 }}
+            className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-teal-500/50 mx-auto relative z-20 shadow-md translate-y-5 sm:translate-y-7"
+            initial={{ rotate: -5 }}
             animate={{ rotate: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
               className="w-full h-full overflow-hidden rounded-full"
             >
               <img
@@ -200,7 +189,7 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Enhanced heading with better gradient */}
+        {/*gradient */}
         <motion.h1
           className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-teal-100 to-teal-300"
           variants={itemVariants}
@@ -218,10 +207,10 @@ const Hero = () => {
               {showAlternateName ? (
                 <motion.span
                   key="realvoidgojo"
-                  initial={{ y: 30, opacity: 0 }}
+                  initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -30, opacity: 0 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
                   className="text-white absolute left-0 right-0"
                 >
                   realvoidgojo
@@ -229,10 +218,10 @@ const Hero = () => {
               ) : (
                 <motion.span
                   key="harish"
-                  initial={{ y: 30, opacity: 0 }}
+                  initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -30, opacity: 0 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
                   className="text-white absolute left-0 right-0"
                 >
                   Harish Sivaraman
@@ -246,7 +235,6 @@ const Hero = () => {
           className="flex flex-col items-center"
           variants={itemVariants}
         >
-          {/* Improved typing animation with better alignment */}
           <div className="inline-block relative px-4 overflow-hidden">
             <motion.h2
               className="text-xl sm:text-2xl md:text-3xl text-teal-300 font-medium mb-4 md:mb-6"
@@ -261,19 +249,17 @@ const Hero = () => {
             </motion.h2>
           </div>
 
-          {/* Enhanced paragraph with animated reveal */}
           <motion.p
             className="max-w-[95%] sm:max-w-xl md:max-w-2xl text-gray-300 mb-6 md:mb-8 text-sm sm:text-base md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            Passionate about CTFs, OSINT, and automation. Building innovative
-            solutions with Python, React, and more. B.Tech student at Sri Sairam
-            Engineering College, Chennai.
+            Hey there! I'm into CTFs and cybersecurity stuff. Currently grinding
+            through my B.Tech at Sri Sairam, Chennai, while working on some cool
+            side projects. Check out my work below!
           </motion.p>
 
-          {/* Enhanced buttons with animations */}
           <motion.div
             className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12 justify-center"
             initial={{ opacity: 0, y: 20 }}
@@ -339,7 +325,6 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced scroll indicator with click functionality */}
       <motion.button
         onClick={handleScrollDown}
         className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 hover:text-teal-300 focus:outline-none cursor-pointer p-2"

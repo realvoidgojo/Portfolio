@@ -120,7 +120,6 @@ const projects: Project[] = [
     detailedDescription:
       "RTO Lookup India is a minimalist React application designed to quickly retrieve details about Indian vehicles from their registration numbers. It features a clean UI for fast access, responsive design, and comprehensive data about RTOs across India.",
     tags: ["JavaScript", "Web Development"],
-    // Replace with a more reliable image
     image:
       "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     githubLink: "https://github.com/realvoidgojo/rto-lookup",
@@ -202,8 +201,9 @@ const Projects = () => {
             Featured Projects
           </h2>
           <p className="text-gray-400 max-w-2xl text-center">
-            Here are some of my recent works. Each project reflects my passion
-            for creating intuitive and functional web applications.
+            Here's some stuff I've built that I'm pretty proud of. Most of these
+            started as weekend projects or competition entries. Nothing fancy,
+            but they work!
           </p>
         </div>
 
@@ -214,28 +214,25 @@ const Projects = () => {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-500 h-full flex flex-col card-shimmer"
+              className="bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 h-full flex flex-col"
               whileHover={{
-                y: -10,
-                transition: { duration: 0.3, ease: "easeOut" },
+                y: -5,
+                transition: { duration: 0.2, ease: "easeOut" },
               }}
               style={{ pointerEvents: "auto" }}
             >
-              <div className="h-48 overflow-hidden relative group">
+              {/* Simplified image container */}
+              <div className="h-48 overflow-hidden relative">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute inset-0 bg-teal-900/70 opacity-0 group-hover:opacity-90 transition-all duration-300 flex items-center justify-center">
-                  <button
-                    onClick={(e) => handleProjectClick(e, project)}
-                    className="bg-white text-teal-800 px-4 py-2 rounded-lg font-medium transform scale-0 group-hover:scale-100 transition-transform duration-300 shadow-lg hover:bg-teal-50"
-                    style={{ pointerEvents: "auto" }}
-                  >
-                    View Details
-                  </button>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
+                <div className="absolute bottom-0 left-0 p-3">
+                  <span className="bg-gray-700/70 text-teal-300 text-xs px-2 py-1 rounded">
+                    {project.tags[0]}
+                  </span>
                 </div>
               </div>
               <div className="p-6 flex-grow">
@@ -247,7 +244,7 @@ const Projects = () => {
                   {project.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-xs rounded-full border border-teal-800/30"
+                      className="px-3 py-1 bg-teal-900/30 text-teal-200 text-xs rounded-full"
                     >
                       {tag}
                     </span>

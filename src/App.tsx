@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,7 +20,7 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { Engine } from "tsparticles-engine";
 
-// Create a routes wrapper component to access location
+// Wrapper to handle route transwith FM
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -32,8 +32,7 @@ const AnimatedRoutes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/certificates" element={<Certificates />} />
         <Route path="/articles" element={<Articles />} />
-        <Route path="/profiles" element={<Profiles />} />{" "}
-        {/* Updated from /coding-profiles to /profiles */}
+        <Route path="/profiles" element={<Profiles />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </AnimatePresence>
@@ -60,7 +59,8 @@ const ParticlesBackground = () => {
               value: "transparent",
             },
           },
-          fpsLimit: 30, // Reduced from 60 to 30 for better performance
+          
+          fpsLimit: 30,
           particles: {
             color: {
               value: ["#14b8a6", "#0ea5e9", "#0284c7"],
@@ -70,10 +70,10 @@ const ParticlesBackground = () => {
               distance: 150,
               enable: true,
               opacity: 0.5,
-              width: 1.2, // Reduced from 1.8
+              width: 1.2,
             },
             collisions: {
-              enable: false, // Disabled collisions for better performance
+              enable: false,
             },
             move: {
               direction: "none",
@@ -82,10 +82,10 @@ const ParticlesBackground = () => {
                 default: "bounce",
               },
               random: true,
-              speed: 1.0, // Reduced speed for better performance
+              speed: 1.0,
               straight: false,
               attract: {
-                enable: false, // Disabled attract for better performance
+                enable: false,
                 rotateX: 600,
                 rotateY: 1200,
               },
@@ -93,16 +93,16 @@ const ParticlesBackground = () => {
             number: {
               density: {
                 enable: true,
-                area: 1000, // Increased area = fewer particles
+                area: 1000,
               },
-              value: 60, // Reduced from 100 to 60
+              value: 60, 
             },
             opacity: {
-              value: 0.6, // Reduced slightly
+              value: 0.6,
               random: true,
               anim: {
                 enable: true,
-                speed: 0.8, // Slower animation
+                speed: 0.8,
                 opacity_min: 0.3,
                 sync: false,
               },
@@ -111,17 +111,17 @@ const ParticlesBackground = () => {
               type: "circle",
             },
             size: {
-              value: { min: 1, max: 4 }, // Slightly smaller max size
+              value: { min: 1, max: 4 },
               random: true,
               anim: {
                 enable: true,
-                speed: 1.5, // Slower animation
+                speed: 1.5,
                 size_min: 0.5,
                 sync: false,
               },
             },
             shadow: {
-              enable: false, // Disabled shadows for better performance
+              enable: false,
             },
           },
           interactivity: {
@@ -145,11 +145,11 @@ const ParticlesBackground = () => {
                 },
               },
               push: {
-                particles_nb: 2, // Reduced from 4 to 2
+                particles_nb: 2, 
               },
             },
           },
-          detectRetina: false, // Disabled retina detection for better performance
+          detectRetina: false, 
         }}
       />
     </div>
@@ -157,29 +157,10 @@ const ParticlesBackground = () => {
 };
 
 function App() {
-  const [error, setError] = useState<string | null>(null);
-
   // Initialize EmailJS when the app loads
   useEffect(() => {
     emailjs.init("l0cyQBOYDtcQ3hscB");
   }, []);
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
-          <p className="text-red-400">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-teal-600 rounded-lg hover:bg-teal-700"
-          >
-            Reload Page
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <Router>

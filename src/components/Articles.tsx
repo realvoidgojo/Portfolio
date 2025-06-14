@@ -106,13 +106,13 @@ const Articles = () => {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-teal-500/20 transition-all duration-300 h-full flex flex-col"
+            className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col"
           >
             <div className="h-48 overflow-hidden">
               <img
                 src={article.image}
                 alt={article.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
             <div className="p-6 flex-grow">
@@ -127,7 +127,7 @@ const Articles = () => {
                 {article.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 bg-teal-900/50 text-teal-200 text-xs rounded-full"
+                    className="px-3 py-1 bg-teal-900/30 text-teal-200 text-xs rounded-full"
                   >
                     {tag}
                   </span>
@@ -151,7 +151,7 @@ const Articles = () => {
 
       <div className="text-center mt-12">
         <a
-          href="https://medium.com/@realvoidgojo"
+          href="https://medium.com/@realvoidogojo"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"

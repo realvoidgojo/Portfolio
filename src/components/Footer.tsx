@@ -35,23 +35,20 @@ const Footer = () => {
       label: "Email",
     },
   ];
-
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Projects", path: "/projects" },
     { name: "Certificates", path: "/certificates" },
     { name: "Articles", path: "/articles" },
-    { name: "Profiles", path: "/profiles" }, // Changed from /coding-profiles to /profiles
+    { name: "Profiles", path: "/profiles" },
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <footer className="bg-gray-900 border-t border-gray-800">
       <div className="container mx-auto px-4 pt-10 pb-8">
-        {/* Adjusted grid with better spacing distribution */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* About column - make it slightly larger */}
           <div className="md:col-span-1">
             <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
               <Code className="w-6 h-6 text-teal-500 mr-2" />
@@ -79,7 +76,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Navigation columns - keep their widths */}
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold text-white mb-4">
               Navigation
@@ -98,7 +94,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Second navigation column */}
           <div className="md:col-span-1">
             <h3 className="text-lg font-semibold text-white mb-4">More</h3>
             <ul className="space-y-2">
@@ -129,15 +124,12 @@ const Footer = () => {
 
         <div className="mt-12 pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Harish Sivaraman. All rights reserved.
+            © {currentYear} Harish Sivaraman // @realvoidgojo
           </p>
 
           <div className="flex items-center mt-4 md:mt-0">
             <span className="text-gray-500 text-sm flex items-center">
-              Made with{" "}
-              <Heart size={14} className="mx-1 text-teal-500 fill-current" />{" "}
-              using
-              <span className="text-teal-400 ml-1">ReactJS</span>
+              Built with React + Tailwind
             </span>
           </div>
         </div>

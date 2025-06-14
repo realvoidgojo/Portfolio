@@ -63,11 +63,11 @@ const About = () => {
       institution: "Sri Sairam Engineering College, Chennai",
       year: "2022 - Present",
       description:
-        "CGPA: 7.53/10. Focused on cybersecurity, software development, and automation.",
+        "CGPA: 7.53/10. Focused on computer science and business systems with a strong emphasis on software development.",
     },
   ];
 
-  // Animation variants
+  // These animations make content appear with a nice stagger effect
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -152,10 +152,17 @@ const About = () => {
               Systems at Sri Sairam Engineering College.
             </p>
             <p className="text-gray-300 mb-8 leading-relaxed">
-              I've built a reputation through national-level competitions like
-              Cyberthon 2025 and NahamCon CTF, where I ranked #361 out of 2961
-              participants. I create educational content on my YouTube channel
-              "RockYou" and write cybersecurity insights on Medium.
+              I'm just a regular CS student who got hooked on cybersecurity
+              during my first year. I've spent way too many late nights solving
+              CTF challenges and messing around with Python automation.
+            </p>
+
+            <p className="text-gray-300 mb-8 leading-relaxed">
+              Somehow managed to qualify for Cyberthon 2025 (still can't believe
+              it) and ranked #361 in NahamCon CTF out of nearly 3000
+              participants. When I'm not breaking stuff, I make tutorial videos
+              on my YouTube channel "@RockYouChannel" and write about my CTF
+              adventures on Medium.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -192,22 +199,22 @@ const About = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-gray-800 rounded-xl p-6 hover:shadow-teal-500/10 hover:shadow-lg transition-all duration-300"
+                className="bg-gray-800 rounded-lg p-5 border border-gray-700/30 transition-all duration-300"
               >
                 <div className="flex items-center mb-4">
                   {index === 0 && (
-                    <Code2 className="w-6 h-6 text-teal-500 mr-3" />
+                    <Code2 className="w-5 h-5 text-teal-400 mr-3" />
                   )}
                   {index === 1 && (
-                    <Database className="w-6 h-6 text-teal-500 mr-3" />
+                    <Database className="w-5 h-5 text-teal-400 mr-3" />
                   )}
                   {index === 2 && (
-                    <Code2 className="w-6 h-6 text-teal-500 mr-3" />
+                    <Code2 className="w-5 h-5 text-teal-400 mr-3" />
                   )}
                   {index === 3 && (
-                    <Palette className="w-6 h-6 text-teal-500 mr-3" />
+                    <Palette className="w-5 h-5 text-teal-400 mr-3" />
                   )}
-                  <h4 className="text-xl font-semibold text-white">
+                  <h4 className="text-lg font-medium text-white">
                     {skillSet.category}
                   </h4>
                 </div>

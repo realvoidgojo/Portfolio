@@ -12,7 +12,7 @@ const ParticlesBackground = () => {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Check for mobile and reduced motion preference
+    // mobile and motion detection
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     const checkMotion = () =>
       setIsReducedMotion(
@@ -26,7 +26,7 @@ const ParticlesBackground = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Use much simpler config for mobile
+  // mobile config
   const mobileConfig = {
     particles: {
       number: { value: 20, density: { enable: true, area: 1200 } },
@@ -39,7 +39,7 @@ const ParticlesBackground = () => {
     detectRetina: false,
   };
 
-  // Reduced settings for prefers-reduced-motion
+  // perf reduction
   const reducedMotionConfig = {
     particles: {
       number: { value: 15 },
@@ -51,6 +51,7 @@ const ParticlesBackground = () => {
 
   return (
     <div className="particles-container">
+
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -64,20 +65,25 @@ const ParticlesBackground = () => {
               value: "transparent",
             },
           },
-          fpsLimit: isMobile ? 30 : 40, // Reduced from 60
+          fpsLimit: 40,
           particles: {
             color: {
-              value: ["#14b8a6", "#0ea5e9", "#0284c7"],
+              value: ["#14b8a6", "#0ea5e9"],
             },
-            links: {
-              color: "#14b8a6",
-              distance: 150,
-              enable: true,
-              opacity: isMobile ? 0.3 : 0.5,
-              width: isMobile ? 1 : 1.2,
+            number: {
+              value: 20, 
+              density: {
+                enable: true,
+                value_area: 800,
+              },
             },
-            collisions: {
-              enable: false, // Disabled for better performance
+            opacity: {
+              value: 0.4,
+              random: true,
+            },
+            size: {
+              value: 2.5,
+              random: true,
             },
             move: {
               direction: "none",
@@ -86,75 +92,11 @@ const ParticlesBackground = () => {
                 default: "bounce",
               },
               random: true,
-              speed: isMobile ? 0.5 : 1.0, // Slower on mobile
+              speed: 0.8,
               straight: false,
-              attract: {
-                enable: false, // Disabled for performance
-              },
-            },
-            number: {
-              density: {
-                enable: true,
-                area: isMobile ? 1500 : 1000, // Increase area = fewer particles
-              },
-              value: isMobile ? 30 : 60, // Fewer particles for mobile
-            },
-            opacity: {
-              value: 0.5,
-              random: true,
-              anim: {
-                enable: true,
-                speed: 0.5, // Reduced from 0.8
-                opacity_min: 0.3,
-                sync: false,
-              },
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: isMobile ? 3 : 4 },
-              random: true,
-              anim: {
-                enable: true,
-                speed: 1.0, // Reduced from 1.5
-                size_min: 0.5,
-                sync: false,
-              },
-            },
-            shadow: {
-              enable: false, // Always disable shadows for performance
             },
           },
-          interactivity: {
-            detect_on: "canvas",
-            events: {
-              onhover: {
-                enable: !isMobile, // Disable hover effects on mobile
-                mode: "grab",
-              },
-              onclick: {
-                enable: true,
-                mode: "push",
-              },
-              resize: {
-                enable: true,
-                delay: 500, // Add delay to reduce calculations during resize
-              },
-            },
-            modes: {
-              grab: {
-                distance: 140,
-                line_linked: {
-                  opacity: 1,
-                },
-              },
-              push: {
-                particles_nb: isMobile ? 1 : 2, // Even fewer particles added on mobile
-              },
-            },
-          },
-          detectRetina: false, // Disable retina detection for performance
+          detectRetina: false, 
           ...(isMobile && mobileConfig),
           ...(isReducedMotion && reducedMotionConfig),
         }}

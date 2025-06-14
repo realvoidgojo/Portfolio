@@ -15,17 +15,17 @@ interface CodingProfile {
   username: string;
   achievements: string[];
   stats: {
-    contributions?: number; // Changed from solved
+    contributions?: number;
     ranking?: string;
     rating?: number;
   };
   link: string;
   icon: React.ReactNode;
   color: string;
-  description: string; // Added description field
+  description: string;
 }
 
-// Renamed from Profiles to profilesData to avoid naming conflict
+// My profiles on different coding/tech platforms
 const profilesData: CodingProfile[] = [
   {
     platform: "GitHub",
@@ -36,7 +36,7 @@ const profilesData: CodingProfile[] = [
       "NatasX CTF Solver",
     ],
     stats: {
-      contributions: 30, // Changed from solved
+      contributions: 30,
     },
     link: "https://github.com/realvoidgojo",
     icon: <GitBranch />,
@@ -60,11 +60,7 @@ const profilesData: CodingProfile[] = [
   {
     platform: "YouTube",
     username: "RockYou Channel",
-    achievements: [
-      "50+ Educational Videos",
-      "CTF Walkthroughs",
-      "OSINT Techniques",
-    ],
+    achievements: ["Educational Videos", "CTF Walkthroughs"],
     stats: {},
     link: "https://youtube.com/@RockYouChannel",
     icon: <Youtube />,
@@ -130,48 +126,44 @@ const Profiles = () => {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300"
+            className="bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all duration-300 h-full flex flex-col border border-gray-700/30"
           >
-            <div className={`h-3 bg-gradient-to-r ${profile.color}`}></div>
-            <div className="p-6">
-              <div className="flex items-center mb-4">
-                <div className="p-3 bg-gray-700 rounded-lg mr-4">
+            <div className={`h-2 bg-gradient-to-r ${profile.color}`}></div>
+            <div className="p-5">
+              <div className="flex items-center mb-3">
+                <div className="p-2 bg-gray-700 rounded-lg mr-3">
                   {React.cloneElement(profile.icon as React.ReactElement, {
-                    className: "w-6 h-6 text-teal-400",
+                    className: "w-5 h-5 text-teal-400",
                   })}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-lg font-medium text-white">
                     {profile.platform}
                   </h3>
-                  <p className="text-gray-400">@{profile.username}</p>
+                  <p className="text-gray-400 text-sm">@{profile.username}</p>
                 </div>
               </div>
 
-              {/* Description instead of stats */}
-              <p className="text-gray-300 mb-4">{profile.description}</p>
+              <p className="text-gray-300 mb-3 text-sm">
+                {profile.description}
+              </p>
 
-              <div className="mb-4">
-                <h4 className="text-gray-300 mb-2">Highlights</h4>
+              <div className="mb-3">
+                <h4 className="text-gray-300 mb-1 text-sm font-medium">
+                  Highlights:
+                </h4>
                 <ul className="space-y-1">
                   {profile.achievements.map((achievement, i) => (
-                    <li key={i} className="text-gray-400 flex items-start">
-                      <span className="text-teal-400 mr-2">•</span>
+                    <li
+                      key={i}
+                      className="text-gray-400 flex items-start text-xs"
+                    >
+                      <span className="text-teal-400 mr-1">•</span>
                       {achievement}
                     </li>
                   ))}
                 </ul>
               </div>
-
-              <a
-                href={profile.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-teal-400 hover:text-teal-300 transition-colors"
-              >
-                <ExternalLink size={18} className="mr-1" />
-                <span>View Profile</span>
-              </a>
             </div>
           </motion.div>
         ))}
