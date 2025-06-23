@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import PageLayout from "./PageLayout";
 
-// Import certificates 
+// Import certificates
 import fullStackCert from "../assets/certifications/full-stack-cert.pdf";
 import unityCert from "../assets/certifications/unity-game-dev.pdf";
 import javaCert from "../assets/certifications/java-nptel.pdf";
@@ -33,7 +33,12 @@ interface Certificate {
   image: string;
   pdfFile: string;
   icon: React.ReactNode;
-  category: "development" | "cybersecurity" | "networking" | "gamedev";
+  category:
+    | "development"
+    | "cybersecurity"
+    | "networking"
+    | "gamedev"
+    | "programming";
   dimensions?: {
     width: string;
     height: string;
@@ -54,7 +59,7 @@ const certificates: Certificate[] = [
     issuer: "Udemy",
     date: "2025",
     description:
-      "Comprehensive training covering front-end and back-end technologies including HTML, CSS, JavaScript, Node.js, and databases.",
+      "Comprehensive training covering front-end and back-end technologies including HTML, CSS, JS, React, Node.js, and databases.",
     image:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: fullStackCert,
@@ -102,12 +107,12 @@ const certificates: Certificate[] = [
     issuer: "NPTEL Elite Program",
     date: "2023",
     description:
-      "Advanced course covering Java programming concepts, object-oriented design, and application development.",
+      "Advanced course covering Java programming concepts and object-oriented design",
     image:
       "https://images.unsplash.com/photo-1588239034647-25783cbfcfc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: javaCert,
     icon: <Code size={24} />,
-    category: "development",
+    category: "programming",
     dimensions: {
       width: "1200px",
       height: "85vh",
@@ -292,6 +297,8 @@ const Certificates = () => {
         return "from-purple-600 to-purple-800";
       case "gamedev":
         return "from-green-600 to-green-800";
+      case "programming":
+        return "from-green-600 to-green-800";
       default:
         return "from-teal-600 to-teal-800";
     }
@@ -398,6 +405,8 @@ const Certificates = () => {
                 }`}
               >
                 {certificate.category === "development" && "Web Development"}
+                {certificate.category === "programming" &&
+                  "Object-Oriented Programming"}
                 {certificate.category === "cybersecurity" && "Cybersecurity"}
                 {certificate.category === "networking" && "Networking & Cloud"}
                 {certificate.category === "gamedev" && "Game Development"}
