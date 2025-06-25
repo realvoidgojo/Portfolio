@@ -16,17 +16,17 @@ const About = () => {
   const skills = [
     {
       category: "Languages",
-      items: ["Python", "Java", "Golang", "JavaScript", "React"],
+      items: ["Python", "Java", "Golang", "JavaScript"],
       icon: <Code2 className="w-5 h-5" />,
     },
     {
       category: "Frameworks & Tools",
-      items: ["Flask", "Requests", "Celery", "OpenCV", "WebSockets"],
+      items: [, "React", "Flask", "Requests", "Celery", "OpenCV", "WebSockets"],
       icon: <Database className="w-5 h-5" />,
     },
     {
       category: "DevOps & Security",
-      items: ["Linux", "Git", "Docker", "Postman", "Nmap", "Burp Suite"],
+      items: ["Linux", "Git", "Docker", "Postman", "Burp Suite"],
       icon: <Shield className="w-5 h-5" />,
     },
     {
@@ -123,7 +123,8 @@ const About = () => {
             variants={itemVariants}
             className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
           >
-            Passionate cybersecurity enthusiast and developer building the future of digital security
+            Passionate cybersecurity enthusiast and developer building the
+            future of digital security
           </motion.p>
         </div>
 
@@ -134,11 +135,12 @@ const About = () => {
         >
           <motion.div variants={itemVariants} className="md:col-span-2">
             <div className="relative group">
-              <div 
+              <div
                 className="aspect-square rounded-3xl overflow-hidden shadow-2xl"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  padding: '6px',
+                  background:
+                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  padding: "6px",
                 }}
               >
                 <div className="w-full h-full rounded-3xl overflow-hidden bg-white dark:bg-neutral-800">
@@ -149,7 +151,7 @@ const About = () => {
                   />
                 </div>
               </div>
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-6 -right-6 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-4 rounded-2xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -163,7 +165,10 @@ const About = () => {
             variants={itemVariants}
             className="md:col-span-3 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-8 md:p-10 rounded-3xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50"
           >
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h2
+              className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
               Hello, I'm{" "}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Harish Sivaraman
@@ -171,20 +176,36 @@ const About = () => {
             </h2>
             <div className="space-y-6 text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
               <p>
-                I'm a passionate cybersecurity enthusiast and software developer from Chennai, India, 
-                with expertise in <span className="font-jetbrains text-blue-600 dark:text-blue-400 font-medium">CTFs</span>, 
-                <span className="font-jetbrains text-purple-600 dark:text-purple-400 font-medium"> OSINT</span>, and 
-                <span className="font-jetbrains text-green-600 dark:text-green-400 font-medium"> automation</span>.
+                I'm a passionate cybersecurity enthusiast and software developer
+                from Chennai, India, with expertise in{" "}
+                <span className="font-jetbrains text-blue-600 dark:text-blue-400 font-medium">
+                  CTFs
+                </span>
+                ,
+                <span className="font-jetbrains text-purple-600 dark:text-purple-400 font-medium">
+                  {" "}
+                  OSINT
+                </span>
+                , and
+                <span className="font-jetbrains text-green-600 dark:text-green-400 font-medium">
+                  {" "}
+                  automation
+                </span>
+                .
               </p>
               <p>
-                Currently pursuing my B.Tech in Computer Science and Business Systems at Sri Sairam Engineering College, 
-                I've been obsessed with cybersecurity since my first year. Late nights solving CTF challenges and 
-                building Python automation tools have become my favorite pastime.
+                Currently pursuing my B.Tech in Computer Science and Business
+                Systems at Sri Sairam Engineering College, I've been obsessed
+                with cybersecurity since my first year. Late nights solving CTF
+                challenges and building Python automation tools have become my
+                favorite pastime.
               </p>
               <p>
-                Proud to have qualified for <strong>Cyberthon 2025</strong> and ranked <strong>#361 in NahamCon CTF</strong> 
-                out of nearly 3000 participants. When I'm not breaking things, I create educational content on 
-                my YouTube channel and share insights on Medium.
+                Proud to have qualified for <strong>Cyberthon 2025</strong> and
+                ranked <strong>#361 in NahamCon CTF </strong>
+                out of nearly 3000 participants. When I'm not breaking things, I
+                create educational content on my YouTube channel and share
+                insights on Medium.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 mt-8">
@@ -213,11 +234,15 @@ const About = () => {
         {/* Skills Section */}
         <motion.div variants={containerVariants} className="mb-24">
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h2
+              className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
               Technical Skills
             </h2>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
-              A comprehensive toolkit built through hands-on experience and continuous learning
+              A comprehensive toolkit built through hands-on experience and
+              continuous learning
             </p>
           </motion.div>
 
@@ -233,7 +258,10 @@ const About = () => {
                   <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
                     {skillSet.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 ml-3" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  <h3
+                    className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 ml-3"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
                     {skillSet.category}
                   </h3>
                 </div>
@@ -255,11 +283,15 @@ const About = () => {
         {/* Experience Section */}
         <motion.div variants={containerVariants} className="mb-24">
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h2
+              className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
               Professional Experience
             </h2>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
-              My journey through cybersecurity competitions, hackathons, and content creation
+              My journey through cybersecurity competitions, hackathons, and
+              content creation
             </p>
           </motion.div>
 
@@ -273,20 +305,26 @@ const About = () => {
               >
                 <div className="flex flex-col lg:flex-row justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <h3
+                      className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
                       {job.position}
                     </h3>
-                    <p className="text-lg text-blue-600 dark:text-blue-400 font-medium">{job.company}</p>
+                    <p className="text-lg text-blue-600 dark:text-blue-400 font-medium">
+                      {job.company}
+                    </p>
                   </div>
-                  <p className="text-neutral-500 dark:text-neutral-500 font-jetbrains mt-2 lg:mt-0 font-medium">{job.period}</p>
+                  <p className="text-neutral-500 dark:text-neutral-500 font-jetbrains mt-2 lg:mt-0 font-medium">
+                    {job.period}
+                  </p>
                 </div>
-                <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed text-lg">{job.description}</p>
+                <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed text-lg">
+                  {job.description}
+                </p>
                 <div className="flex flex-wrap gap-3">
                   {job.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="tech-tag text-sm"
-                    >
+                    <span key={i} className="tech-tag text-sm">
                       {tech}
                     </span>
                   ))}
@@ -299,7 +337,10 @@ const About = () => {
         {/* Education Section */}
         <motion.div variants={containerVariants}>
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h2
+              className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
               Education
             </h2>
             <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
@@ -317,14 +358,23 @@ const About = () => {
               >
                 <div className="flex flex-col lg:flex-row justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <h3
+                      className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
                       {edu.degree}
                     </h3>
-                    <p className="text-lg text-purple-600 dark:text-purple-400 font-medium">{edu.institution}</p>
+                    <p className="text-lg text-purple-600 dark:text-purple-400 font-medium">
+                      {edu.institution}
+                    </p>
                   </div>
-                  <p className="text-neutral-500 dark:text-neutral-500 font-jetbrains mt-2 lg:mt-0 font-medium">{edu.year}</p>
+                  <p className="text-neutral-500 dark:text-neutral-500 font-jetbrains mt-2 lg:mt-0 font-medium">
+                    {edu.year}
+                  </p>
                 </div>
-                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">{edu.description}</p>
+                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
+                  {edu.description}
+                </p>
               </motion.div>
             ))}
           </div>

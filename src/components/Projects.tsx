@@ -78,7 +78,7 @@ const projects: Project[] = [
       "Real-time chat application with group and private messaging built with JavaScript, PHP, and PostgreSQL/Supabase.",
     detailedDescription:
       "XD Chat App is a feature-rich real-time messaging platform designed to connect people globally. It supports both group conversations and private messaging with a focus on speed, ease of use, and security. Built with a JavaScript frontend and PHP backend using Supabase for PostgreSQL database management.",
-    tags: ["JavaScript", "PHP", "PostgreSQL", "Supabase", "WebSockets"],
+    tags: ["JavaScript", "PHP", "PostgreSQL", "Supabase"],
     image:
       "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     githubLink: "https://github.com/realvoidgojo/XD-Chat-App",
@@ -115,9 +115,9 @@ const projects: Project[] = [
   {
     title: "RTO Lookup India",
     description:
-      "A lightweight React web app to look up Indian RTO and vehicle data from registration numbers.",
+      "A lightweight  web app to look up Indian RTO and vehicle data from registration numbers.",
     detailedDescription:
-      "RTO Lookup India is a minimalist React application designed to quickly retrieve details about Indian vehicles from their registration numbers. It features a clean UI for fast access, responsive design, and comprehensive data about RTOs across India.",
+      "RTO Lookup India is a minimalist  application designed to quickly retrieve details about Indian vehicles from their registration numbers. It features a clean UI for fast access, responsive design, and comprehensive data about RTOs across India.",
     tags: ["JavaScript", "Web Development"],
     image:
       "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",

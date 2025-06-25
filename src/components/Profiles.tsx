@@ -38,7 +38,7 @@ const profilesData: CodingProfile[] = [
       "NatasX CTF Solver",
     ],
     stats: {
-      contributions: 30,
+      contributions: 1,
     },
     link: "https://github.com/realvoidgojo",
     icon: <GitBranch />,
@@ -51,7 +51,7 @@ const profilesData: CodingProfile[] = [
     username: "realvoidgojo",
     achievements: ["NahamCon CTF 2025 - #361"],
     stats: {
-      ranking: "Rising",
+      ranking: "beginner",
     },
     link: "https://ctftime.org/user/198041",
     icon: <Shield />,

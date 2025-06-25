@@ -19,7 +19,7 @@ const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState({
     name: "",
-    email: "", 
+    email: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -93,7 +93,7 @@ const Contact = () => {
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Available",
-      value: "Mon - Fri, 9 AM - 6 PM IST",
+      value: "+91 8825964873",
       href: null,
     },
   ];
@@ -169,7 +169,8 @@ const Contact = () => {
             variants={itemVariants}
             className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
           >
-            Ready to collaborate on something amazing? Let's discuss your next project
+            Ready to collaborate on something amazing? Let's discuss your next
+            project
           </motion.p>
         </div>
 
@@ -180,7 +181,10 @@ const Contact = () => {
               variants={itemVariants}
               className="lg:col-span-3 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-8 md:p-10 rounded-3xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50"
             >
-              <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-8" style={{ fontFamily: "'Inter', sans-serif" }}>
+              <h2
+                className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-8"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
                 Send Me a Message
               </h2>
 
@@ -196,9 +200,12 @@ const Contact = () => {
                       <Check className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">Message Sent Successfully!</h4>
+                      <h4 className="font-semibold mb-1">
+                        Message Sent Successfully!
+                      </h4>
                       <p className="text-sm opacity-90">
-                        Thank you for reaching out. I'll get back to you as soon as possible.
+                        Thank you for reaching out. I'll get back to you as soon
+                        as possible.
                       </p>
                     </div>
                   </motion.div>
@@ -222,11 +229,7 @@ const Contact = () => {
                 )}
               </AnimatePresence>
 
-              <form
-                ref={formRef}
-                onSubmit={handleSubmit}
-                className="space-y-8"
-              >
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-6">
                   <motion.div
                     variants={itemVariants}
@@ -285,10 +288,7 @@ const Contact = () => {
                   </motion.div>
                 </div>
 
-                <motion.div
-                  variants={itemVariants}
-                  className="relative group"
-                >
+                <motion.div variants={itemVariants} className="relative group">
                   <label
                     htmlFor="message"
                     className={`absolute left-4 transition-all duration-300 pointer-events-none z-10 ${
@@ -317,7 +317,10 @@ const Contact = () => {
                   type="submit"
                   disabled={loading}
                   className="w-full btn-primary flex items-center justify-center space-x-3 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                  whileHover={{ scale: loading ? 1 : 1.02, y: loading ? 0 : -2 }}
+                  whileHover={{
+                    scale: loading ? 1 : 1.02,
+                    y: loading ? 0 : -2,
+                  }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
                   variants={itemVariants}
                 >
@@ -342,7 +345,10 @@ const Contact = () => {
               className="lg:col-span-2 space-y-8"
             >
               <div className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 p-8 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <h3
+                  className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
                   Contact Information
                 </h3>
                 <div className="space-y-6">
@@ -356,7 +362,10 @@ const Contact = () => {
                         {item.icon}
                       </div>
                       <div>
-                        <h4 className="font-semibold text-neutral-900 dark:text-neutral-100 mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        <h4
+                          className="font-semibold text-neutral-900 dark:text-neutral-100 mb-1"
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
                           {item.label}
                         </h4>
                         {item.href ? (
@@ -378,11 +387,15 @@ const Contact = () => {
               </div>
 
               <div className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 p-8 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <h3
+                  className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
                   Let's Connect
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
-                  Follow me on social media for updates on my latest projects, cybersecurity insights, and tech adventures.
+                  Follow me on social media for updates on my latest projects,
+                  cybersecurity insights, and tech adventures.
                 </p>
                 <div className="flex space-x-4">
                   {socialLinks.map((link, index) => (
@@ -404,11 +417,16 @@ const Contact = () => {
               </div>
 
               <div className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 p-8 rounded-2xl border border-blue-500/20">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+                <h3
+                  className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-4"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
                   Quick Response
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                  I typically respond to messages within <strong>24 hours</strong>. For urgent matters, feel free to reach out via email directly.
+                  I typically respond to messages within{" "}
+                  <strong>24 hours</strong>. For urgent matters, feel free to
+                  reach out via email directly.
                 </p>
               </div>
             </motion.div>
