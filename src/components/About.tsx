@@ -7,6 +7,8 @@ import {
   Award,
   Database,
   Palette,
+  Terminal,
+  Shield,
 } from "lucide-react";
 import profileImage from "../assets/profile.jpg";
 
@@ -15,18 +17,22 @@ const About = () => {
     {
       category: "Languages",
       items: ["Python", "Java", "Golang", "JavaScript", "React"],
+      icon: <Code2 className="w-5 h-5" />,
     },
     {
       category: "Frameworks & Tools",
       items: ["Flask", "Requests", "Celery", "OpenCV", "WebSockets"],
+      icon: <Database className="w-5 h-5" />,
     },
     {
-      category: "DevOps & Others",
+      category: "DevOps & Security",
       items: ["Linux", "Git", "Docker", "Postman", "Nmap", "Burp Suite"],
+      icon: <Shield className="w-5 h-5" />,
     },
     {
       category: "Creative & Design",
       items: ["Figma", "Canva", "Premier", "Photoshop", "Illustrator"],
+      icon: <Palette className="w-5 h-5" />,
     },
   ];
 
@@ -67,7 +73,6 @@ const About = () => {
     },
   ];
 
-  // These animations make content appear with a nice stagger effect
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,10 +84,15 @@ const About = () => {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+      },
     },
   };
 
@@ -91,138 +101,147 @@ const About = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="py-20 bg-gray-900"
+      className="section-padding"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-center mb-16">
+      <div className="container mx-auto px-6">
+        {/* Header Section */}
+        <div className="flex flex-col items-center justify-center mb-20">
           <motion.div
             variants={itemVariants}
-            className="bg-teal-500/20 p-3 rounded-full mb-4"
+            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
           >
-            <Code2 className="w-8 h-8 text-teal-400" />
+            <Terminal className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </motion.div>
-          <motion.h2
+          <motion.h1
             variants={itemVariants}
-            className="text-4xl font-bold text-white mb-4 text-center"
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             About Me
-          </motion.h2>
+          </motion.h1>
           <motion.p
             variants={itemVariants}
-            className="text-gray-400 max-w-2xl text-center"
+            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
           >
-            I'm a cybersecurity enthusiast and software developer focused on
-            CTFs, OSINT, and automation.
+            Passionate cybersecurity enthusiast and developer building the future of digital security
           </motion.p>
         </div>
 
         {/* Bio Section */}
         <motion.div
           variants={containerVariants}
-          className="grid md:grid-cols-3 gap-8 mb-20"
+          className="grid md:grid-cols-5 gap-12 mb-24"
         >
-          <motion.div variants={itemVariants} className="md:col-span-1">
-            <div className="relative">
-              <div className="aspect-square rounded-xl overflow-hidden border-4 border-teal-600">
-                {/* Replace the Unsplash URL with the imported image */}
-                <img
-                  src={profileImage}
-                  alt="Harish Sivaraman"
-                  className="w-full h-full object-cover"
-                />
+          <motion.div variants={itemVariants} className="md:col-span-2">
+            <div className="relative group">
+              <div 
+                className="aspect-square rounded-3xl overflow-hidden shadow-2xl"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  padding: '6px',
+                }}
+              >
+                <div className="w-full h-full rounded-3xl overflow-hidden bg-white dark:bg-neutral-800">
+                  <img
+                    src={profileImage}
+                    alt="Harish Sivaraman"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-gray-900 p-3 rounded-lg shadow-lg">
-                <Award className="w-8 h-8 text-teal-500" />
-              </div>
+              <motion.div 
+                className="absolute -bottom-6 -right-6 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-4 rounded-2xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              >
+                <Award className="w-8 h-8 text-blue-600" />
+              </motion.div>
             </div>
           </motion.div>
 
           <motion.div
             variants={itemVariants}
-            className="md:col-span-2 bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col justify-center"
+            className="md:col-span-3 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-8 md:p-10 rounded-3xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Hello, I'm Harish Sivaraman
-            </h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              I'm a passionate cybersecurity enthusiast and software developer
-              from Chennai, India, with a strong focus on CTFs (Capture The Flag
-              challenges), OSINT (Open-Source Intelligence), and automation.
-              Currently pursuing my B.Tech in Computer Science and Business
-              Systems at Sri Sairam Engineering College.
-            </p>
-            <p className="text-gray-300 mb-8 leading-relaxed">
-              I'm just a regular CS student who got hooked on cybersecurity
-              during my first year. I've spent way too many late nights solving
-              CTF challenges and messing around with Python automation.
-            </p>
-
-            <p className="text-gray-300 mb-8 leading-relaxed">
-              Somehow managed to qualify for Cyberthon 2025 (still can't believe
-              it) and ranked #361 in NahamCon CTF out of nearly 3000
-              participants. When I'm not breaking stuff, I make tutorial videos
-              on my YouTube channel "@RockYouChannel" and write about my CTF
-              adventures on Medium.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
+            <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+              Hello, I'm{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Harish Sivaraman
+              </span>
+            </h2>
+            <div className="space-y-6 text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
+              <p>
+                I'm a passionate cybersecurity enthusiast and software developer from Chennai, India, 
+                with expertise in <span className="font-jetbrains text-blue-600 dark:text-blue-400 font-medium">CTFs</span>, 
+                <span className="font-jetbrains text-purple-600 dark:text-purple-400 font-medium"> OSINT</span>, and 
+                <span className="font-jetbrains text-green-600 dark:text-green-400 font-medium"> automation</span>.
+              </p>
+              <p>
+                Currently pursuing my B.Tech in Computer Science and Business Systems at Sri Sairam Engineering College, 
+                I've been obsessed with cybersecurity since my first year. Late nights solving CTF challenges and 
+                building Python automation tools have become my favorite pastime.
+              </p>
+              <p>
+                Proud to have qualified for <strong>Cyberthon 2025</strong> and ranked <strong>#361 in NahamCon CTF</strong> 
+                out of nearly 3000 participants. When I'm not breaking things, I create educational content on 
+                my YouTube channel and share insights on Medium.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-4 mt-8">
+              <motion.a
                 href="mailto:harishsivaraman@outlook.com"
-                target="_blank"
-                className="bg-teal-600 text-white px-5 py-2 rounded-lg hover:bg-teal-700 transition-colors"
+                className="btn-primary flex items-center space-x-2"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                Contact Me
-              </a>
-              <a
+                <span>Contact Me</span>
+              </motion.a>
+              <motion.a
                 href="https://github.com/realvoidgojo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+                className="btn-secondary flex items-center space-x-2"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                GitHub Profile
-              </a>
+                <span>GitHub Profile</span>
+              </motion.a>
             </div>
           </motion.div>
         </motion.div>
 
         {/* Skills Section */}
-        <motion.div variants={containerVariants} className="mb-20">
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-white mb-4">My Skills</h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              I've worked with various technologies throughout my career. Here
-              are some of my key skills.
+        <motion.div variants={containerVariants} className="mb-24">
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+              Technical Skills
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
+              A comprehensive toolkit built through hands-on experience and continuous learning
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skillSet, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-gray-800 rounded-lg p-5 border border-gray-700/30 transition-all duration-300"
+                className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 rounded-2xl p-6 border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300 group"
+                whileHover={{ y: -4, scale: 1.02 }}
               >
-                <div className="flex items-center mb-4">
-                  {index === 0 && (
-                    <Code2 className="w-5 h-5 text-teal-400 mr-3" />
-                  )}
-                  {index === 1 && (
-                    <Database className="w-5 h-5 text-teal-400 mr-3" />
-                  )}
-                  {index === 2 && (
-                    <Code2 className="w-5 h-5 text-teal-400 mr-3" />
-                  )}
-                  {index === 3 && (
-                    <Palette className="w-5 h-5 text-teal-400 mr-3" />
-                  )}
-                  <h4 className="text-lg font-medium text-white">
+                <div className="flex items-center mb-6">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+                    {skillSet.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 ml-3" style={{ fontFamily: "'Inter', sans-serif" }}>
                     {skillSet.category}
-                  </h4>
+                  </h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {skillSet.items.map((skill, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm"
+                      className="tech-tag text-sm hover:bg-gray-600 dark:hover:bg-gray-700 transition-colors duration-200"
                     >
                       {skill}
                     </span>
@@ -234,13 +253,13 @@ const About = () => {
         </motion.div>
 
         {/* Experience Section */}
-        <motion.div variants={containerVariants} className="mb-20">
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-white mb-4">
+        <motion.div variants={containerVariants} className="mb-24">
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
               Professional Experience
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              My professional journey and work experience over the years.
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
+              My journey through cybersecurity competitions, hackathons, and content creation
             </p>
           </motion.div>
 
@@ -249,23 +268,24 @@ const About = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-gray-800 rounded-xl p-6 md:p-8"
+                className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 rounded-2xl p-8 border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300 group"
+                whileHover={{ y: -2, scale: 1.005 }}
               >
-                <div className="flex flex-col md:flex-row justify-between mb-4">
+                <div className="flex flex-col lg:flex-row justify-between mb-6">
                   <div>
-                    <h4 className="text-xl font-semibold text-white">
+                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
                       {job.position}
-                    </h4>
-                    <p className="text-teal-400">{job.company}</p>
+                    </h3>
+                    <p className="text-lg text-blue-600 dark:text-blue-400 font-medium">{job.company}</p>
                   </div>
-                  <p className="text-gray-500 mt-2 md:mt-0">{job.period}</p>
+                  <p className="text-neutral-500 dark:text-neutral-500 font-jetbrains mt-2 lg:mt-0 font-medium">{job.period}</p>
                 </div>
-                <p className="text-gray-300 mb-4">{job.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed text-lg">{job.description}</p>
+                <div className="flex flex-wrap gap-3">
                   {job.technologies.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-teal-900/30 text-teal-300 rounded-full text-xs"
+                      className="tech-tag text-sm"
                     >
                       {tech}
                     </span>
@@ -278,10 +298,12 @@ const About = () => {
 
         {/* Education Section */}
         <motion.div variants={containerVariants}>
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-white mb-4">Education</h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              My academic background and qualifications.
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+              Education
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
+              Academic foundation supporting my technical journey
             </p>
           </motion.div>
 
@@ -290,18 +312,19 @@ const About = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-gray-800 rounded-xl p-6 md:p-8"
+                className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 rounded-2xl p-8 border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300 group"
+                whileHover={{ y: -2, scale: 1.005 }}
               >
-                <div className="flex flex-col md:flex-row justify-between mb-4">
+                <div className="flex flex-col lg:flex-row justify-between mb-6">
                   <div>
-                    <h4 className="text-xl font-semibold text-white">
+                    <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
                       {edu.degree}
-                    </h4>
-                    <p className="text-teal-400">{edu.institution}</p>
+                    </h3>
+                    <p className="text-lg text-purple-600 dark:text-purple-400 font-medium">{edu.institution}</p>
                   </div>
-                  <p className="text-gray-500 mt-2 md:mt-0">{edu.year}</p>
+                  <p className="text-neutral-500 dark:text-neutral-500 font-jetbrains mt-2 lg:mt-0 font-medium">{edu.year}</p>
                 </div>
-                <p className="text-gray-300">{edu.description}</p>
+                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">{edu.description}</p>
               </motion.div>
             ))}
           </div>

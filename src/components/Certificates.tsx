@@ -13,8 +13,8 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCw,
+  Trophy,
 } from "lucide-react";
-import PageLayout from "./PageLayout";
 
 // Import certificates
 import fullStackCert from "../assets/certifications/full-stack-cert.pdf";
@@ -63,7 +63,7 @@ const certificates: Certificate[] = [
     image:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: fullStackCert,
-    icon: <Code size={24} />,
+    icon: <Code size={20} />,
     category: "development",
     dimensions: {
       width: "1100px",
@@ -87,7 +87,7 @@ const certificates: Certificate[] = [
     image:
       "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: unityCert,
-    icon: <BookOpen size={24} />,
+    icon: <BookOpen size={20} />,
     category: "gamedev",
     dimensions: {
       width: "1100px",
@@ -111,7 +111,7 @@ const certificates: Certificate[] = [
     image:
       "https://images.unsplash.com/photo-1588239034647-25783cbfcfc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: javaCert,
-    icon: <Code size={24} />,
+    icon: <Code size={20} />,
     category: "programming",
     dimensions: {
       width: "1200px",
@@ -135,7 +135,7 @@ const certificates: Certificate[] = [
     image:
       "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: networksCert,
-    icon: <Database size={24} />,
+    icon: <Database size={20} />,
     category: "networking",
     dimensions: {
       width: "1200px",
@@ -159,7 +159,7 @@ const certificates: Certificate[] = [
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: cloudCert,
-    icon: <Database size={24} />,
+    icon: <Database size={20} />,
     category: "networking",
     dimensions: {
       width: "1200px",
@@ -183,7 +183,7 @@ const certificates: Certificate[] = [
     image:
       "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: reactCert,
-    icon: <Code size={24} />,
+    icon: <Code size={20} />,
     category: "development",
     dimensions: {
       width: "1100px",
@@ -199,20 +199,20 @@ const certificates: Certificate[] = [
     },
   },
   {
-    title: "NahamCon 2025 CTF Certificate",
-    issuer: "NahamCon",
-    date: "2025",
+    title: "NahamCon CTF 2024 - Ranked #361/2987",
+    issuer: "NahamCon CTF",
+    date: "2024",
     description:
-      "Recognition for participation and ranking #361 out of 2961 participants in the national-level Capture The Flag cybersecurity competition.",
+      "Competitive cybersecurity challenge where I achieved top 12% ranking among nearly 3000 participants worldwide.",
     image:
-      "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     pdfFile: nahamconCert,
-    icon: <Shield size={24} />,
+    icon: <Shield size={20} />,
     category: "cybersecurity",
     dimensions: {
-      width: "1300px",
-      height: "59vh",
-      maxWidth: "80vw",
+      width: "1100px",
+      height: "65vh",
+      maxWidth: "98vw",
       maxHeight: "65vh",
     },
     mobileDimensions: {
@@ -227,49 +227,105 @@ const certificates: Certificate[] = [
 const Certificates = () => {
   const [selectedCertificate, setSelectedCertificate] =
     useState<Certificate | null>(null);
+  const [filter, setFilter] = useState<string>("all");
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [pdfError, setPdfError] = useState(false);
 
-  // Default dimensions for certificates that don't specify their own
-  const defaultDimensions = {
-    width: "1100px",
-    height: "80vh",
-    maxWidth: "98vw",
-    maxHeight: "65vh",
-  };
-
-  const defaultMobileDimensions = {
-    width: "95vw", // Fixed from 20vw to 95vw
-    height: "65vh", // Increased from 60vh to 65vh
-    maxWidth: "95vw",
-    maxHeight: "65vh", // Increased from 60vh to 65vh
-  };
-
-  // Check for mobile viewport on component mount and resize
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    // Initial check
     checkMobile();
-
-    // Add event listener for window resize
     window.addEventListener("resize", checkMobile);
-
-    // Clean up
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Reset PDF error state when certificate changes
-  useEffect(() => {
-    setPdfError(false);
-  }, [selectedCertificate]);
+  const categories = [
+    { key: "all", label: "All Certificates", count: certificates.length },
+    {
+      key: "development",
+      label: "Web Development",
+      count: certificates.filter((c) => c.category === "development").length,
+    },
+    {
+      key: "programming",
+      label: "Programming",
+      count: certificates.filter((c) => c.category === "programming").length,
+    },
+    {
+      key: "networking",
+      label: "Cloud & Networks",
+      count: certificates.filter((c) => c.category === "networking").length,
+    },
+    {
+      key: "cybersecurity",
+      label: "Cybersecurity",
+      count: certificates.filter((c) => c.category === "cybersecurity").length,
+    },
+    {
+      key: "gamedev",
+      label: "Game Development",
+      count: certificates.filter((c) => c.category === "gamedev").length,
+    },
+  ];
 
-  // Animation variants for children elements
+  const getCategoryColor = (category: string) => {
+    const colors = {
+      development: "from-blue-500 to-cyan-500",
+      programming: "from-green-500 to-emerald-500",
+      networking: "from-purple-500 to-violet-500",
+      cybersecurity: "from-red-500 to-pink-500",
+      gamedev: "from-orange-500 to-yellow-500",
+    };
+    return colors[category as keyof typeof colors] || "from-gray-500 to-gray-600";
+  };
+
+  const openCertificate = (certificate: Certificate) => {
+    setSelectedCertificate(certificate);
+    setPdfError(false);
+    setScale(1);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeCertificate = () => {
+    setSelectedCertificate(null);
+    setScale(1);
+    setPdfError(false);
+    document.body.style.overflow = "auto";
+  };
+
+  const zoomIn = () => setScale((prev) => Math.min(prev + 0.25, 2));
+  const zoomOut = () => setScale((prev) => Math.max(prev - 0.25, 0.5));
+  const resetZoom = () => setScale(1);
+
+  const getDimensions = (certificate: Certificate) => {
+    const dimensions = isMobile
+      ? certificate.mobileDimensions || certificate.dimensions
+      : certificate.dimensions;
+    
+    return dimensions || {
+      width: "95vw",
+      height: "65vh",
+      maxWidth: "95vw",
+      maxHeight: "65vh",
+    };
+  };
+
+  const handlePdfError = () => {
+    setPdfError(true);
+  };
+
+  const filteredCertificates =
+    filter === "all"
+      ? certificates
+      : certificates.filter((cert) => cert.category === filter);
+
   const containerVariants = {
-    animate: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
       transition: {
         staggerChildren: 0.1,
       },
@@ -277,86 +333,59 @@ const Certificates = () => {
   };
 
   const itemVariants = {
-    initial: { y: 20, opacity: 0 },
-    animate: {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
       },
     },
   };
 
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case "development":
-        return "from-blue-600 to-blue-800";
-      case "cybersecurity":
-        return "from-red-600 to-red-800";
-      case "networking":
-        return "from-purple-600 to-purple-800";
-      case "gamedev":
-        return "from-green-600 to-green-800";
-      case "programming":
-        return "from-green-600 to-green-800";
-      default:
-        return "from-teal-600 to-teal-800";
-    }
-  };
-
-  // Handle opening certificate view
-  const openCertificate = (certificate: Certificate) => {
-    setSelectedCertificate(certificate);
-    document.body.style.overflow = "hidden";
-    setScale(1); // Reset zoom when opening new certificate
-  };
-
-  // Handle closing certificate view
-  const closeCertificate = () => {
-    setSelectedCertificate(null);
-    document.body.style.overflow = "auto";
-  };
-
-  // Zoom functions
-  const zoomIn = () => setScale((prev) => Math.min(prev + 0.25, 2));
-  const zoomOut = () => setScale((prev) => Math.max(prev - 0.25, 0.5));
-  const resetZoom = () => setScale(1);
-
-  // Get appropriate dimensions based on device
-  const getDimensions = (certificate: Certificate) => {
-    if (isMobile) {
-      return certificate.mobileDimensions || defaultMobileDimensions;
-    }
-    return certificate.dimensions || defaultDimensions;
-  };
-
-  const handlePdfError = () => {
-    console.error("PDF failed to load");
-    setPdfError(true);
-  };
-
   return (
-    <PageLayout
-      title="Certificates & Courses"
-      icon={<Award className="w-8 h-8 text-teal-400" />}
+    <motion.section
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="section-padding"
     >
-      <div className="mb-10 text-center max-w-2xl mx-auto">
-        <p className="text-gray-300">
-          I'm constantly learning and improving my skills through various
-          courses and certifications. Here's a collection of my educational
-          achievements that have helped shape my technical expertise.
-        </p>
-      </div>
+      <div className="container mx-auto px-6">
+        {/* Header Section */}
+        <div className="flex flex-col items-center justify-center mb-20">
+          <motion.div
+            variants={itemVariants}
+            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
+          >
+            <Award className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+          </motion.div>
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            Certificates & Courses
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
+          >
+            I'm constantly learning and improving my skills through various courses and certifications. 
+            Here's a collection of my educational achievements that have helped shape my technical expertise.
+          </motion.p>
+        </div>
 
-      <motion.div
-        variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-      >
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+        >
         {certificates.map((certificate, index) => (
           <motion.div
             key={index}
             variants={itemVariants}
-            className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-teal-500/20 transition-all duration-300 h-full flex flex-col"
+            className="group backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 rounded-3xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50 overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 h-full flex flex-col"
           >
             <div className="h-48 overflow-hidden relative">
               <div
@@ -367,41 +396,53 @@ const Certificates = () => {
               <img
                 src={certificate.image}
                 alt={certificate.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute top-3 right-3 bg-gray-900/70 p-2 rounded-full">
-                {certificate.icon}
+              <div className="absolute top-4 right-4 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-3 rounded-full border border-neutral-200/50 dark:border-neutral-700/50">
+                <div className="text-blue-600 dark:text-blue-400">
+                  {certificate.icon}
+                </div>
               </div>
             </div>
             <div className="p-6 flex-grow">
-              <h3 className="text-xl font-semibold text-white mb-1">
+              <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-3 group-hover:text-blue-custom transition-colors duration-300" style={{ fontFamily: "'Inter', sans-serif" }}>
                 {certificate.title}
               </h3>
-              <div className="flex justify-between mb-4">
-                <p className="text-teal-400">{certificate.issuer}</p>
-                <p className="text-gray-400">{certificate.date}</p>
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-3 py-1 bg-gradient-to-r from-blue-500/10 to-purple-600/10 text-blue-custom text-xs font-medium font-jetbrains rounded-lg border border-blue-500/20">
+                  {certificate.issuer}
+                </span>
+                <span className="text-sm text-neutral-500 dark:text-neutral-500 font-jetbrains font-medium">
+                  {certificate.date}
+                </span>
               </div>
-              <p className="text-gray-300">{certificate.description}</p>
+              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">
+                {certificate.description}
+              </p>
 
-              <button
+              <motion.button
                 onClick={() => openCertificate(certificate)}
-                className="mt-4 flex items-center text-teal-400 hover:text-teal-300 transition-colors"
+                className="btn-secondary text-sm flex items-center space-x-2 px-4 py-3 w-full justify-center"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
                 aria-label={`View ${certificate.title}`}
               >
-                <Eye size={18} className="mr-1" />
-                <span>View Certificate</span>
-              </button>
+                <Eye size={16} />
+                <span className="font-jetbrains">View Certificate</span>
+              </motion.button>
             </div>
-            <div className="p-4 border-t border-gray-700 mt-auto">
+            <div className="px-6 pb-6 mt-auto">
               <span
-                className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                className={`inline-flex items-center px-3 py-2 rounded-xl text-xs font-medium font-jetbrains border ${
                   certificate.category === "development"
-                    ? "bg-blue-900/30 text-blue-300"
+                    ? "bg-gradient-to-r from-blue-500/10 to-blue-600/10 text-blue-custom border-blue-500/20"
                     : certificate.category === "cybersecurity"
-                    ? "bg-red-900/30 text-red-300"
+                    ? "bg-gradient-to-r from-red-500/10 to-red-600/10 text-red-600 dark:text-red-400 border-red-500/20"
                     : certificate.category === "networking"
-                    ? "bg-purple-900/30 text-purple-300"
-                    : "bg-green-900/30 text-green-300"
+                    ? "bg-gradient-to-r from-purple-500/10 to-purple-600/10 text-purple-600 dark:text-purple-400 border-purple-500/20"
+                    : certificate.category === "programming"
+                    ? "bg-gradient-to-r from-green-500/10 to-green-600/10 text-green-600 dark:text-green-400 border-green-500/20"
+                    : "bg-gradient-to-r from-orange-500/10 to-orange-600/10 text-orange-600 dark:text-orange-400 border-orange-500/20"
                 }`}
               >
                 {certificate.category === "development" && "Web Development"}
@@ -424,7 +465,7 @@ const Certificates = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 modal-backdrop flex items-center justify-center z-50 p-1"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             onClick={closeCertificate}
           >
             <motion.div
@@ -432,73 +473,84 @@ const Certificates = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ type: "spring", damping: 25 }}
-              className={`bg-gray-800 rounded-xl overflow-hidden flex flex-col ${
+              className={`backdrop-blur-xl bg-white/95 dark:bg-neutral-900/95 rounded-3xl overflow-hidden flex flex-col shadow-2xl border border-neutral-200/50 dark:border-neutral-700/50 ${
                 isMobile
-                  ? "w-[98%] h-[90vh] max-h-[90vh]"
-                  : "max-w-[90%] w-[1100px] h-[92vh]"
+                  ? "w-[95%] h-[85vh] max-h-[85vh]"
+                  : "max-w-[90%] w-[1100px] h-[90vh]"
               }`}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header - Simplified */}
-              <div className="p-1.5 bg-gray-700 border-b border-gray-700/50 flex justify-between items-center">
+              {/* Header - Modern */}
+              <div className="p-4 bg-gradient-to-r from-blue-500/10 to-purple-600/10 border-b border-neutral-200/50 dark:border-neutral-700/50 flex justify-between items-center">
                 <h2
-                  className={`font-bold text-white truncate pl-2 ${
-                    isMobile ? "text-xs max-w-[60%]" : "text-sm max-w-[70%]"
+                  className={`font-bold text-neutral-900 dark:text-neutral-100 truncate ${
+                    isMobile ? "text-sm max-w-[60%]" : "text-lg max-w-[70%]"
                   }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   {selectedCertificate?.title}
                 </h2>
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-2">
                   {/* Simplified control buttons */}
                   <motion.button
                     onClick={zoomOut}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
+                    className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     title="Zoom out"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <ZoomOut size={isMobile ? 12 : 14} />
+                    <ZoomOut size={isMobile ? 14 : 16} />
                   </motion.button>
                   <motion.button
                     onClick={resetZoom}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
+                    className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     title="Reset zoom"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <RotateCw size={isMobile ? 12 : 14} />
+                    <RotateCw size={isMobile ? 14 : 16} />
                   </motion.button>
                   <motion.button
                     onClick={zoomIn}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
+                    className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     title="Zoom in"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <ZoomIn size={isMobile ? 12 : 14} />
+                    <ZoomIn size={isMobile ? 14 : 16} />
                   </motion.button>
 
                   <motion.a
                     href={selectedCertificate?.pdfFile}
                     download
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors"
+                    className="btn-secondary p-2 flex items-center"
                     onClick={(e) => e.stopPropagation()}
                     title="Download certificate"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <Download size={isMobile ? 12 : 14} />
+                    <Download size={isMobile ? 14 : 16} />
                   </motion.a>
 
                   <motion.button
                     onClick={closeCertificate}
-                    className="p-1 text-gray-400 hover:text-white rounded-full hover:bg-gray-600 transition-colors ml-1"
+                    className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                     title="Close"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <X size={isMobile ? 14 : 16} />
+                    <X size={isMobile ? 16 : 18} />
                   </motion.button>
                 </div>
               </div>
               {/* PDF Viewer Container */}
-              <div className="flex-grow bg-gray-900 bg-opacity-90 overflow-hidden flex items-center justify-center p-0 relative">
+              <div className="flex-grow bg-neutral-50 dark:bg-neutral-800 overflow-hidden flex items-center justify-center p-6 relative">
                 <div
-                  className="absolute inset-0 opacity-5"
+                  className="absolute inset-0 opacity-10"
                   style={{
                     backgroundImage:
-                      "radial-gradient(circle at 25px 25px, rgb(30, 41, 59) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgb(30, 41, 59) 2%, transparent 0%)",
-                    backgroundSize: "100px 100px",
+                      "radial-gradient(circle at 25px 25px, rgb(59, 130, 246) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgb(147, 51, 234) 2%, transparent 0%)",
+                    backgroundSize: "50px 50px",
                   }}
                 ></div>
 
@@ -511,51 +563,50 @@ const Certificates = () => {
                 >
                   {/* Show fallback UI for mobile devices to ensure compatibility */}
                   {pdfError || isMobile ? (
-                    <div className="bg-gray-800 p-6 rounded-md shadow-xl text-white text-center">
+                    <div className="backdrop-blur-xl bg-white/90 dark:bg-neutral-900/90 p-8 rounded-3xl shadow-2xl border border-neutral-200/50 dark:border-neutral-700/50 text-center max-w-md">
                       <h3
                         className={`${
-                          isMobile ? "text-lg" : "text-xl"
-                        } font-bold mb-4`}
+                          isMobile ? "text-xl" : "text-2xl"
+                        } font-bold mb-6 text-neutral-900 dark:text-neutral-100`}
+                        style={{ fontFamily: "'Inter', sans-serif" }}
                       >
                         Certificate Preview
                       </h3>
-                      <p className="mb-4">
+                      <p className="mb-8 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                         {isMobile && !pdfError
-                          ? "For better viewing experience on mobile, please download or open in a new tab."
+                          ? "For the best viewing experience on mobile, please download or open in a new tab."
                           : "The certificate PDF cannot be displayed in the browser."}
                       </p>
                       <div
                         className={`flex ${
                           isMobile
-                            ? "flex-col space-y-3"
+                            ? "flex-col space-y-4"
                             : "justify-center gap-4"
                         }`}
                       >
-                        <a
+                        <motion.a
                           href={selectedCertificate?.pdfFile}
                           download
-                          className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center"
+                          className="btn-primary px-6 py-3 flex items-center justify-center space-x-2"
                           onClick={(e) => e.stopPropagation()}
+                          whileHover={{ scale: 1.02, y: -1 }}
+                          whileTap={{ scale: 0.98 }}
                         >
-                          <Download
-                            size={isMobile ? 16 : 18}
-                            className="mr-2"
-                          />
-                          Download PDF
-                        </a>
-                        <a
+                          <Download size={isMobile ? 16 : 18} />
+                          <span className="font-jetbrains">Download PDF</span>
+                        </motion.a>
+                        <motion.a
                           href={selectedCertificate?.pdfFile}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center"
+                          className="btn-secondary px-6 py-3 flex items-center justify-center space-x-2"
                           onClick={(e) => e.stopPropagation()}
+                          whileHover={{ scale: 1.02, y: -1 }}
+                          whileTap={{ scale: 0.98 }}
                         >
-                          <ExternalLink
-                            size={isMobile ? 16 : 18}
-                            className="mr-2"
-                          />
-                          Open in New Tab
-                        </a>
+                          <ExternalLink size={isMobile ? 16 : 18} />
+                          <span className="font-jetbrains">Open in New Tab</span>
+                        </motion.a>
                       </div>
                     </div>
                   ) : (
@@ -596,40 +647,39 @@ const Certificates = () => {
                   )}
                 </motion.div>
               </div>
-              {/* Footer - Simplified for mobile */}
-              <div className="p-1 border-t border-gray-700/50 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 flex justify-between items-center">
-                <p
-                  className={`text-teal-400 font-medium ${
-                    isMobile ? "text-2xs" : "text-xs"
-                  }`}
-                >
-                  {selectedCertificate?.issuer} • {selectedCertificate?.date}
-                </p>
+              {/* Footer - Modern */}
+              <div className="p-4 border-t border-neutral-200/50 dark:border-neutral-700/50 bg-gradient-to-r from-blue-500/5 to-purple-600/5 flex justify-between items-center">
+                <div className="flex items-center space-x-3">
+                  <span className="px-3 py-1 bg-gradient-to-r from-blue-500/10 to-purple-600/10 text-blue-custom text-xs font-medium font-jetbrains rounded-lg border border-blue-500/20">
+                    {selectedCertificate?.issuer}
+                  </span>
+                  <span
+                    className={`text-neutral-500 dark:text-neutral-400 font-jetbrains font-medium ${
+                      isMobile ? "text-xs" : "text-sm"
+                    }`}
+                  >
+                    {selectedCertificate?.date}
+                  </span>
+                </div>
                 <motion.a
                   href={selectedCertificate?.pdfFile}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white flex items-center shadow-sm ${
-                    isMobile
-                      ? "text-2xs px-1.5 py-0.5 rounded"
-                      : "text-xs px-2 py-0.5 rounded-lg"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="btn-secondary px-4 py-2 flex items-center space-x-2"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <ExternalLink
-                    size={isMobile ? 10 : 12}
-                    className={isMobile ? "mr-0.5" : "mr-1"}
-                  />
-                  {isMobile ? "Open" : "Open in New Tab"}
+                  <ExternalLink size={isMobile ? 14 : 16} />
+                  <span className="font-jetbrains">{isMobile ? "Open" : "Open in New Tab"}</span>
                 </motion.a>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </PageLayout>
+      </div>
+    </motion.section>
   );
 };
 

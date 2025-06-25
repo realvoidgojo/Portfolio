@@ -29,14 +29,10 @@ const Navbar = () => {
     { to: "/contact", icon: <Phone size={18} />, label: "Contact" },
   ];
 
-  // Makes navbar animation on scroll
+  // Apple-style navbar blur effect on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -57,35 +53,30 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // animations for mobile-menu
+  // Apple-style mobile menu animations
   const mobileMenuVariants = {
     closed: {
       opacity: 0,
-      height: 0,
+      y: -20,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
         ease: [0.4, 0, 0.2, 1],
-        when: "afterChildren",
-        staggerChildren: 0.05,
-        staggerDirection: -1,
       },
     },
     open: {
       opacity: 1,
-      height: "auto",
+      y: 0,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
         ease: [0, 0.55, 0.45, 1],
-        when: "beforeChildren",
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        staggerChildren: 0.05,
       },
     },
   };
 
   const menuItemVariants = {
-    closed: { opacity: 0, y: -10 },
-    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, x: -20 },
+    open: { opacity: 1, x: 0 },
   };
 
   return (
@@ -93,20 +84,24 @@ const Navbar = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
         className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-gray-900/80 backdrop-blur-sm py-2 shadow-md"
-            : "bg-transparent py-4"
+            ? "backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 border-b border-neutral-200/50 dark:border-neutral-700/50 py-3"
+            : "bg-transparent py-6"
         }`}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           <div className="flex justify-between items-center">
-            {/* logo and title animation */}
-            <NavLink to="/" className="flex items-center space-x-3">
-              <div className="bg-teal-600 p-2 rounded-lg">
-                <Code size={20} className="text-white" />
-              </div>
+            {/* Logo and title with Apple-style animation */}
+            <NavLink to="/" className="flex items-center space-x-3 group">
+              <motion.div 
+                className="bg-black dark:bg-white p-2.5 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 border-2 border-black dark:border-white"
+                whileHover={{ scale: 1.05, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Code size={20} className="text-white dark:text-black" />
+              </motion.div>
               <div
                 className="h-7 relative overflow-hidden"
                 style={{ minWidth: "180px" }}
@@ -115,22 +110,22 @@ const Navbar = () => {
                   {showAlternateName ? (
                     <motion.span
                       key="realvoidgojo"
-                      initial={{ y: 10, opacity: 0 }}
+                      initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -10, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="text-xl font-bold text-white absolute left-0"
+                      exit={{ y: -20, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                      className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 absolute left-0 tracking-tight font-jetbrains"
                     >
                       @realvoidgojo
                     </motion.span>
                   ) : (
                     <motion.span
                       key="harish"
-                      initial={{ y: 10, opacity: 0 }}
+                      initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -10, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      className="text-xl font-bold text-white absolute left-0"
+                      exit={{ y: -20, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                      className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 absolute left-0 tracking-tight font-jetbrains"
                     >
                       Harish S.
                     </motion.span>
@@ -139,37 +134,37 @@ const Navbar = () => {
               </div>
             </NavLink>
 
-            {/* Desktop Navigation : hover */}
-            <div className="hidden md:flex space-x-1">
+            {/* Desktop Navigation with Apple-style design */}
+            <div className="hidden md:flex items-center space-x-2">
               {navItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    `flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 nav-link ${
+                    `flex items-center space-x-2 px-4 py-2.5 rounded-xl transition-all duration-200 font-medium text-sm font-jetbrains ${
                       isActive
-                        ? "bg-gradient-to-r from-teal-600/80 to-teal-600/90 text-white shadow-md shadow-teal-900/20"
-                        : "text-gray-300 hover:bg-gray-800/40 hover:text-white hover:shadow-sm"
+                        ? "bg-black text-white shadow-lg hover:bg-gray-800 border-2 border-black"
+                        : "text-neutral-700 dark:text-neutral-200 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white border-2 border-transparent hover:border-black dark:hover:border-white"
                     }`
                   }
                 >
                   <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
                     {item.icon}
                   </motion.div>
-                  <span>{item.label}</span>
+                  <span className="hidden lg:block font-jetbrains">{item.label}</span>
                 </NavLink>
               ))}
             </div>
 
-            {/* Mobile MenuButton-anim */}
+            {/* Mobile Menu Button with Apple-style design */}
             <motion.button
-              className="md:hidden text-white p-2 focus:outline-none bg-gray-800/50 rounded-lg hover:bg-gray-700/60 transition-colors"
+              className="md:hidden p-2.5 rounded-xl bg-white dark:bg-black text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors border-2 border-black dark:border-white"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.95 }}
             >
               <AnimatePresence mode="wait">
                 {mobileMenuOpen ? (
@@ -180,7 +175,7 @@ const Navbar = () => {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X size={24} />
+                    <X size={20} />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -190,7 +185,7 @@ const Navbar = () => {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu size={24} />
+                    <Menu size={20} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -199,7 +194,7 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile-NavMenu */}
+      {/* Mobile Navigation Menu with Apple-style glass effect */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -207,34 +202,34 @@ const Navbar = () => {
             animate="open"
             exit="closed"
             variants={mobileMenuVariants}
-            className="fixed top-16 left-0 right-0 glass-effect z-40 border-t border-gray-800/50 shadow-lg md:hidden overflow-hidden"
+            className="fixed top-20 left-4 right-4 backdrop-blur-xl bg-white/90 dark:bg-neutral-900/90 border border-neutral-200/50 dark:border-neutral-700/50 rounded-2xl shadow-2xl z-40 md:hidden"
           >
-            <div className="container mx-auto px-4 py-3">
+            <div className="p-4">
               <div className="flex flex-col space-y-1">
                 {navItems.map((item) => (
                   <motion.div key={item.to} variants={menuItemVariants}>
                     <NavLink
                       to={item.to}
                       className={({ isActive }) =>
-                        `flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                        `flex items-center space-x-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium font-jetbrains ${
                           isActive
-                            ? "bg-gradient-to-r from-teal-600/80 to-teal-600/50 text-white shadow-md"
-                            : "text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                            ? "bg-black text-white shadow-lg hover:bg-gray-800 border-2 border-black"
+                            : "text-neutral-700 dark:text-neutral-200 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white border-2 border-transparent hover:border-black dark:hover:border-white"
                         }`
                       }
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <motion.div
-                        whileHover={{ scale: 1.2, rotate: 5 }}
+                        whileHover={{ scale: 1.1 }}
                         transition={{
                           type: "spring",
                           stiffness: 400,
-                          damping: 10,
+                          damping: 20,
                         }}
                       >
                         {item.icon}
                       </motion.div>
-                      <span>{item.label}</span>
+                      <span className="font-jetbrains">{item.label}</span>
                     </NavLink>
                   </motion.div>
                 ))}

@@ -4,11 +4,13 @@ import {
   Code,
   ExternalLink,
   GitBranch,
-  BookOpen, // For Medium
-  Shield, // For CTFTime
-  Youtube, // For YouTube
+  BookOpen,
+  Shield,
+  Youtube,
+  Users,
+  Star,
+  ArrowRight,
 } from "lucide-react";
-import PageLayout from "./PageLayout";
 
 interface CodingProfile {
   platform: string;
@@ -40,7 +42,7 @@ const profilesData: CodingProfile[] = [
     },
     link: "https://github.com/realvoidgojo",
     icon: <GitBranch />,
-    color: "from-gray-700 to-gray-900",
+    color: "from-gray-600 to-gray-800",
     description:
       "Repository of all my projects, tools, and code experiments in cybersecurity and software development.",
   },
@@ -86,9 +88,10 @@ const profilesData: CodingProfile[] = [
 ];
 
 const Profiles = () => {
-  // Animation variants for children elements
   const containerVariants = {
-    animate: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
       transition: {
         staggerChildren: 0.1,
       },
@@ -96,79 +99,176 @@ const Profiles = () => {
   };
 
   const itemVariants = {
-    initial: { y: 20, opacity: 0 },
-    animate: {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
       },
     },
   };
 
   return (
-    <PageLayout
-      title="Profiles"
-      icon={<Code className="w-8 h-8 text-teal-400" />}
+    <motion.section
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="section-padding"
     >
-      <div className="mb-10 text-center max-w-2xl mx-auto">
-        <p className="text-gray-300">
-          Connect with me on various platforms where I share my work,
-          participate in challenges, and create educational content.
-        </p>
-      </div>
-
-      <motion.div
-        variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-      >
-        {profilesData.map((profile, index) => (
+      <div className="container mx-auto px-6">
+        {/* Header Section */}
+        <div className="flex flex-col items-center justify-center mb-20">
           <motion.div
-            key={index}
             variants={itemVariants}
-            className="bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all duration-300 h-full flex flex-col border border-gray-700/30"
+            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
           >
-            <div className={`h-2 bg-gradient-to-r ${profile.color}`}></div>
-            <div className="p-5">
-              <div className="flex items-center mb-3">
-                <div className="p-2 bg-gray-700 rounded-lg mr-3">
-                  {React.cloneElement(profile.icon as React.ReactElement, {
-                    className: "w-5 h-5 text-teal-400",
-                  })}
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-white">
-                    {profile.platform}
-                  </h3>
-                  <p className="text-gray-400 text-sm">@{profile.username}</p>
-                </div>
-              </div>
-
-              <p className="text-gray-300 mb-3 text-sm">
-                {profile.description}
-              </p>
-
-              <div className="mb-3">
-                <h4 className="text-gray-300 mb-1 text-sm font-medium">
-                  Highlights:
-                </h4>
-                <ul className="space-y-1">
-                  {profile.achievements.map((achievement, i) => (
-                    <li
-                      key={i}
-                      className="text-gray-400 flex items-start text-xs"
-                    >
-                      <span className="text-teal-400 mr-1">•</span>
-                      {achievement}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <Users className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </motion.div>
-        ))}
-      </motion.div>
-    </PageLayout>
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            Social Profiles
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
+          >
+            Connect with me across platforms where I share code, compete in challenges, and create educational content
+          </motion.p>
+        </div>
+
+        {/* Profiles Grid */}
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+        >
+          {profilesData.map((profile, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 rounded-2xl overflow-hidden border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300 group h-full flex flex-col"
+              whileHover={{ y: -4, scale: 1.01 }}
+            >
+              {/* Color Accent Bar */}
+              <div className={`h-1 bg-gradient-to-r ${profile.color}`}></div>
+              
+              <div className="p-8 flex-grow flex flex-col">
+                {/* Header */}
+                <div className="flex items-center mb-6">
+                  <div className={`p-3 rounded-xl bg-gradient-to-r ${profile.color} text-white shadow-lg`}>
+                    {React.cloneElement(profile.icon as React.ReactElement, {
+                      className: "w-6 h-6",
+                    })}
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {profile.platform}
+                    </h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 font-jetbrains text-sm">
+                      @{profile.username}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+                  {profile.description}
+                </p>
+
+                {/* Achievements */}
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <Star className="w-4 h-4 mr-2 text-yellow-500" />
+                    Highlights
+                  </h4>
+                  <ul className="space-y-3">
+                    {profile.achievements.map((achievement, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start text-neutral-600 dark:text-neutral-400"
+                      >
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                        <span className="font-jetbrains text-sm">{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Stats */}
+                {Object.keys(profile.stats).length > 0 && (
+                  <div className="mb-6 p-4 bg-gradient-to-r from-neutral-100/50 to-neutral-200/50 dark:from-neutral-800/50 dark:to-neutral-700/50 rounded-xl backdrop-blur-sm">
+                    <div className="flex flex-wrap gap-4">
+                      {profile.stats.contributions && (
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-jetbrains">
+                            {profile.stats.contributions}+
+                          </div>
+                          <div className="text-xs text-neutral-600 dark:text-neutral-400">
+                            Contributions
+                          </div>
+                        </div>
+                      )}
+                      {profile.stats.ranking && (
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600 dark:text-green-400 font-jetbrains">
+                            {profile.stats.ranking}
+                          </div>
+                          <div className="text-xs text-neutral-600 dark:text-neutral-400">
+                            Status
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Visit Profile Button */}
+                <motion.a
+                  href={profile.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary inline-flex items-center justify-center space-x-2 py-3 px-6 rounded-xl font-semibold transition-all duration-300 mt-auto"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Visit Profile</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </motion.a>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          variants={itemVariants}
+          className="text-center mt-16"
+        >
+          <div className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 p-8 rounded-2xl border border-blue-500/20 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+              Let's Connect
+            </h3>
+            <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+              Follow my journey in cybersecurity, development, and continuous learning. I'm always excited to connect with fellow tech enthusiasts!
+            </p>
+            <motion.a
+              href="mailto:harishsivaraman@outlook.com"
+              className="btn-primary inline-flex items-center space-x-2"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span>Get In Touch</span>
+              <ExternalLink className="w-4 h-4" />
+            </motion.a>
+          </div>
+        </motion.div>
+      </div>
+    </motion.section>
   );
 };
 

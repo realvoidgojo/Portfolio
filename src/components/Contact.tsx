@@ -8,6 +8,10 @@ import {
   Check,
   AlertCircle,
   Loader2,
+  MessageCircle,
+  Github,
+  Linkedin,
+  BookOpen,
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
@@ -29,13 +33,13 @@ const Contact = () => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     setSuccess(false);
 
-    // Using EmailJS
     const templateParams = {
       from_name: form.name,
       to_name: "Harish",
@@ -73,7 +77,48 @@ const Contact = () => {
       );
   };
 
-  // Animation variants
+  const contactInfo = [
+    {
+      icon: <Mail className="w-5 h-5" />,
+      label: "Email",
+      value: "harishsivaraman@outlook.com",
+      href: "mailto:harishsivaraman@outlook.com",
+    },
+    {
+      icon: <MapPin className="w-5 h-5" />,
+      label: "Location",
+      value: "Chennai, Tamil Nadu, India",
+      href: null,
+    },
+    {
+      icon: <Phone className="w-5 h-5" />,
+      label: "Available",
+      value: "Mon - Fri, 9 AM - 6 PM IST",
+      href: null,
+    },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <Github className="w-5 h-5" />,
+      label: "GitHub",
+      href: "https://github.com/realvoidgojo",
+      color: "hover:text-blue-400",
+    },
+    {
+      icon: <Linkedin className="w-5 h-5" />,
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/realvoidgojo",
+      color: "hover:text-blue-500",
+    },
+    {
+      icon: <BookOpen className="w-5 h-5" />,
+      label: "Medium",
+      href: "https://medium.com/@realvoidgojo",
+      color: "hover:text-green-400",
+    },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -85,10 +130,15 @@ const Contact = () => {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+      },
     },
   };
 
@@ -97,284 +147,270 @@ const Contact = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="py-20 bg-gray-900"
+      className="section-padding"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-center mb-16">
+      <div className="container mx-auto px-6">
+        {/* Header Section */}
+        <div className="flex flex-col items-center justify-center mb-20">
           <motion.div
             variants={itemVariants}
-            className="bg-teal-500/20 p-3 rounded-full mb-4"
+            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
           >
-            <Mail className="w-8 h-8 text-teal-400" />
+            <MessageCircle className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </motion.div>
-          <motion.h2
+          <motion.h1
             variants={itemVariants}
-            className="text-4xl font-bold text-white mb-4 text-center"
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Get In Touch
-          </motion.h2>
+          </motion.h1>
           <motion.p
             variants={itemVariants}
-            className="text-gray-400 max-w-2xl text-center"
+            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
           >
-            Have a project in mind or want to collaborate? Feel free to reach
-            out!
+            Ready to collaborate on something amazing? Let's discuss your next project
           </motion.p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-10 items-start">
+          <div className="grid lg:grid-cols-5 gap-12 items-start">
+            {/* Contact Form */}
             <motion.div
-              variants={containerVariants}
-              className="order-2 md:order-1"
-              style={{ pointerEvents: "auto" }}
+              variants={itemVariants}
+              className="lg:col-span-3 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-8 md:p-10 rounded-3xl shadow-xl border border-neutral-200/50 dark:border-neutral-700/50"
             >
-              <div className="bg-gray-800 p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-semibold text-white mb-6">
-                  Send Me a Message
-                </h3>
+              <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-8" style={{ fontFamily: "'Inter', sans-serif" }}>
+                Send Me a Message
+              </h2>
 
-                <AnimatePresence>
-                  {success && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="bg-green-500/20 border border-green-500/30 text-green-400 p-4 rounded-lg mb-6 flex items-start"
-                    >
-                      <Check className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
-                      <p>
-                        Your message has been sent successfully! I'll get back
-                        to you as soon as possible.
+              <AnimatePresence>
+                {success && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 text-green-700 dark:text-green-400 p-6 rounded-2xl mb-8 flex items-start backdrop-blur-sm"
+                  >
+                    <div className="p-2 bg-green-500/20 rounded-xl mr-4 flex-shrink-0">
+                      <Check className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Message Sent Successfully!</h4>
+                      <p className="text-sm opacity-90">
+                        Thank you for reaching out. I'll get back to you as soon as possible.
                       </p>
-                    </motion.div>
-                  )}
+                    </div>
+                  </motion.div>
+                )}
 
-                  {error && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="bg-red-500/20 border border-red-500/30 text-red-400 p-4 rounded-lg mb-6 flex items-start"
-                    >
-                      <AlertCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
-                      <p>{error}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    className="bg-gradient-to-r from-red-500/10 to-pink-500/10 border border-red-500/20 text-red-700 dark:text-red-400 p-6 rounded-2xl mb-8 flex items-start backdrop-blur-sm"
+                  >
+                    <div className="p-2 bg-red-500/20 rounded-xl mr-4 flex-shrink-0">
+                      <AlertCircle className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Message Failed</h4>
+                      <p className="text-sm opacity-90">{error}</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                <form
-                  ref={formRef}
-                  onSubmit={handleSubmit}
-                  style={{ pointerEvents: "auto" }}
-                  className="space-y-6"
-                >
-                  <div className="space-y-5">
-                    <motion.div
-                      variants={itemVariants}
-                      className="relative"
-                      whileHover={{ scale: 1.01 }}
-                      transition={{ duration: 0.2 }}
-                      style={{ pointerEvents: "auto" }}
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="space-y-8"
+              >
+                <div className="grid md:grid-cols-2 gap-6">
+                  <motion.div
+                    variants={itemVariants}
+                    className="relative group"
+                  >
+                    <label
+                      htmlFor="name"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none z-10 ${
+                        focusedField === "name" || form.name
+                          ? "-top-3 text-sm bg-white dark:bg-neutral-900 px-2 text-blue-600 dark:text-blue-400 font-medium"
+                          : "top-4 text-neutral-500 dark:text-neutral-400"
+                      }`}
+                      style={{ fontFamily: "'Inter', sans-serif" }}
                     >
-                      <label
-                        htmlFor="name"
-                        className={`absolute left-3 transition-all duration-300 pointer-events-none ${
-                          focusedField === "name" || form.name
-                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400 font-medium"
-                            : "top-3 text-gray-400"
-                        }`}
-                      >
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField("name")}
-                        onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-sm"
-                        required
-                        style={{ pointerEvents: "auto" }}
-                      />
-                    </motion.div>
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField("name")}
+                      onBlur={() => setFocusedField(null)}
+                      className="w-full px-4 py-4 bg-white/60 dark:bg-neutral-800/60 text-neutral-900 dark:text-neutral-100 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all backdrop-blur-sm group-hover:bg-white/80 dark:group-hover:bg-neutral-800/80 font-jetbrains"
+                      required
+                    />
+                  </motion.div>
 
-                    <motion.div
-                      variants={itemVariants}
-                      className="relative"
-                      whileHover={{ scale: 1.01 }}
-                      transition={{ duration: 0.2 }}
-                      style={{ pointerEvents: "auto" }}
+                  <motion.div
+                    variants={itemVariants}
+                    className="relative group"
+                  >
+                    <label
+                      htmlFor="email"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none z-10 ${
+                        focusedField === "email" || form.email
+                          ? "-top-3 text-sm bg-white dark:bg-neutral-900 px-2 text-blue-600 dark:text-blue-400 font-medium"
+                          : "top-4 text-neutral-500 dark:text-neutral-400"
+                      }`}
+                      style={{ fontFamily: "'Inter', sans-serif" }}
                     >
-                      <label
-                        htmlFor="email"
-                        className={`absolute left-3 transition-all duration-300 pointer-events-none ${
-                          focusedField === "email" || form.email
-                            ? "-top-2.5 text-xs bg-gray-800 px-1 text-teal-400 font-medium"
-                            : "top-3 text-gray-400"
-                        }`}
-                      >
-                        Your Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField("email")}
-                        onBlur={() => setFocusedField(null)}
-                        className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 transition-all shadow-sm"
-                        required
-                        style={{ pointerEvents: "auto" }}
-                      />
-                    </motion.div>
-
-                    <motion.div
-                      variants={itemVariants}
-                      className="relative mb-6"
-                      style={{ pointerEvents: "auto" }}
-                    >
-                      <label
-                        htmlFor="message"
-                        className={`absolute transition-all duration-200 px-1 ${
-                          focusedField === "message" || form.message
-                            ? "-top-2.5 text-xs bg-gray-800 text-teal-400 font-medium"
-                            : "top-3 text-gray-400"
-                        }`}
-                      >
-                        Your Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={form.message}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField("message")}
-                        onBlur={() => setFocusedField(null)}
-                        rows={5}
-                        className="w-full px-4 py-3 bg-gray-700/80 text-white rounded-lg border border-gray-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/30 transition-all shadow-sm resize-none"
-                        required
-                        style={{ pointerEvents: "auto" }}
-                      />
-                    </motion.div>
-
-                    <motion.button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full py-3 bg-teal-600 hover:bg-teal-500 text-white rounded-lg font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.98 }}
-                      style={{ pointerEvents: "auto" }}
-                    >
-                      {loading ? "Sending..." : "Send Message"}
-                    </motion.button>
-                  </div>
-                </form>
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
+                      className="w-full px-4 py-4 bg-white/60 dark:bg-neutral-800/60 text-neutral-900 dark:text-neutral-100 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all backdrop-blur-sm group-hover:bg-white/80 dark:group-hover:bg-neutral-800/80 font-jetbrains"
+                      required
+                    />
+                  </motion.div>
+                </div>
 
                 <motion.div
                   variants={itemVariants}
-                  className="mt-6 text-center text-sm text-gray-400 border-t border-gray-700 pt-4"
-                  style={{ pointerEvents: "auto" }}
-                ></motion.div>
-              </div>
+                  className="relative group"
+                >
+                  <label
+                    htmlFor="message"
+                    className={`absolute left-4 transition-all duration-300 pointer-events-none z-10 ${
+                      focusedField === "message" || form.message
+                        ? "-top-3 text-sm bg-white dark:bg-neutral-900 px-2 text-blue-600 dark:text-blue-400 font-medium"
+                        : "top-4 text-neutral-500 dark:text-neutral-400"
+                    }`}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField("message")}
+                    onBlur={() => setFocusedField(null)}
+                    rows={6}
+                    className="w-full px-4 py-4 bg-white/60 dark:bg-neutral-800/60 text-neutral-900 dark:text-neutral-100 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all backdrop-blur-sm group-hover:bg-white/80 dark:group-hover:bg-neutral-800/80 resize-none font-jetbrains"
+                    required
+                  />
+                </motion.div>
+
+                <motion.button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full btn-primary flex items-center justify-center space-x-3 py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={{ scale: loading ? 1 : 1.02, y: loading ? 0 : -2 }}
+                  whileTap={{ scale: loading ? 1 : 0.98 }}
+                  variants={itemVariants}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </motion.button>
+              </form>
             </motion.div>
 
+            {/* Contact Information */}
             <motion.div
-              variants={containerVariants}
-              className="order-1 md:order-2"
+              variants={itemVariants}
+              className="lg:col-span-2 space-y-8"
             >
-              <motion.div
-                variants={itemVariants}
-                className="bg-gray-800 p-8 rounded-xl shadow-lg mb-8"
-              >
-                <h3 className="text-2xl font-semibold text-white mb-6">
+              <div className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 p-8 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
+                <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
                   Contact Information
                 </h3>
-
                 <div className="space-y-6">
-                  <motion.div
-                    variants={itemVariants}
-                    className="flex items-start"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                  >
-                    <div className="bg-gradient-to-br from-teal-500/20 to-teal-700/20 p-3 rounded-xl mr-4 shadow-inner">
-                      <Mail className="w-7 h-7 text-teal-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium text-lg">Email</h4>
-                      <a
-                        href="mailto:harishsivaraman@outlook.com"
-                        className="text-gray-300 hover:text-teal-400 transition-colors"
-                        style={{ pointerEvents: "auto" }}
-                      >
-                        harishsivaraman@outlook.com
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    variants={itemVariants}
-                    className="flex items-start"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                  >
-                    <div className="bg-gradient-to-br from-teal-500/20 to-teal-700/20 p-3 rounded-xl mr-4 shadow-inner">
-                      <Phone className="w-7 h-7 text-teal-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium text-lg">Phone</h4>
-                      <a
-                        href="tel:+918825964873"
-                        className="text-gray-300 hover:text-teal-400 transition-colors"
-                        style={{ pointerEvents: "auto" }}
-                      >
-                        +91 88259 64873
-                      </a>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    variants={itemVariants}
-                    className="flex items-start"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                  >
-                    <div className="bg-gradient-to-br from-teal-500/20 to-teal-700/20 p-3 rounded-xl mr-4 shadow-inner">
-                      <MapPin className="w-7 h-7 text-teal-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium text-lg">
-                        Location
-                      </h4>
-                      <p className="text-gray-300">Chennai, India</p>
-                    </div>
-                  </motion.div>
+                  {contactInfo.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-start space-x-4"
+                      whileHover={{ x: 4 }}
+                    >
+                      <div className="p-3 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-xl text-blue-600 dark:text-blue-400">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-neutral-900 dark:text-neutral-100 mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
+                          {item.label}
+                        </h4>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            className="text-neutral-600 dark:text-neutral-400 text-blue-custom-hover transition-colors font-jetbrains"
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="text-neutral-600 dark:text-neutral-400 font-jetbrains">
+                            {item.value}
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                variants={itemVariants}
-                className="bg-gray-800 p-8 rounded-xl shadow-lg overflow-hidden"
-              >
-                <h3 className="text-2xl font-semibold text-white mb-6">
-                  Availability
+              <div className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 p-8 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50">
+                <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  Let's Connect
                 </h3>
-                <p className="text-gray-300 mb-4">
-                  I'm currently available for freelance work and collaborations.
-                  My typical response time is within 24 hours.
+                <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+                  Follow me on social media for updates on my latest projects, cybersecurity insights, and tech adventures.
                 </p>
-                <div className="relative h-2 bg-gray-700 rounded-full mb-4">
-                  <div className="absolute top-0 left-0 h-full w-3/4 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full"></div>
+                <div className="flex space-x-4">
+                  {socialLinks.map((link, index) => (
+                    <motion.a
+                      key={index}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-4 bg-white/60 dark:bg-neutral-800/60 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 text-neutral-600 dark:text-neutral-400 ${link.color} transition-all hover:bg-white/80 dark:hover:bg-neutral-700/80 backdrop-blur-sm group`}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <span className="group-hover:scale-110 transition-transform block">
+                        {link.icon}
+                      </span>
+                    </motion.a>
+                  ))}
                 </div>
-                <p className="text-teal-400 font-medium">
-                  75% Availability for New Projects
+              </div>
+
+              <div className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 p-8 rounded-2xl border border-blue-500/20">
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  Quick Response
+                </h3>
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  I typically respond to messages within <strong>24 hours</strong>. For urgent matters, feel free to reach out via email directly.
                 </p>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </div>

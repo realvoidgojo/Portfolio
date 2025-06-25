@@ -4,7 +4,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    include: ["react-tsparticles", "tsparticles", "tsparticles-engine"],
     exclude: ["framer-motion"], // Avoid optimizing heavy libraries at dev time
   },
   build: {
@@ -16,11 +15,6 @@ export default defineConfig({
           // Split vendor chunks for better caching
           "react-vendor": ["react", "react-dom", "react-router-dom"],
           "animation-vendor": ["framer-motion"],
-          "particles-vendor": [
-            "react-tsparticles",
-            "tsparticles",
-            "tsparticles-engine",
-          ],
         },
       },
     },

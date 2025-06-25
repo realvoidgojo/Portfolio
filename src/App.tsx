@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,11 +16,8 @@ import Articles from "./components/Articles";
 import Profiles from "./components/Profiles";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import type { Engine } from "tsparticles-engine";
 
-// Wrapper to handle route transwith FM
+// Wrapper to handle route transitions with Framer Motion
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -39,123 +36,6 @@ const AnimatedRoutes = () => {
   );
 };
 
-const ParticlesBackground = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadFull(engine);
-  }, []);
-
-  return (
-    <div className="particles-container">
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fullScreen: {
-            enable: true,
-            zIndex: 1,
-          },
-          background: {
-            color: {
-              value: "transparent",
-            },
-          },
-          
-          fpsLimit: 30,
-          particles: {
-            color: {
-              value: ["#14b8a6", "#0ea5e9", "#0284c7"],
-            },
-            links: {
-              color: "#14b8a6",
-              distance: 150,
-              enable: true,
-              opacity: 0.5,
-              width: 1.2,
-            },
-            collisions: {
-              enable: false,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: true,
-              speed: 1.0,
-              straight: false,
-              attract: {
-                enable: false,
-                rotateX: 600,
-                rotateY: 1200,
-              },
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 1000,
-              },
-              value: 60, 
-            },
-            opacity: {
-              value: 0.6,
-              random: true,
-              anim: {
-                enable: true,
-                speed: 0.8,
-                opacity_min: 0.3,
-                sync: false,
-              },
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: 4 },
-              random: true,
-              anim: {
-                enable: true,
-                speed: 1.5,
-                size_min: 0.5,
-                sync: false,
-              },
-            },
-            shadow: {
-              enable: false,
-            },
-          },
-          interactivity: {
-            detect_on: "canvas",
-            events: {
-              onhover: {
-                enable: true,
-                mode: "grab",
-              },
-              onclick: {
-                enable: true,
-                mode: "push",
-              },
-              resize: true,
-            },
-            modes: {
-              grab: {
-                distance: 140,
-                line_linked: {
-                  opacity: 1,
-                },
-              },
-              push: {
-                particles_nb: 2, 
-              },
-            },
-          },
-          detectRetina: false, 
-        }}
-      />
-    </div>
-  );
-};
-
 function App() {
   // Initialize EmailJS when the app loads
   useEffect(() => {
@@ -164,12 +44,18 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-950 via-blue-950 to-gray-900 relative">
-        <ParticlesBackground />
-        <div
-          className="content-container flex-grow flex flex-col"
-          style={{ zIndex: 5 }}
-        >
+      <div className="flex flex-col min-h-screen relative">
+        {/* Clean gradient background */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800" />
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-blue-50/30 dark:to-blue-950/30" />
+          {/* Subtle mesh gradient for depth */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-indigo-100/40 to-pink-100/40 dark:from-indigo-900/20 dark:to-pink-900/20 rounded-full blur-3xl" />
+        </div>
+        
+        {/* Main content */}
+        <div className="content-container flex-grow flex flex-col relative z-10">
           <Navbar />
           <main className="flex-grow">
             <AnimatedRoutes />

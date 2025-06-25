@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GithubIcon, ExternalLink, Code, X } from "lucide-react";
+import { GithubIcon, ExternalLink, Code, X, Rocket, Star } from "lucide-react";
 
 interface Project {
   title: string;
@@ -41,7 +41,6 @@ const projects: Project[] = [
     detailedDescription:
       "This video analytics platform was my finalist entry for Cyberthon 2025. It features YOLOv11-based object detection, heatmap analytics for movement tracking, real-time WebSocket streaming, and a modern React frontend with a Flask+Celery backend for efficient processing.",
     tags: ["Python", "Flask", "Celery", "YOLOv11", "React"],
-    // Replace with a more reliable image
     image:
       "https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     githubLink: "https://github.com/realvoidgojo/VideoAnalytics-Cyberthon",
@@ -166,244 +165,259 @@ const Projects = () => {
     document.body.style.overflow = "auto";
   };
 
-  // Explicit click handler to ensure event fires
   const handleProjectClick = (e: React.MouseEvent, project: Project) => {
     e.preventDefault();
     e.stopPropagation();
     openProject(project);
   };
 
-  // Explicit close handler
   const handleCloseClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     closeProject();
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 80,
+        damping: 20,
+      },
+    },
+  };
+
   return (
     <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="py-20 bg-gray-900"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="section-padding"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-center mb-16">
+      <div className="container mx-auto px-6">
+        {/* Header Section */}
+        <div className="flex flex-col items-center justify-center mb-20">
           <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="bg-teal-500/20 p-3 rounded-full mb-4"
+            variants={itemVariants}
+            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
           >
-            <Code className="w-8 h-8 text-teal-400" />
+            <Rocket className="w-8 h-8 text-blue-600 dark:text-blue-400" />
           </motion.div>
-          <h2 className="text-4xl font-bold text-white mb-4 text-center">
-            Featured Projects
-          </h2>
-          <p className="text-gray-400 max-w-2xl text-center">
-            Here's some stuff I've built that I'm pretty proud of. Most of these
-            started as weekend projects or competition entries. Nothing fancy,
-            but they work!
-          </p>
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            My Projects
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
+          >
+            A showcase of my technical journey through cybersecurity, web development, and automation
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Projects Grid */}
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 h-full flex flex-col"
-              whileHover={{
-                y: -5,
-                transition: { duration: 0.2, ease: "easeOut" },
-              }}
-              style={{ pointerEvents: "auto" }}
+              variants={itemVariants}
+              className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 rounded-2xl overflow-hidden border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300 group cursor-pointer"
+              whileHover={{ y: -6, scale: 1.02 }}
+              onClick={(e) => handleProjectClick(e, project)}
             >
-              {/* Simplified image container */}
-              <div className="h-48 overflow-hidden relative">
+              <div className="relative overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
-                <div className="absolute bottom-0 left-0 p-3">
-                  <span className="bg-gray-700/70 text-teal-300 text-xs px-2 py-1 rounded">
-                    {project.tags[0]}
-                  </span>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="p-6 flex-grow">
-                <h3 className="text-xl font-semibold text-white mb-3">
+              
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" style={{ fontFamily: "'Inter', sans-serif" }}>
                   {project.title}
                 </h3>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, i) => (
+                <p className="text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.slice(0, 3).map((tag, tagIndex) => (
                     <span
-                      key={i}
-                      className="px-3 py-1 bg-teal-900/30 text-teal-200 text-xs rounded-full"
+                      key={tagIndex}
+                      className="tech-tag"
                     >
                       {tag}
                     </span>
                   ))}
+                  {project.tags.length > 3 && (
+                    <span className="tech-tag">
+                      +{project.tags.length - 3}
+                    </span>
+                  )}
                 </div>
-              </div>
-              <div className="p-6 pt-0 mt-auto">
-                <div className="flex space-x-4">
-                  <a
+
+                {/* Explicit Action Buttons */}
+                <div className="flex flex-wrap gap-3 mt-auto">
+                  <motion.a
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-gray-300 hover:text-teal-400 transition-colors"
-                    style={{ pointerEvents: "auto" }}
+                    className="btn-secondary text-sm flex items-center space-x-2 px-4 py-2"
+                    whileHover={{ scale: 1.02, y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <GithubIcon size={18} className="mr-1" />
-                    <span>Code</span>
-                  </a>
+                    <GithubIcon size={16} />
+                    <span>GitHub</span>
+                  </motion.a>
                   {project.liveLink && (
-                    <a
+                    <motion.a
                       href={project.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-gray-300 hover:text-teal-400 transition-colors"
-                      style={{ pointerEvents: "auto" }}
+                      className="btn-primary text-sm flex items-center space-x-2 px-4 py-2"
+                      whileHover={{ scale: 1.02, y: -1 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <ExternalLink size={18} className="mr-1" />
+                      <ExternalLink size={16} />
                       <span>Live Demo</span>
-                    </a>
+                    </motion.a>
                   )}
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="flex justify-center mt-12">
-          <motion.a
-            href="https://github.com/realvoidgojo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center bg-transparent border border-teal-500 text-teal-400 px-6 py-3 rounded-lg hover:bg-teal-500/10 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{ pointerEvents: "auto" }}
-          >
-            <span>View All Projects</span>
-            <ExternalLink size={18} className="ml-2" />
-          </motion.a>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Project Details Modal */}
+      {/* Project Detail Modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 modal-backdrop flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-neutral-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={handleCloseClick}
-            style={{ pointerEvents: "auto" }}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 10 }}
-              transition={{ type: "spring", damping: 25 }}
-              className="bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto card-shimmer"
+              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              transition={{ type: "spring", damping: 25, stiffness: 500 }}
+              className="backdrop-blur-xl bg-white/95 dark:bg-neutral-900/95 rounded-3xl border border-neutral-200/50 dark:border-neutral-700/50 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
-              style={{ pointerEvents: "auto" }}
             >
-              <div className="h-72 md:h-80 relative">
+              {/* Modal Header */}
+              <div className="relative">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-64 object-cover rounded-t-3xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-70"></div>
-                <button
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent rounded-t-3xl" />
+                <motion.button
                   onClick={handleCloseClick}
-                  className="absolute top-4 right-4 bg-black/60 hover:bg-teal-800 text-white p-2 rounded-full transition-colors shadow-lg"
-                  aria-label="Close modal"
-                  style={{ pointerEvents: "auto" }}
+                  className="absolute top-4 right-4 p-2 bg-white/90 dark:bg-neutral-800/90 rounded-xl backdrop-blur-sm"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  <X size={24} />
-                </button>
-                <div className="absolute bottom-0 left-0 p-6 w-full">
-                  <h2 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
-                    {selectedProject.title}
-                  </h2>
-                </div>
+                  <X size={20} className="text-neutral-700 dark:text-neutral-300" />
+                </motion.button>
               </div>
+
+              {/* Modal Content */}
               <div className="p-8">
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 bg-teal-900/50 text-teal-200 text-sm rounded-full border border-teal-800/30"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-gray-300 mb-6 text-lg leading-relaxed">
-                  {selectedProject.detailedDescription}
-                </p>
-
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-                    <span className="bg-teal-500/20 p-1 rounded-full mr-2">
-                      <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-                    </span>
-                    Key Features
-                  </h3>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {selectedProject.features?.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <div className="bg-teal-500/20 p-1 rounded-full mr-3 mt-1">
-                          <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-                        </div>
-                        <span className="text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="flex flex-wrap gap-4">
-                  <motion.a
-                    href={selectedProject.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-4 py-2 rounded-lg transition-all duration-300 shadow-md"
-                    whileHover={{
-                      y: -3,
-                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.3)",
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    style={{ pointerEvents: "auto" }}
-                  >
-                    <GithubIcon size={18} className="mr-2" />
-                    <span>View Source Code</span>
-                  </motion.a>
-                  {selectedProject.liveLink && (
+                <div className="flex flex-col lg:flex-row justify-between items-start mb-6">
+                  <div>
+                    <h2 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-3" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {selectedProject.title}
+                    </h2>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {selectedProject.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="tech-tag text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex space-x-3 mt-4 lg:mt-0">
+                    {selectedProject.liveLink && (
+                      <motion.a
+                        href={selectedProject.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary flex items-center space-x-2"
+                        whileHover={{ scale: 1.02, y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <ExternalLink size={18} />
+                        <span>Live Demo</span>
+                      </motion.a>
+                    )}
                     <motion.a
-                      href={selectedProject.liveLink}
+                      href={selectedProject.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600 text-white px-4 py-2 rounded-lg transition-all duration-300 shadow-md"
-                      whileHover={{
-                        y: -3,
-                        boxShadow: "0 10px 25px -5px rgba(20, 184, 166, 0.3)",
-                      }}
+                      className="btn-secondary flex items-center space-x-2"
+                      whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      style={{ pointerEvents: "auto" }}
                     >
-                      <ExternalLink size={18} className="mr-2" />
-                      <span>Live Demo</span>
+                      <GithubIcon size={18} />
+                      <span>GitHub</span>
                     </motion.a>
+                  </div>
+                </div>
+
+                <div className="grid lg:grid-cols-3 gap-8">
+                  <div className="lg:col-span-2">
+                    <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      About This Project
+                    </h3>
+                    <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg mb-6">
+                      {selectedProject.detailedDescription || selectedProject.description}
+                    </p>
+                  </div>
+
+                  {selectedProject.features && (
+                    <div>
+                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        <Star className="w-5 h-5 mr-2 text-blue-600 dark:text-blue-400" />
+                        Key Features
+                      </h3>
+                      <ul className="space-y-3">
+                        {selectedProject.features.map((feature, index) => (
+                          <li key={index} className="flex items-start">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                            <span className="text-neutral-600 dark:text-neutral-400">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </div>
               </div>

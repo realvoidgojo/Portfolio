@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Mail,
   Download,
+  ArrowRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import profileImage from "../assets/profile.jpg";
@@ -17,7 +18,7 @@ const Hero = () => {
   const [showAlternateName, setShowAlternateName] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "CyberSec Enthusiast & Dev";
+  const fullText = "CyberSec Enthusiast & Developer";
 
   useEffect(() => {
     const checkMobile = () => {
@@ -32,7 +33,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setShowAlternateName((prev) => !prev);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -42,7 +43,7 @@ const Hero = () => {
       if (typedText.length < fullText.length) {
         const timeout = setTimeout(() => {
           setTypedText(fullText.slice(0, typedText.length + 1));
-        }, 100);
+        }, 120);
         return () => clearTimeout(timeout);
       } else {
         const timeout = setTimeout(() => {
@@ -54,7 +55,7 @@ const Hero = () => {
       if (typedText.length > 0) {
         const timeout = setTimeout(() => {
           setTypedText(fullText.slice(0, typedText.length - 1));
-        }, 50);
+        }, 60);
         return () => clearTimeout(timeout);
       } else {
         const timeout = setTimeout(() => {
@@ -75,28 +76,28 @@ const Hero = () => {
 
   const socialLinks = [
     {
-      icon: <GithubIcon size={isMobile ? 20 : 24} />,
+      icon: <GithubIcon size={isMobile ? 18 : 20} />,
       url: "https://github.com/realvoidgojo",
       label: "GitHub",
-      color: "from-gray-700 to-gray-900",
+      color: "from-neutral-700 to-neutral-900",
     },
     {
-      icon: <LinkedinIcon size={isMobile ? 20 : 24} />,
+      icon: <LinkedinIcon size={isMobile ? 18 : 20} />,
       url: "https://linkedin.com/in/realvoidgojo",
       label: "LinkedIn",
-      color: "from-blue-600 to-blue-800",
+      color: "from-blue-500 to-blue-700",
     },
     {
-      icon: <BookOpen size={isMobile ? 20 : 24} />,
+      icon: <BookOpen size={isMobile ? 18 : 20} />,
       url: "https://medium.com/@realvoidgojo",
       label: "Medium",
-      color: "from-green-600 to-green-800",
+      color: "from-green-500 to-emerald-600",
     },
     {
-      icon: <Mail size={isMobile ? 20 : 24} />,
+      icon: <Mail size={isMobile ? 18 : 20} />,
       url: "mailto:harishsivaraman@outlook.com",
       label: "Email",
-      color: "from-purple-600 to-purple-800",
+      color: "from-purple-500 to-purple-700",
     },
   ];
 
@@ -105,31 +106,30 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.2,
+        delayChildren: 0.3,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 40, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: "spring",
-        stiffness: 100,
-        damping: 12,
+        stiffness: 80,
+        damping: 20,
       },
     },
   };
 
   const profileVariants = {
-    hidden: { scale: 0.8, opacity: 0, y: 20 },
+    hidden: { scale: 0.8, opacity: 0 },
     visible: {
       scale: 1,
       opacity: 1,
-      y: 0,
       transition: {
         type: "spring",
         stiffness: 100,
@@ -139,209 +139,184 @@ const Hero = () => {
     },
   };
 
-  const buttonVariants = {
-    hover: {
-      scale: 1.05,
-      boxShadow:
-        "0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.15)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-      },
-    },
-    tap: { scale: 0.95 },
-  };
-
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen flex flex-col justify-center items-center relative px-5 py-16 sm:py-24 md:py-32"
+      className="min-h-screen flex flex-col justify-center items-center relative px-6 py-24 md:py-32"
     >
-      <div className="text-center w-full max-w-4xl z-10">
-        {/*profile img glow effect */}
+      <div className="text-center w-full max-w-5xl">
+        {/* Profile Image with Apple-style design */}
         <motion.div
-          className="inline-block mb-6 md:mb-8 relative"
+          className="inline-block mb-8 md:mb-12 relative"
           variants={profileVariants}
         >
-          {/*glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-600 to-teal-400 rounded-full blur-2xl opacity-40 z-10 transform scale-110 translate-y-5 sm:translate-y-7 animate-pulse"></div>
-
           <motion.div
-            className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-teal-500/50 mx-auto relative z-20 shadow-md translate-y-5 sm:translate-y-7"
-            initial={{ rotate: -5 }}
-            animate={{ rotate: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden mx-auto relative shadow-2xl"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              padding: '4px',
+            }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-              className="w-full h-full overflow-hidden rounded-full"
-            >
+            <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-neutral-800">
               <img
                 src={profileImage}
-                alt="Profile"
+                alt="Harish Sivaraman"
                 className="w-full h-full object-cover"
               />
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
-        {/*gradient */}
-        <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-3 md:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-teal-100 to-teal-300"
+        {/* Main Heading with Apple-style typography */}
+        <motion.div
+          className="mb-6 md:mb-8"
           variants={itemVariants}
         >
-          <motion.span
-            className="block"
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-neutral-900 dark:text-neutral-100 tracking-tight leading-tight"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Hello, I'm
-          </motion.span>
-          <div className="relative h-[1.2em] overflow-hidden">
-            <AnimatePresence mode="wait">
-              {showAlternateName ? (
-                <motion.span
-                  key="realvoidgojo"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="text-white absolute left-0 right-0"
-                >
-                  realvoidgojo
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="harish"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="text-white absolute left-0 right-0"
-                >
-                  Harish Sivaraman
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.h1>
+            <span className="block mb-2">Hello, I'm</span>
+            <div className="relative h-[1.1em] overflow-hidden">
+              <AnimatePresence mode="wait">
+                {showAlternateName ? (
+                  <motion.span
+                    key="realvoidgojo"
+                    initial={{ y: 60, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -60, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                  >
+                    realvoidgojo
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="harish"
+                    initial={{ y: 60, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -60, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                  >
+                    Harish Sivaraman
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.h1>
+        </motion.div>
 
+        {/* Subtitle with typing effect */}
         <motion.div
-          className="flex flex-col items-center"
+          className="mb-8 md:mb-10"
           variants={itemVariants}
         >
-          <div className="inline-block relative px-4 overflow-hidden">
-            <motion.h2
-              className="text-xl sm:text-2xl md:text-3xl text-teal-300 font-medium mb-4 md:mb-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 1 }}
+          <motion.h2
+            className="text-xl sm:text-2xl md:text-3xl text-neutral-600 dark:text-neutral-400 font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
+            <span className="inline-flex items-center min-h-[1.5em]">
+              {typedText}
+              <span className="w-0.5 h-6 md:h-8 bg-blue-500 ml-1 animate-pulse"></span>
+            </span>
+          </motion.h2>
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          className="max-w-2xl mx-auto text-neutral-600 dark:text-neutral-400 mb-10 md:mb-12 text-lg md:text-xl leading-relaxed font-jetbrains"
+          variants={itemVariants}
+        >
+          Passionate about cybersecurity and modern development. Currently pursuing B.Tech at Sri Sairam, Chennai, 
+          while building innovative projects and competing in CTFs.
+        </motion.p>
+
+        {/* Action Buttons with Apple-style design */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 md:mb-16 justify-center items-center"
+          variants={itemVariants}
+        >
+          <Link to="/projects">
+            <motion.button
+              className="btn-primary group flex items-center space-x-2 px-8 py-4 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="inline-flex items-center min-h-[1.5em]">
-                {typedText}
-                <span className="typing-cursor"></span>
-              </span>
-            </motion.h2>
-          </div>
+              <span>View My Work</span>
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-200" />
+            </motion.button>
+          </Link>
 
-          <motion.p
-            className="max-w-[95%] sm:max-w-xl md:max-w-2xl text-gray-300 mb-6 md:mb-8 text-sm sm:text-base md:text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+          <motion.a
+            href={resumePDF}
+            download="Harish_Sivaraman_Resume.pdf"
+            className="btn-secondary group flex items-center space-x-2 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
-            Hey there! I'm into CTFs and cybersecurity stuff. Currently grinding
-            through my B.Tech at Sri Sairam, Chennai, while working on some cool
-            side projects. Check out my work below!
-          </motion.p>
+            <Download size={20} className="group-hover:scale-110 transition-transform duration-200" />
+            <span>Download CV</span>
+          </motion.a>
 
-          <motion.div
-            className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-          >
-            <Link to="/projects">
-              <motion.button
-                className="button-effect px-3 sm:px-4 md:px-6 py-2 sm:py-3 bg-gradient-to-r from-teal-600 to-teal-500 text-white rounded-lg font-medium shadow-md shadow-teal-900/20 hover:shadow-lg hover:shadow-teal-800/30 transition-all duration-300 text-xs sm:text-sm md:text-base"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                View My Work
-              </motion.button>
-            </Link>
+          <Link to="/contact">
+            <motion.button
+              className="btn-ghost px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Contact Me
+            </motion.button>
+          </Link>
+        </motion.div>
 
+        {/* Social Links with refined design */}
+        <motion.div
+          className="flex space-x-6 justify-center"
+          variants={itemVariants}
+        >
+          {socialLinks.map((link, index) => (
             <motion.a
-              href={resumePDF}
-              download="Harish_Sivaraman_Resume.pdf"
-              className="button-effect px-3 sm:px-4 md:px-6 py-2 sm:py-3 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center text-xs sm:text-sm md:text-base"
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`bg-gradient-to-br ${link.color} p-3 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300`}
+              whileHover={{ y: -3, scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={link.label}
             >
-              <Download size={isMobile ? 14 : 16} className="mr-1 sm:mr-2" />
-              Download CV
+              {link.icon}
             </motion.a>
-
-            <Link to="/contact">
-              <motion.button
-                className="button-effect px-3 sm:px-4 md:px-6 py-2 sm:py-3 border-2 border-teal-500 text-white rounded-lg font-medium hover:border-teal-400 hover:bg-teal-500/10 transition-all duration-300 text-xs sm:text-sm md:text-base"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Contact Me
-              </motion.button>
-            </Link>
-          </motion.div>
-
-          {/* Enhanced social links with gradient backgrounds */}
-          <motion.div
-            className="flex space-x-2 xs:space-x-3 sm:space-x-4"
-            variants={itemVariants}
-          >
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`bg-gradient-to-br ${link.color} p-2 sm:p-3 rounded-full text-white shadow-md hover:shadow-lg transition-all duration-300`}
-                whileHover={{ y: -5, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={link.label}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                {link.icon}
-              </motion.a>
-            ))}
-          </motion.div>
+          ))}
         </motion.div>
       </div>
 
+      {/* Scroll indicator with Apple-style design */}
       <motion.button
         onClick={handleScrollDown}
-        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 hover:text-teal-300 focus:outline-none cursor-pointer p-2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-3 rounded-full bg-white/20 dark:bg-neutral-800/50 backdrop-blur-sm border border-white/30 dark:border-neutral-700/50 hover:bg-white/30 dark:hover:bg-neutral-700/50 transition-all duration-300"
         animate={{
-          y: [0, 10, 0],
-          opacity: [0.5, 1, 0.5],
+          y: [0, 8, 0],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        whileHover={{ scale: 1.2 }}
+        whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Scroll down"
       >
-        <ChevronDown size={isMobile ? 24 : 30} className="text-teal-400" />
+        <ChevronDown size={24} className="text-neutral-600 dark:text-neutral-400" />
       </motion.button>
     </motion.div>
   );
