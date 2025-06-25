@@ -2,20 +2,15 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
-  GithubIcon,
-  X,
-  Calendar,
-  Users,
   Star,
-  Briefcase,
+  Tag,
+  Github as GithubIcon,
+  X,
   Rocket,
 } from "lucide-react";
 
 // Import enhanced components
 import EnhancedCard from "./EnhancedCard";
-import MagneticElement from "./MagneticElement";
-import TextReveal from "./TextReveal";
-import { ScrollAnimation } from "./ScrollAnimations";
 
 interface Project {
   title: string;
@@ -302,20 +297,16 @@ const Projects = () => {
                     <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4 leading-relaxed">
                       {project.description}
                     </p>
-                    <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
-                      {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.map((tag: string, index: number) => (
                         <span
-                          key={tagIndex}
-                          className="tech-tag text-xs sm:text-sm"
+                          key={index}
+                          className="tech-tag flex items-center"
                         >
+                          <Tag className="w-3 h-3 mr-1" />
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 3 && (
-                        <span className="tech-tag text-xs sm:text-sm">
-                          +{project.tags.length - 3}
-                        </span>
-                      )}
                     </div>
 
                     {/* Action Buttons */}
@@ -400,7 +391,7 @@ const Projects = () => {
                       {selectedProject.title}
                     </h2>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {selectedProject.tags.map((tag, index) => (
+                      {selectedProject.tags.map((tag: string, index: number) => (
                         <span
                           key={index}
                           className="tech-tag text-sm"
@@ -455,10 +446,13 @@ const Projects = () => {
                         Key Features
                       </h3>
                       <ul className="space-y-3">
-                        {selectedProject.features.map((feature, index) => (
-                          <li key={index} className="flex items-start">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
-                            <span className="text-neutral-600 dark:text-neutral-400">{feature}</span>
+                        {selectedProject.features.map((feature: string, index: number) => (
+                          <li
+                            key={index}
+                            className="flex items-start text-neutral-600 dark:text-neutral-400"
+                          >
+                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                            {feature}
                           </li>
                         ))}
                       </ul>

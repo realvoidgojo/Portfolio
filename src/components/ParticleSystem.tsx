@@ -18,27 +18,29 @@ const ParticleSystem = () => {
   const animationRef = useRef<number>();
   const isActiveRef = useRef(true);
 
-  const colors = [
-    'rgba(59, 130, 246, 0.3)',
-    'rgba(147, 51, 234, 0.3)',
-    'rgba(236, 72, 153, 0.3)',
-    'rgba(16, 185, 129, 0.3)',
-    'rgba(245, 158, 11, 0.3)',
-  ];
-
-  const shapes = ['circle', 'triangle', 'square'] as const;
-
-  const createParticle = useCallback((id: number): Particle => ({
-    id,
-    x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-    y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5,
-    size: Math.random() * 4 + 2,
-    opacity: Math.random() * 0.5 + 0.1,
-    color: colors[Math.floor(Math.random() * colors.length)],
-    shape: shapes[Math.floor(Math.random() * shapes.length)],
-  }), [colors]);
+  const createParticle = useCallback((id: number): Particle => {
+    const colors = [
+      'rgba(59, 130, 246, 0.3)',
+      'rgba(147, 51, 234, 0.3)',
+      'rgba(236, 72, 153, 0.3)',
+      'rgba(16, 185, 129, 0.3)',
+      'rgba(245, 158, 11, 0.3)',
+    ];
+    
+    const shapes = ['circle', 'triangle', 'square'] as const;
+    
+    return {
+      id,
+      x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+      y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 4 + 2,
+      opacity: Math.random() * 0.5 + 0.1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      shape: shapes[Math.floor(Math.random() * shapes.length)],
+    };
+  }, []);
 
   const renderParticles = useCallback(() => {
     if (!containerRef.current || !isActiveRef.current) return;

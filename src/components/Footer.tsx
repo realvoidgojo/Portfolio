@@ -1,11 +1,11 @@
+import React from "react";
 import {
   Github,
   Linkedin,
   ExternalLink,
   Mail,
-  Heart,
-  Code,
   BookOpen,
+  Code,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";

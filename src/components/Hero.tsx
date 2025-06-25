@@ -130,12 +130,12 @@ const Hero = () => {
       >
         {/* Profile Image */}
         <motion.div
-          className="inline-block mb-6 sm:mb-8 md:mb-12 relative"
+          className="inline-block mb-8 sm:mb-10 md:mb-14 relative"
           variants={itemVariants}
         >
           <MagneticElement strength={0.15} distance={100}>
             <motion.div
-              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden mx-auto relative shadow-2xl performance-optimized"
+              className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full overflow-hidden mx-auto relative shadow-2xl performance-optimized"
               style={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 padding: '3px',
@@ -173,11 +173,11 @@ const Hero = () => {
 
         {/* Main Heading with Rolling Animation */}
         <motion.div
-          className="mb-4 sm:mb-6 md:mb-8"
+          className="mb-6 sm:mb-8 md:mb-10"
           variants={itemVariants}
         >
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-4 text-neutral-900 dark:text-neutral-100 tracking-tight leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 text-neutral-900 dark:text-neutral-100 tracking-tight leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -201,7 +201,7 @@ const Hero = () => {
                     stiffness: 100,
                     damping: 15
                   }}
-                  className="absolute inset-0 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text  tracking-tight leading-tigh line-through decoration-black decoration-10"
+                  className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text tracking-tight leading-tight line-through decoration-black decoration-10"
                   style={{ 
                     transformStyle: 'preserve-3d',
                     transformOrigin: 'center bottom'
@@ -225,7 +225,7 @@ const Hero = () => {
                     stiffness: 100,
                     damping: 15
                   }}
-                  className="absolute inset-0 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight leading-tight"
+                  className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight leading-tight"
                   style={{ 
                     transformStyle: 'preserve-3d',
                     transformOrigin: 'center bottom'
@@ -240,11 +240,11 @@ const Hero = () => {
 
         {/* Subtitle with typing effect */}
         <motion.div
-          className="mb-6 sm:mb-8 md:mb-10"
+          className="mb-8 sm:mb-10 md:mb-12"
           variants={itemVariants}
         >
           <motion.h3
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-neutral-600 dark:text-neutral-400 font-medium"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-neutral-600 dark:text-neutral-400 font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
@@ -252,7 +252,7 @@ const Hero = () => {
             <span className="inline-flex items-center min-h-[1.5em]">
               {typedText}
               <motion.span 
-                className="w-0.5 h-5 sm:h-6 md:h-8 bg-blue-500 ml-1"
+                className="w-0.5 h-6 sm:h-7 md:h-9 lg:h-11 bg-blue-500 ml-1"
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
               />
@@ -262,7 +262,7 @@ const Hero = () => {
 
         {/* Description - Simple fade in */}
         <motion.p
-          className="max-w-2xl mx-auto text-neutral-600 dark:text-neutral-400 mb-8 sm:mb-10 md:mb-12 text-base sm:text-lg md:text-xl leading-relaxed px-4"
+          className="max-w-2xl mx-auto text-neutral-600 dark:text-neutral-400 mb-8 sm:mb-10 md:mb-12 text-lg sm:text-xl md:text-2xl leading-relaxed px-4"
           variants={itemVariants}
         >
           Passionate about cybersecurity and modern development. Currently pursuing B.Tech at Sri Sairam, Chennai, while building innovative projects and competing in CTFs.
@@ -276,7 +276,7 @@ const Hero = () => {
           <MagneticElement strength={0.1} distance={60}>
             <Link to="/projects">
               <motion.button
-                className="w-full sm:w-auto btn-primary group flex items-center justify-center space-x-2 px-6 py-3 text-white rounded-xl font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-300 performance-optimized"
+                className="w-full sm:w-auto btn-primary group flex items-center justify-center space-x-2 px-6 py-4 text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 performance-optimized"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -290,7 +290,7 @@ const Hero = () => {
             <motion.a
               href={resumePDF}
               download="Harish_Sivaraman_Resume.pdf"
-              className="w-full sm:w-auto btn-secondary group flex items-center justify-center space-x-2 px-6 py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 performance-optimized"
+              className="w-full sm:w-auto btn-secondary group flex items-center justify-center space-x-2 px-6 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 performance-optimized"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -302,7 +302,7 @@ const Hero = () => {
           <MagneticElement strength={0.1} distance={60}>
             <Link to="/contact">
               <motion.button
-                className="w-full sm:w-auto btn-ghost px-6 py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 performance-optimized"
+                className="w-full sm:w-auto btn-ghost px-6 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 performance-optimized"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >

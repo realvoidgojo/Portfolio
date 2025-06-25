@@ -1,5 +1,6 @@
+import React from 'react';
 import { useRef, ReactNode } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 
 interface ScrollAnimationProps {
   children: ReactNode;
@@ -83,8 +84,6 @@ export const MorphingBackground = () => {
       'M0,100 C150,100 350,100 500,100 L500,00 L0,0 Z',
     ]
   );
-
-  const gradientOffset = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10">

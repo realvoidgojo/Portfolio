@@ -422,7 +422,7 @@ p {
 
 @media (max-width: 768px) {
     .section-padding {
-        padding: 4rem 0;
+        padding: 6rem 0;
     }
 }
 
@@ -528,7 +528,7 @@ p {
     }
     
     .section-padding {
-        padding: 2rem 0;
+        padding: 6rem 0;
     }
     
     .container {
@@ -569,7 +569,7 @@ p {
     }
     
     .section-padding {
-        padding: 3rem 0;
+        padding: 6rem 0;
     }
     
     .btn-primary,
@@ -588,7 +588,7 @@ p {
     }
     
     .section-padding {
-        padding: 4rem 0;
+        padding: 6rem 0;
     }
     
     .btn-primary,

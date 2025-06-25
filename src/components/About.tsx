@@ -2,8 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   Code2,
-  GraduationCap,
-  Briefcase,
   Award,
   Database,
   Palette,
@@ -21,7 +19,7 @@ const About = () => {
     },
     {
       category: "Frameworks & Tools",
-      items: [, "React", "Flask", "Requests", "Celery", "OpenCV", "WebSockets"],
+      items: ["React", "Flask", "Requests", "Celery", "OpenCV", "WebSockets"],
       icon: <Database className="w-5 h-5" />,
     },
     {

@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const [cursorType, setCursorType] = useState('default');
 
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
 
   const springConfig = { damping: 25, stiffness: 700 };
   const cursorXSpring = useSpring(cursorX, springConfig);
@@ -29,6 +29,13 @@ const CustomCursor = () => {
 
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
+    
+    // Initialize cursor position immediately
+    const initializeCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX - 16);
+      cursorY.set(e.clientY - 16);
+      setIsVisible(true);
+    };
 
     const handleElementHover = (e: Event) => {
       const target = e.target as HTMLElement;
@@ -48,12 +55,15 @@ const CustomCursor = () => {
       }
     };
 
+    // Initialize cursor on first mouse movement
+    document.addEventListener('mousemove', initializeCursor, { once: true });
     document.addEventListener('mousemove', moveCursor);
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseover', handleElementHover);
 
     return () => {
+      document.removeEventListener('mousemove', initializeCursor);
       document.removeEventListener('mousemove', moveCursor);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -61,7 +71,8 @@ const CustomCursor = () => {
     };
   }, [cursorX, cursorY]);
 
-  if (!isVisible) return null;
+  // Always render the cursor, control visibility with opacity
+  // if (!isVisible) return null;
 
   return (
     <>
@@ -78,6 +89,10 @@ const CustomCursor = () => {
           animate={{
             scale: isHovering ? 1.5 : 1,
             opacity: isVisible ? 1 : 0,
+          }}
+          initial={{
+            scale: 1,
+            opacity: 1,
           }}
           transition={{
             type: "spring",

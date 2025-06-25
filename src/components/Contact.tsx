@@ -1,14 +1,13 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
-  Send,
   Phone,
   MapPin,
+  Send,
   Check,
   AlertCircle,
   Loader2,
-  MessageCircle,
   Github,
   Linkedin,
   BookOpen,
@@ -55,7 +54,7 @@ const Contact = () => {
         "l0cyQBOYDtcQ3hscB"
       )
       .then(
-        (result) => {
+        () => {
           setLoading(false);
           setSuccess(true);
           setForm({

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const ThreeDBackground = () => {
@@ -62,7 +62,7 @@ const ThreeDBackground = () => {
     },
   ];
 
-  const renderObject = (obj: any) => {
+  const renderObject = (obj: typeof objects[0]) => {
     const baseClasses = `absolute backdrop-blur-xl border border-white/10 shadow-2xl`;
     const glassEffect = `bg-gradient-to-br ${obj.gradient} backdrop-blur-xl`;
     

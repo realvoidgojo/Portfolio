@@ -13,7 +13,6 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCw,
-  Trophy,
 } from "lucide-react";
 
 // Import certificates
@@ -227,7 +226,6 @@ const certificates: Certificate[] = [
 const Certificates = () => {
   const [selectedCertificate, setSelectedCertificate] =
     useState<Certificate | null>(null);
-  const [filter, setFilter] = useState<string>("all");
   const [scale, setScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [pdfError, setPdfError] = useState(false);
@@ -241,35 +239,6 @@ const Certificates = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  const categories = [
-    { key: "all", label: "All Certificates", count: certificates.length },
-    {
-      key: "development",
-      label: "Web Development",
-      count: certificates.filter((c) => c.category === "development").length,
-    },
-    {
-      key: "programming",
-      label: "Programming",
-      count: certificates.filter((c) => c.category === "programming").length,
-    },
-    {
-      key: "networking",
-      label: "Cloud & Networks",
-      count: certificates.filter((c) => c.category === "networking").length,
-    },
-    {
-      key: "cybersecurity",
-      label: "Cybersecurity",
-      count: certificates.filter((c) => c.category === "cybersecurity").length,
-    },
-    {
-      key: "gamedev",
-      label: "Game Development",
-      count: certificates.filter((c) => c.category === "gamedev").length,
-    },
-  ];
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -316,11 +285,6 @@ const Certificates = () => {
   const handlePdfError = () => {
     setPdfError(true);
   };
-
-  const filteredCertificates =
-    filter === "all"
-      ? certificates
-      : certificates.filter((cert) => cert.category === filter);
 
   const containerVariants = {
     hidden: { opacity: 0 },
