@@ -17,7 +17,7 @@ interface CodingProfile {
   username: string;
   achievements: string[];
   stats: {
-    contributions?: number;
+    repository?: number;
     ranking?: string;
     rating?: number;
   };
@@ -38,7 +38,7 @@ const profilesData: CodingProfile[] = [
       "NatasX CTF Solver",
     ],
     stats: {
-      contributions: 1,
+      repository: 8,
     },
     link: "https://github.com/realvoidgojo",
     icon: <GitBranch />,
@@ -138,7 +138,8 @@ const Profiles = () => {
             variants={itemVariants}
             className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
           >
-            Connect with me across platforms where I share code, compete in challenges, and create educational content
+            Connect with me across platforms where I share code, compete in
+            challenges, and create educational content
           </motion.p>
         </div>
 
@@ -156,17 +157,22 @@ const Profiles = () => {
             >
               {/* Color Accent Bar */}
               <div className={`h-1 bg-gradient-to-r ${profile.color}`}></div>
-              
+
               <div className="p-8 flex-grow flex flex-col">
                 {/* Header */}
                 <div className="flex items-center mb-6">
-                  <div className={`p-3 rounded-xl bg-gradient-to-r ${profile.color} text-white shadow-lg`}>
+                  <div
+                    className={`p-3 rounded-xl bg-gradient-to-r ${profile.color} text-white shadow-lg`}
+                  >
                     {React.cloneElement(profile.icon as React.ReactElement, {
                       className: "w-6 h-6",
                     })}
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <h3
+                      className="text-2xl font-bold text-neutral-900 dark:text-neutral-100"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
                       {profile.platform}
                     </h3>
                     <p className="text-neutral-600 dark:text-neutral-400 font-jetbrains text-sm">
@@ -182,7 +188,10 @@ const Profiles = () => {
 
                 {/* Achievements */}
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  <h4
+                    className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4 flex items-center"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
                     <Star className="w-4 h-4 mr-2 text-yellow-500" />
                     Highlights
                   </h4>
@@ -193,7 +202,9 @@ const Profiles = () => {
                         className="flex items-start text-neutral-600 dark:text-neutral-400"
                       >
                         <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
-                        <span className="font-jetbrains text-sm">{achievement}</span>
+                        <span className="font-jetbrains text-sm">
+                          {achievement}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -203,13 +214,13 @@ const Profiles = () => {
                 {Object.keys(profile.stats).length > 0 && (
                   <div className="mb-6 p-4 bg-gradient-to-r from-neutral-100/50 to-neutral-200/50 dark:from-neutral-800/50 dark:to-neutral-700/50 rounded-xl backdrop-blur-sm">
                     <div className="flex flex-wrap gap-4">
-                      {profile.stats.contributions && (
+                      {profile.stats.repository && (
                         <div className="text-center">
                           <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-jetbrains">
-                            {profile.stats.contributions}+
+                            {profile.stats.repository}+
                           </div>
                           <div className="text-xs text-neutral-600 dark:text-neutral-400">
-                            Contributions
+                            Repositories
                           </div>
                         </div>
                       )}
@@ -245,16 +256,18 @@ const Profiles = () => {
         </motion.div>
 
         {/* Call to Action */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center mt-16"
-        >
+        <motion.div variants={itemVariants} className="text-center mt-16">
           <div className="backdrop-blur-xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 p-8 rounded-2xl border border-blue-500/20 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>
+            <h3
+              className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-4"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
               Let's Connect
             </h3>
             <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
-              Follow my journey in cybersecurity, development, and continuous learning. I'm always excited to connect with fellow tech enthusiasts!
+              Follow my journey in cybersecurity, development, and continuous
+              learning. I'm always excited to connect with fellow tech
+              enthusiasts!
             </p>
             <motion.a
               href="mailto:harishsivaraman@outlook.com"
