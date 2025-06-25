@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GithubIcon, ExternalLink, Code, X, Rocket, Star } from "lucide-react";
+import {
+  ExternalLink,
+  GithubIcon,
+  X,
+  Calendar,
+  Users,
+  Star,
+  Briefcase,
+  Rocket,
+} from "lucide-react";
+
+// Import enhanced components
+import EnhancedCard from "./EnhancedCard";
+import MagneticElement from "./MagneticElement";
+import TextReveal from "./TextReveal";
+import { ScrollAnimation } from "./ScrollAnimations";
 
 interface Project {
   title: string;
@@ -208,104 +223,134 @@ const Projects = () => {
       className="section-padding"
     >
       <div className="container mx-auto px-6">
-        {/* Header Section */}
-        <div className="flex flex-col items-center justify-center mb-20">
+        {/* Simple Header Section */}
+        <div className="flex flex-col items-center justify-center mb-12 md:mb-20">
           <motion.div
             variants={itemVariants}
-            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
+            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-3 md:p-4 rounded-2xl mb-4 md:mb-6 backdrop-blur-sm border border-blue-500/20"
+            whileHover={{ scale: 1.05 }}
           >
-            <Rocket className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+            <Rocket className="w-6 h-6 md:w-8 md:h-8 text-blue-600 dark:text-blue-400" />
           </motion.div>
+          
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight line-through decoration-black decoration-10"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-4 md:mb-6 text-center tracking-tight relative"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            My Projects
+            <span className="relative">
+              My Projects
+              <motion.div
+                className="absolute top-1/2 left-0 w-full h-1 bg-black dark:bg-white"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: "easeInOut" }}
+                style={{ transform: 'translateY(-50%)' }}
+              />
+            </span>
           </motion.h1>
+          
           <motion.p
             variants={itemVariants}
-            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed px-4"
           >
             A showcase of my technical journey through cybersecurity, web development, and automation
           </motion.p>
         </div>
 
-        {/* Projects Grid */}
+        {/* Simple Projects Grid */}
         <motion.div
           variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {projects.map((project, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="backdrop-blur-xl bg-white/60 dark:bg-neutral-900/60 rounded-2xl overflow-hidden border border-neutral-200/50 dark:border-neutral-700/50 hover:bg-white/80 dark:hover:bg-neutral-900/80 transition-all duration-300 group cursor-pointer"
-              whileHover={{ y: -6, scale: 1.02 }}
-              onClick={(e) => handleProjectClick(e, project)}
+              className="group cursor-pointer"
             >
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  {project.title}
-                </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.slice(0, 3).map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="tech-tag"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {project.tags.length > 3 && (
-                    <span className="tech-tag">
-                      +{project.tags.length - 3}
-                    </span>
-                  )}
-                </div>
+              <EnhancedCard
+                className="h-full"
+                tiltEffect={true}
+                glassEffect={true}
+                magneticEffect={false}
+              >
+                <motion.div
+                  onClick={(e) => handleProjectClick(e, project)}
+                  className="h-full"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Project type indicator */}
+                    <div className="absolute top-3 right-3 bg-black/80 text-white px-2 py-1 rounded-lg text-xs font-medium backdrop-blur-sm">
+                      {project.tags[0]}
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2 sm:mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {project.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4 leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                      {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="tech-tag text-xs sm:text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.tags.length > 3 && (
+                        <span className="tech-tag text-xs sm:text-sm">
+                          +{project.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
 
-                {/* Explicit Action Buttons */}
-                <div className="flex flex-wrap gap-3 mt-auto">
-                  <motion.a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary text-sm flex items-center space-x-2 px-3 py-2"
-                    whileHover={{ scale: 1.02, y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <GithubIcon size={14} />
-                    <span>GitHub</span>
-                  </motion.a>
-                  {project.liveLink && (
-                    <motion.a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary text-sm flex items-center space-x-2 px-3 py-2"
-                      whileHover={{ scale: 1.02, y: -1 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <ExternalLink size={14} />
-                      <span>Live Demo</span>
-                    </motion.a>
-                  )}
-                </div>
-              </div>
+                    {/* Action Buttons */}
+                    <div className="flex flex-wrap gap-2 sm:gap-3 mt-auto">
+                      <motion.a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-secondary text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1.5 sm:py-2"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <GithubIcon size={14} />
+                        <span>GitHub</span>
+                      </motion.a>
+                      
+                      {project.liveLink && (
+                        <motion.a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary text-xs sm:text-sm flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1.5 sm:py-2"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <ExternalLink size={14} />
+                          <span>Live Demo</span>
+                        </motion.a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              </EnhancedCard>
             </motion.div>
           ))}
         </motion.div>

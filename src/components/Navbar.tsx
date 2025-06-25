@@ -134,45 +134,55 @@ const Navbar = () => {
               </div>
             </NavLink>
 
-            {/* Desktop Navigation with centered items and consistent border radius */}
-            <div className="hidden md:flex items-center justify-center space-x-1">
-              {navItems.map((item) => (
-                <NavLink
+            {/* Desktop Navigation */}
+            <motion.nav
+              className="hidden md:flex items-center space-x-1 lg:space-x-2"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.to}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `relative flex items-center justify-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm font-jetbrains ${
-                      isActive
-                        ? "bg-black text-white shadow-lg hover:bg-gray-800 border-2 border-black"
-                        : "text-neutral-700 dark:text-neutral-200 hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white border-2 border-transparent hover:border-black dark:hover:border-white"
-                    }`
-                  }
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                 >
-                  {({ isActive }) => (
-                    <>
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                      >
-                        {item.icon}
-                      </motion.div>
-                      <span className="hidden lg:block font-jetbrains relative">
-                        {item.label}
-                        {/* Strike-through line for active section */}
-                        {isActive && (
-                          <motion.div
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            className="absolute inset-x-0 top-1/2 h-0.5 bg-white origin-left"
-                            style={{ transform: "translateY(-50%)" }}
-                          />
-                        )}
-                      </span>
-                    </>
-                  )}
-                </NavLink>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `relative flex items-center space-x-2 px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 ${
+                        isActive
+                          ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
+                          : "text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-neutral-100 dark:hover:bg-neutral-800/50"
+                      }`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <span className="relative z-10 flex items-center space-x-2">
+                          {item.icon}
+                          <span className="relative">
+                            {item.label}
+                            {/* Linethrough for active state */}
+                            {isActive && (
+                              <motion.div
+                                className="absolute top-1/2 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400"
+                                layoutId="activeLinethrough"
+                                initial={{ scaleX: 0 }}
+                                animate={{ scaleX: 1 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                style={{ transform: 'translateY(-50%)' }}
+                              />
+                            )}
+                          </span>
+                        </span>
+                      </>
+                    )}
+                  </NavLink>
+                </motion.div>
               ))}
-            </div>
+            </motion.nav>
 
             {/* Mobile Menu Button with consistent styling */}
             <motion.button

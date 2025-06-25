@@ -56,7 +56,6 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          console.log("SUCCESS!", result);
           setLoading(false);
           setSuccess(true);
           setForm({
@@ -70,7 +69,7 @@ const Contact = () => {
           }, 5000);
         },
         (error) => {
-          console.error("FAILED...", error);
+          console.error("Email send failed:", error);
           setLoading(false);
           setError(`Failed to send: ${error.text || "Unknown error"}`);
         }
@@ -151,26 +150,34 @@ const Contact = () => {
     >
       <div className="container mx-auto px-6">
         {/* Header Section */}
-        <div className="flex flex-col items-center justify-center mb-20">
+        <div className="flex flex-col items-center justify-center mb-12 md:mb-20">
           <motion.div
             variants={itemVariants}
-            className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 p-4 rounded-2xl mb-6 backdrop-blur-sm border border-blue-500/20"
+            className="bg-gradient-to-br from-green-500/20 to-blue-600/20 p-3 md:p-4 rounded-2xl mb-4 md:mb-6 backdrop-blur-sm border border-green-500/20"
           >
-            <MessageCircle className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+            <Phone className="w-6 h-6 md:w-8 md:h-8 text-green-600 dark:text-green-400" />
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight line-through decoration-black decoration-10"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-4 md:mb-6 text-center tracking-tight relative"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Get In Touch
+            <span className="relative">
+              Contact Me
+              <motion.div
+                className="absolute top-1/2 left-0 w-full h-1 bg-black dark:bg-white"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: "easeInOut" }}
+                style={{ transform: 'translateY(-50%)' }}
+              />
+            </span>
           </motion.h1>
           <motion.p
             variants={itemVariants}
-            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed px-4"
           >
-            Ready to collaborate on something amazing? Let's discuss your next
-            project
+            Let's connect and discuss opportunities, projects, or just have a conversation about technology
           </motion.p>
         </div>
 

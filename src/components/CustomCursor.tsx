@@ -13,6 +13,14 @@ const CustomCursor = () => {
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  // Create trailing cursor springs unconditionally
+  const trailingXSpring = useSpring(cursorX, { damping: 30, stiffness: 200 });
+  const trailingYSpring = useSpring(cursorY, { damping: 30, stiffness: 200 });
+
+  // Create indicator springs unconditionally
+  const indicatorXSpring = useSpring(cursorX, { damping: 20, stiffness: 300 });
+  const indicatorYSpring = useSpring(cursorY, { damping: 20, stiffness: 300 });
+
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 16);
@@ -83,8 +91,8 @@ const CustomCursor = () => {
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-40"
         style={{
-          x: useSpring(cursorX, { damping: 30, stiffness: 200 }),
-          y: useSpring(cursorY, { damping: 30, stiffness: 200 }),
+          x: trailingXSpring,
+          y: trailingYSpring,
         }}
       >
         <motion.div
@@ -95,13 +103,13 @@ const CustomCursor = () => {
         />
       </motion.div>
 
-      {/* Cursor type indicator */}
+      {/* Cursor type indicator - render conditionally but don't use conditional hooks */}
       {cursorType !== 'default' && (
         <motion.div
           className="fixed top-0 left-0 pointer-events-none z-45 text-white text-xs font-medium bg-black px-2 py-1 rounded"
           style={{
-            x: useSpring(cursorX, { damping: 20, stiffness: 300 }),
-            y: useSpring(cursorY, { damping: 20, stiffness: 300 }),
+            x: indicatorXSpring,
+            y: indicatorYSpring,
             transform: 'translate(20px, -30px)',
           }}
           initial={{ opacity: 0, scale: 0.8 }}

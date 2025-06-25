@@ -114,10 +114,19 @@ const About = () => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight line-through decoration-black decoration-10"
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight relative"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            About Me
+            <span className="relative">
+              About Me
+              <motion.div
+                className="absolute top-1/2 left-0 w-full h-1 bg-black dark:bg-white"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: "easeInOut" }}
+                style={{ transform: 'translateY(-50%)' }}
+              />
+            </span>
           </motion.h1>
           <motion.p
             variants={itemVariants}
@@ -147,7 +156,7 @@ const About = () => {
                   <img
                     src={profileImage}
                     alt="Harish Sivaraman"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
