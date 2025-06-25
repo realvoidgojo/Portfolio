@@ -218,7 +218,7 @@ const Projects = () => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight line-through decoration-black decoration-10"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             My Projects
@@ -282,12 +282,12 @@ const Projects = () => {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-secondary text-sm flex items-center space-x-2 px-4 py-2"
+                    className="btn-secondary text-sm flex items-center space-x-2 px-3 py-2"
                     whileHover={{ scale: 1.02, y: -1 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <GithubIcon size={16} />
+                    <GithubIcon size={14} />
                     <span>GitHub</span>
                   </motion.a>
                   {project.liveLink && (
@@ -295,12 +295,12 @@ const Projects = () => {
                       href={project.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary text-sm flex items-center space-x-2 px-4 py-2"
+                      className="btn-primary text-sm flex items-center space-x-2 px-3 py-2"
                       whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={14} />
                       <span>Live Demo</span>
                     </motion.a>
                   )}

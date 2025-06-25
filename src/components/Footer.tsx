@@ -162,8 +162,8 @@ const Footer = () => {
 
           <div className="flex items-center mt-4 md:mt-0">
             <span className="text-neutral-500 dark:text-neutral-500 text-sm font-medium flex items-center">
-              Built with React + Tailwind CSS
-              <Heart className="ml-2 w-4 h-4 text-red-500" />
+              Built with React 
+              
             </span>
           </div>
         </motion.div>

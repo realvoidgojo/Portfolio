@@ -114,7 +114,7 @@ const About = () => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight line-through decoration-black decoration-10"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             About Me

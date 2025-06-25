@@ -18,7 +18,7 @@ const Hero = () => {
   const [showAlternateName, setShowAlternateName] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = "CyberSec Enthusiast & Developer";
+  const fullText = "Software Developer";
 
   useEffect(() => {
     const checkMobile = () => {
@@ -192,7 +192,7 @@ const Hero = () => {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -60, opacity: 0 }}
                     transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-                    className="absolute left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                    className="absolute left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent line-through decoration-white decoration-10"
                   >
                     realvoidgojo
                   </motion.span>
@@ -240,36 +240,36 @@ const Hero = () => {
           while building innovative projects and competing in CTFs.
         </motion.p>
 
-        {/* Action Buttons with Apple-style design */}
+        {/* Action Buttons with refined sizing */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 md:mb-16 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 md:mb-16 justify-center items-center"
           variants={itemVariants}
         >
           <Link to="/projects">
             <motion.button
-              className="btn-primary group flex items-center space-x-2 px-8 py-4 text-white rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="btn-primary group flex items-center space-x-2 px-6 py-3 text-white rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
               <span>View My Work</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
             </motion.button>
           </Link>
 
           <motion.a
             href={resumePDF}
             download="Harish_Sivaraman_Resume.pdf"
-            className="btn-secondary group flex items-center space-x-2 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
+            className="btn-secondary group flex items-center space-x-2 px-6 py-3 rounded-xl font-semibold text-base transition-all duration-300"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Download size={20} className="group-hover:scale-110 transition-transform duration-200" />
+            <Download size={18} className="group-hover:scale-110 transition-transform duration-200" />
             <span>Download CV</span>
           </motion.a>
 
           <Link to="/contact">
             <motion.button
-              className="btn-ghost px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300"
+              className="btn-ghost px-6 py-3 rounded-xl font-semibold text-base transition-all duration-300"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -280,7 +280,7 @@ const Hero = () => {
 
         {/* Social Links with refined design */}
         <motion.div
-          className="flex space-x-6 justify-center"
+          className="flex space-x-4 justify-center"
           variants={itemVariants}
         >
           {socialLinks.map((link, index) => (
@@ -289,7 +289,7 @@ const Hero = () => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`bg-gradient-to-br ${link.color} p-3 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300`}
+              className={`bg-gradient-to-br ${link.color} p-2.5 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300`}
               whileHover={{ y: -3, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={link.label}
@@ -300,12 +300,12 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator with Apple-style design */}
+      {/* Scroll indicator with improved mobile alignment */}
       <motion.button
         onClick={handleScrollDown}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-3 rounded-full bg-white/20 dark:bg-neutral-800/50 backdrop-blur-sm border border-white/30 dark:border-neutral-700/50 hover:bg-white/30 dark:hover:bg-neutral-700/50 transition-all duration-300"
+        className="hero-scroll-button absolute bottom-6 left-1/2 transform -translate-x-1/2 p-2.5 rounded-full bg-white/20 dark:bg-neutral-800/50 backdrop-blur-sm border border-white/30 dark:border-neutral-700/50 hover:bg-white/30 dark:hover:bg-neutral-700/50 transition-all duration-300 performance-optimized"
         animate={{
-          y: [0, 8, 0],
+          y: [0, 6, 0],
         }}
         transition={{
           duration: 2,
@@ -316,7 +316,7 @@ const Hero = () => {
         whileTap={{ scale: 0.9 }}
         aria-label="Scroll down"
       >
-        <ChevronDown size={24} className="text-neutral-600 dark:text-neutral-400" />
+        <ChevronDown size={20} className="text-neutral-600 dark:text-neutral-400" />
       </motion.button>
     </motion.div>
   );

@@ -106,7 +106,7 @@ const Articles = () => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight"
+            className="text-5xl md:text-6xl font-bold text-neutral-900 dark:text-neutral-100 mb-6 text-center tracking-tight line-through decoration-black decoration-10"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             Articles & Writeups
@@ -202,11 +202,11 @@ const Articles = () => {
           variants={itemVariants}
           className="text-center"
         >
-                     <motion.a
-             href="https://medium.com/@realvoidgojo"
+          <motion.a
+            href="https://medium.com/@realvoidgojo"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center space-x-3 text-lg"
+            className="btn-primary inline-flex items-center space-x-2 text-base"
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
