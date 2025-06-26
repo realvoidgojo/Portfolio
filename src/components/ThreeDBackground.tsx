@@ -1,21 +1,33 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const ThreeDBackground = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
-  // Transform values for scroll-based animations
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 0.8]);
+  // Transform values for scroll-based animations - reduced on mobile
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 180 : 360]);
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 90 : 180]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, isMobile ? 1.1 : 1.2, 0.8]);
   
-  // 3D Objects data
+  // 3D Objects data - reduced count on mobile
   const objects = [
     {
       id: 1,
       type: 'sphere',
-      size: 120,
+      size: isMobile ? 80 : 120,
       position: { top: '15%', left: '10%' },
       animationDelay: 0,
       gradient: 'from-blue-400/20 to-purple-600/20',
@@ -23,44 +35,52 @@ const ThreeDBackground = () => {
     {
       id: 2,
       type: 'cube',
-      size: 100,
+      size: isMobile ? 70 : 100,
       position: { top: '60%', right: '15%' },
       animationDelay: 0.5,
       gradient: 'from-emerald-400/20 to-cyan-600/20',
     },
-    {
-      id: 3,
-      type: 'pyramid',
-      size: 80,
-      position: { top: '30%', right: '30%' },
-      animationDelay: 1,
-      gradient: 'from-pink-400/20 to-rose-600/20',
-    },
-    {
-      id: 4,
-      type: 'torus',
-      size: 140,
-      position: { bottom: '20%', left: '20%' },
-      animationDelay: 1.5,
-      gradient: 'from-orange-400/20 to-yellow-600/20',
-    },
-    {
-      id: 5,
-      type: 'octahedron',
-      size: 90,
-      position: { top: '70%', left: '60%' },
-      animationDelay: 2,
-      gradient: 'from-indigo-400/20 to-blue-600/20',
-    },
-    {
-      id: 6,
-      type: 'sphere',
-      size: 60,
-      position: { top: '10%', right: '5%' },
-      animationDelay: 2.5,
-      gradient: 'from-green-400/20 to-emerald-600/20',
-    },
+    // Reduce objects on mobile
+    ...(isMobile ? [] : [
+      {
+        id: 3,
+        type: 'pyramid',
+        size: 80,
+        position: { top: '30%', right: '30%' },
+        animationDelay: 1,
+        gradient: 'from-pink-400/20 to-rose-600/20',
+      },
+      {
+        id: 4,
+        type: 'torus',
+        size: 140,
+        position: { bottom: '20%', left: '20%' },
+        animationDelay: 1.5,
+        gradient: 'from-orange-400/20 to-yellow-600/20',
+      },
+      {
+        id: 5,
+        type: 'octahedron',
+        size: 90,
+        position: { top: '70%', left: '60%' },
+        animationDelay: 2,
+        gradient: 'from-indigo-400/20 to-blue-600/20',
+      },
+      {
+        id: 6,
+        type: 'sphere',
+        size: 60,
+        position: { top: '10%', right: '5%' },
+        animationDelay: 2.5,
+        gradient: 'from-green-400/20 to-emerald-600/20',
+      }
+    ])
   ];
+
+  // Don't render on very small screens (only for performance, not layout)
+  if (typeof window !== 'undefined' && window.innerWidth < 350) {
+    return null;
+  }
 
   const renderObject = (obj: typeof objects[0]) => {
     const baseClasses = `absolute backdrop-blur-xl border border-white/10 shadow-2xl`;

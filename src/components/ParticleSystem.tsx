@@ -17,6 +17,7 @@ const ParticleSystem = () => {
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
   const isActiveRef = useRef(true);
+  const isMobileRef = useRef(false);
 
   const createParticle = useCallback((id: number): Particle => {
     const colors = [
@@ -86,8 +87,26 @@ const ParticleSystem = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    // Check if mobile and adjust particle count accordingly
+    const checkMobile = () => {
+      isMobileRef.current = window.innerWidth < 768;
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Reduce particle count on mobile for performance
+    const particleCount = isMobileRef.current ? 15 : 30;
+    
+    // Don't run particles on very small screens for performance
+    if (window.innerWidth < 350) {
+      return () => {
+        window.removeEventListener('resize', checkMobile);
+      };
+    }
+
     // Initialize particles
-    particlesRef.current = Array.from({ length: 30 }, (_, i) => createParticle(i));
+    particlesRef.current = Array.from({ length: particleCount }, (_, i) => createParticle(i));
 
     const animate = () => {
       if (!isActiveRef.current) return;

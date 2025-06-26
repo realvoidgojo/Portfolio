@@ -327,7 +327,7 @@ const Hero = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`bg-gradient-to-br ${link.color} p-2 sm:p-2.5 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300 performance-optimized`}
+                className={`bg-gradient-to-br ${link.color} p-2 sm:p-2.5 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300 performance-optimized flex items-center justify-center min-w-[44px] min-h-[44px]`}
                 whileHover={{ y: -3, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={link.label}

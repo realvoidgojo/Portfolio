@@ -1,4 +1,4 @@
-import { useRef, useEffect, ReactNode } from 'react';
+import { useRef, useEffect, ReactNode, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface MagneticElementProps {
@@ -15,6 +15,7 @@ const MagneticElement = ({
   distance = 100 
 }: MagneticElementProps) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -27,6 +28,19 @@ const MagneticElement = ({
   const rotateY = useTransform(xSpring, [-50, 50], [-10, 10]);
 
   useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    // Don't initialize magnetic effects on mobile
+    if (isMobile) {
+      return () => window.removeEventListener('resize', checkMobile);
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!ref.current) return;
       
@@ -59,8 +73,18 @@ const MagneticElement = ({
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', checkMobile);
     };
-  }, [x, y, strength, distance]);
+  }, [x, y, strength, distance, isMobile]);
+
+  // Simplified component for mobile devices
+  if (isMobile) {
+    return (
+      <div className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div

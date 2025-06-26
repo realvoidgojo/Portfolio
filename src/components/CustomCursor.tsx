@@ -5,6 +5,7 @@ const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const [cursorType, setCursorType] = useState('default');
+  const [isMobile, setIsMobile] = useState(false);
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
@@ -22,6 +23,19 @@ const CustomCursor = () => {
   const indicatorYSpring = useSpring(cursorY, { damping: 20, stiffness: 300 });
 
   useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    // Don't initialize cursor events on mobile
+    if (isMobile) {
+      return () => window.removeEventListener('resize', checkMobile);
+    }
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 16);
       cursorY.set(e.clientY - 16);
@@ -69,10 +83,13 @@ const CustomCursor = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseover', handleElementHover);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isMobile]);
 
   // Always render the cursor, control visibility with opacity
   // if (!isVisible) return null;
+
+  // Don't render cursor on mobile devices
+  if (isMobile) return null;
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,9 +21,29 @@ import ParticleSystem from "./components/ParticleSystem";
 import ThreeDBackground from "./components/ThreeDBackground";
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
+
   // Initialize EmailJS when the app loads
   useEffect(() => {
     emailjs.init("l0cyQBOYDtcQ3hscB");
+  }, []);
+
+  // Check device capabilities and performance
+  useEffect(() => {
+    const checkDeviceCapabilities = () => {
+      const width = window.innerWidth;
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSlowDevice = navigator.hardwareConcurrency ? navigator.hardwareConcurrency < 4 : false;
+      
+      setIsMobile(width < 768 || isTouchDevice);
+      setIsLowPerformance(width < 350 || isSlowDevice);
+    };
+
+    checkDeviceCapabilities();
+    window.addEventListener('resize', checkDeviceCapabilities);
+    
+    return () => window.removeEventListener('resize', checkDeviceCapabilities);
   }, []);
 
   // Hide default cursor for custom cursor experience
@@ -31,7 +51,7 @@ function App() {
     // Only hide cursor on non-touch devices
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
-    if (!isTouchDevice) {
+    if (!isTouchDevice && !isMobile) {
       document.body.style.cursor = 'none';
       document.documentElement.style.cursor = 'none';
     }
@@ -40,19 +60,19 @@ function App() {
       document.body.style.cursor = 'auto';
       document.documentElement.style.cursor = 'auto';
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <Router>
       <div className="min-h-screen relative">
-        {/* Custom Cursor - only on non-touch devices */}
-        {typeof window !== 'undefined' && !('ontouchstart' in window) && <CustomCursor />}
+        {/* Custom Cursor - only on non-touch, non-mobile devices */}
+        {!isMobile && !isLowPerformance && <CustomCursor />}
         
-        {/* 3D Background with Glassmorphism */}
-        <ThreeDBackground />
+        {/* 3D Background with Glassmorphism - reduced on mobile */}
+        {!isLowPerformance && <ThreeDBackground />}
         
-        {/* Particle System */}
-        <ParticleSystem />
+        {/* Particle System - disabled on low performance devices */}
+        {!isLowPerformance && <ParticleSystem />}
         
         {/* Simple background without parallax effects */}
         <div className="fixed inset-0 pointer-events-none -z-20">

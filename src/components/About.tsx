@@ -262,7 +262,7 @@ const About = () => {
                 whileHover={{ y: -4, scale: 1.02 }}
               >
                 <div className="flex items-center mb-6">
-                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-600/20 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center min-w-[44px] min-h-[44px]">
                     {skillSet.icon}
                   </div>
                   <h3

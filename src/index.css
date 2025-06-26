@@ -554,10 +554,92 @@ p {
         margin-bottom: 1rem;
     }
     
-    /* Prevent horizontal scroll on mobile */
-    * {
+    /* Prevent horizontal scroll on mobile - more specific */
+    .container,
+    .section-padding,
+    .backdrop-blur-xl {
         max-width: 100vw;
         box-sizing: border-box;
+    }
+    
+    /* Mobile Performance Optimizations */
+    .performance-optimized {
+        will-change: transform;
+        transform: translateZ(0);
+    }
+    
+    /* Reduce blur effects on mobile for performance */
+    .backdrop-blur-xl,
+    .backdrop-blur-lg {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    
+    /* Disable heavy animations on mobile */
+    .animate-float,
+    .float {
+        animation: none;
+    }
+    
+    /* Simplify glassmorphism on mobile - preserve layout */
+    .glass-effect {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    
+    /* Reduce particle effects complexity */
+    .particle-trail::after {
+        display: none;
+    }
+    
+    /* Optimize hover states for touch devices */
+    .hover-glow::before {
+        display: none;
+    }
+    
+    /* Reduce 3D transforms on mobile for performance */
+    .transform-3d {
+        transform-style: preserve-3d;
+        perspective: 500px;
+    }
+    
+    /* Center icons in containers on mobile */
+    .icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    /* Specific icon container fixes for mobile */
+    .social-icon-container,
+    .contact-icon-container,
+    .skill-icon-container,
+    .certificate-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Optimize shadows for mobile */
+    .shadow-glow,
+    .shadow-glow-purple {
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* Reset any potentially interfering styles */
+    * {
+        /* Ensure proper box-sizing inheritance */
+        box-sizing: inherit;
+    }
+    
+    /* Preserve responsive spacing and sizing */
+    [class*="sm:"],
+    [class*="md:"],
+    [class*="lg:"],
+    [class*="xl:"] {
+        /* Let Tailwind handle responsive styles without interference */
     }
 }
 

@@ -186,7 +186,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button with consistent styling */}
             <motion.button
-              className="md:hidden p-2 rounded-lg bg-white dark:bg-black text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors border-2 border-black dark:border-white"
+              className="md:hidden p-2 rounded-lg bg-white dark:bg-black text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors border-2 border-black dark:border-white flex items-center justify-center min-w-[44px] min-h-[44px]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
               whileTap={{ scale: 0.95 }}

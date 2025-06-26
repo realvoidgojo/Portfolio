@@ -371,8 +371,8 @@ const Certificates = () => {
                 alt={certificate.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute top-4 right-4 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-3 rounded-full border border-neutral-200/50 dark:border-neutral-700/50">
-                <div className="text-blue-600 dark:text-blue-400">
+              <div className="absolute top-4 right-4 backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 p-3 rounded-full border border-neutral-200/50 dark:border-neutral-700/50 flex items-center justify-center min-w-[44px] min-h-[44px]">
+                <div className="text-blue-600 dark:text-blue-400 flex items-center justify-center">
                   {certificate.icon}
                 </div>
               </div>

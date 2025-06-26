@@ -364,7 +364,7 @@ const Contact = () => {
                       className="flex items-start space-x-4"
                       whileHover={{ x: 4 }}
                     >
-                      <div className="p-3 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-xl text-blue-600 dark:text-blue-400">
+                      <div className="p-3 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-xl text-blue-600 dark:text-blue-400 flex items-center justify-center min-w-[44px] min-h-[44px]">
                         {item.icon}
                       </div>
                       <div>
@@ -410,7 +410,7 @@ const Contact = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-4 bg-white/60 dark:bg-neutral-800/60 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 text-neutral-600 dark:text-neutral-400 ${link.color} transition-all hover:bg-white/80 dark:hover:bg-neutral-700/80 backdrop-blur-sm group`}
+                      className={`p-4 bg-white/60 dark:bg-neutral-800/60 rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 text-neutral-600 dark:text-neutral-400 ${link.color} transition-all hover:bg-white/80 dark:hover:bg-neutral-700/80 backdrop-blur-sm group flex items-center justify-center min-w-[56px] min-h-[56px]`}
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
