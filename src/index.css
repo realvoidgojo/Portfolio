@@ -26,7 +26,7 @@ body {
     font-weight: 400;
     letter-spacing: -0.01em;
     line-height: 1.6;
-    cursor: none;
+    cursor: auto;
 }
 
 /* Dark mode support */
@@ -115,6 +115,18 @@ a {
 a:hover {
     color: #007AFF;
     /* NO underlines - clean Apple style */
+}
+
+/* Disable image hover effects globally */
+img {
+    transition: none !important;
+    pointer-events: auto;
+}
+
+img:hover {
+    transform: none !important;
+    scale: 1 !important;
+    filter: none !important;
 }
 
 /* Glass Morphism Effects */
@@ -236,32 +248,32 @@ a:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Modern Button Styles */
+/* Modern Button Styles - Minimal Design */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     border: none;
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     letter-spacing: -0.01em;
 }
 
 .btn-primary {
     background: #000000;
     color: #ffffff;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.625rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid #000000;
     cursor: pointer;
-    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -296,8 +308,8 @@ a:hover {
     background: #ffffff;
     backdrop-filter: blur(10px);
     color: #000000;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.625rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid #000000;
@@ -306,7 +318,7 @@ a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     position: relative;
     overflow: hidden;
 }
@@ -351,8 +363,8 @@ a:hover {
     background: transparent;
     color: var(--text-secondary);
     border: 2px solid transparent;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.625rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
@@ -360,7 +372,7 @@ a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     position: relative;
     overflow: hidden;
 }
@@ -516,15 +528,15 @@ p {
     
     /* Ensure all interactive elements have proper touch targets */
     button, a, .btn-primary, .btn-secondary, .btn-ghost {
-        min-height: 44px;
-        min-width: 44px;
+        min-height: 40px;
+        min-width: 40px;
     }
     
     .btn-primary,
     .btn-secondary,
     .btn-ghost {
-        padding: 0.75rem 1rem;
-        font-size: 0.875rem;
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8rem;
     }
     
     .section-padding {
@@ -587,10 +599,7 @@ p {
         -webkit-backdrop-filter: blur(8px);
     }
     
-    /* Reduce particle effects complexity */
-    .particle-trail::after {
-        display: none;
-    }
+
     
     /* Optimize hover states for touch devices */
     .hover-glow::before {
@@ -657,8 +666,8 @@ p {
     .btn-primary,
     .btn-secondary,
     .btn-ghost {
-        padding: 0.625rem 1.25rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -676,8 +685,8 @@ p {
     .btn-primary,
     .btn-secondary,
     .btn-ghost {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.5rem 1.125rem;
+        font-size: 0.85rem;
     }
 }
 
@@ -974,40 +983,7 @@ html {
     box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
 }
 
-/* Particle trail effect */
-.particle-trail {
-    position: relative;
-    overflow: visible;
-}
 
-.particle-trail::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    background: radial-gradient(circle, #667eea, transparent);
-    border-radius: 50%;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.particle-trail:hover::after {
-    animation: particleTrail 0.6s ease-out;
-}
-
-@keyframes particleTrail {
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(3);
-    }
-}
 
 /* Enhanced focus states for accessibility */
 .focus-ring:focus {
@@ -1016,35 +992,62 @@ html {
     border-radius: 8px;
 }
 
-/* Enhanced component optimizations */
-.custom-cursor, .magnetic, .enhanced-card {
+/* Enhanced component optimizations for hosting environments */
+.magnetic, .enhanced-card {
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Performance optimizations for all animated elements */
+*[class*="animate"], 
+*[class*="motion"], 
+.framer-motion-element {
+    will-change: auto;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Optimize backdrop filters for better cross-browser support */
+.backdrop-blur-xl,
+.backdrop-blur-lg,
+.backdrop-blur-md {
+    -webkit-backdrop-filter: blur(var(--blur-strength, 16px));
+    backdrop-filter: blur(var(--blur-strength, 16px));
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+    .backdrop-blur-xl,
+    .backdrop-blur-lg,
+    .backdrop-blur-md {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .dark .backdrop-blur-xl,
+    .dark .backdrop-blur-lg,
+    .dark .backdrop-blur-md {
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
 }
 
 /* Prevent text selection on interactive elements */
-.magnetic, .enhanced-card, .particle-system {
+.magnetic, .enhanced-card {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
 
-/* Smooth cursor transitions */
+/* Ensure normal cursor behavior */
 body {
-    cursor: none;
+    cursor: auto;
 }
 
 /* Ensure proper z-index layering */
-.cursor-layer {
-    z-index: 9999;
-}
-
-.particle-layer {
-    z-index: 1;
-}
-
 .content-layer {
     z-index: 10;
 }
@@ -1068,19 +1071,29 @@ body {
     perspective-origin: center center;
 }
 
-/* Reduced motion for accessibility */
+/* Enhanced reduced motion for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
     .magnetic,
     .enhanced-card,
-    .particle-system,
-    .custom-cursor {
+    *[class*="animate"],
+    *[class*="motion"],
+    .framer-motion-element {
         animation: none !important;
         transition: none !important;
+        transform: none !important;
     }
     
     * {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Disable 3D transforms when motion is reduced */
+    .transform-3d,
+    .perspective-container {
+        transform-style: flat !important;
+        perspective: none !important;
     }
 }

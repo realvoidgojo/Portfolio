@@ -17,7 +17,6 @@ import {
 
 // Import certificates
 import fullStackCert from "../assets/certifications/full-stack-cert.pdf";
-import unityCert from "../assets/certifications/unity-game-dev.pdf";
 import javaCert from "../assets/certifications/java-nptel.pdf";
 import networksCert from "../assets/certifications/computer-networks.pdf";
 import cloudCert from "../assets/certifications/cloud-computing.pdf";
@@ -64,30 +63,6 @@ const certificates: Certificate[] = [
     pdfFile: fullStackCert,
     icon: <Code size={20} />,
     category: "development",
-    dimensions: {
-      width: "1100px",
-      height: "65vh",
-      maxWidth: "98vw",
-      maxHeight: "65vh",
-    },
-    mobileDimensions: {
-      width: "95vw",
-      height: "65vh",
-      maxWidth: "95vw",
-      maxHeight: "65vh",
-    },
-  },
-  {
-    title: "Complete C# Unity Game Developer 2D",
-    issuer: "Udemy",
-    date: "2022",
-    description:
-      "In-depth course on game development using Unity engine and C#, focusing on 2D game mechanics and design.",
-    image:
-      "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    pdfFile: unityCert,
-    icon: <BookOpen size={20} />,
-    category: "gamedev",
     dimensions: {
       width: "1100px",
       height: "65vh",

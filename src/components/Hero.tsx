@@ -11,63 +11,28 @@ import {
 import { Link } from "react-router-dom";
 import profileImage from "../assets/profile.jpg";
 import resumePDF from "../assets/Harish_Resume.pdf";
-
-// Import enhanced components  
 import MagneticElement from "./MagneticElement";
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [showAlternateName, setShowAlternateName] = useState(false);
-  const [typedText, setTypedText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
-  const fullText = "Software Developer";
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Rolling animation for name change
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShowAlternateName((prev) => !prev);
-    }, 4000);
-
-    return () => clearInterval(interval);
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        setShowAlternateName((prev) => !prev);
+      }, 4000);
+      return () => clearInterval(interval);
+    }, 2000);
+    return () => clearTimeout(timeout);
   }, []);
-
-  useEffect(() => {
-    if (isTyping) {
-      if (typedText.length < fullText.length) {
-        const timeout = setTimeout(() => {
-          setTypedText(fullText.slice(0, typedText.length + 1));
-        }, 120);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => {
-          setIsTyping(false);
-        }, 3000);
-        return () => clearTimeout(timeout);
-      }
-    } else {
-      if (typedText.length > 0) {
-        const timeout = setTimeout(() => {
-          setTypedText(fullText.slice(0, typedText.length - 1));
-        }, 60);
-        return () => clearTimeout(timeout);
-      } else {
-        const timeout = setTimeout(() => {
-          setIsTyping(true);
-        }, 1000);
-        return () => clearTimeout(timeout);
-      }
-    }
-  }, [typedText, isTyping, fullText]);
 
   const socialLinks = [
     {
@@ -130,17 +95,17 @@ const Hero = () => {
       >
         {/* Profile Image */}
         <motion.div
-          className="inline-block mb-8 sm:mb-10 md:mb-14 relative"
+          className="inline-block mb-10 relative"
           variants={itemVariants}
         >
           <MagneticElement strength={0.15} distance={100}>
             <motion.div
               className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-full overflow-hidden mx-auto relative shadow-2xl performance-optimized"
               style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                padding: '3px',
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                padding: "3px",
               }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
                 rotateY: 5,
               }}
@@ -149,14 +114,14 @@ const Hero = () => {
               <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-neutral-800">
                 <img
                   src={profileImage}
-                  alt="Harish Sivaraman"
+                  alt="Harish Sivaraman profile"
+                  role="img"
                   className="w-full h-full object-cover"
                 />
               </div>
-              
-              {/* Online indicator */}
+
               <motion.div
-                className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full border-2 border-white dark:border-neutral-800"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white dark:border-neutral-800"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.7, 1, 0.7],
@@ -171,22 +136,22 @@ const Hero = () => {
           </MagneticElement>
         </motion.div>
 
-        {/* Main Heading with Rolling Animation */}
-        <motion.div
-          className="mb-6 sm:mb-8 md:mb-10"
-          variants={itemVariants}
-        >
+        {/* Intro Heading */}
+        <motion.div className="mb-6" variants={itemVariants}>
           <motion.h1
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 text-neutral-900 dark:text-neutral-100 tracking-tight leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-neutral-900 dark:text-neutral-100 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
             Hello, I'm
           </motion.h1>
-          
-          {/* Name with Rolling Animation - Appropriately sized */}
-          <div className="relative h-[3em] overflow-hidden">
+
+          {/* Rolling Name */}
+          <div
+            className="relative flex items-center justify-center overflow-hidden"
+            style={{ minHeight: "5em", perspective: "1000px" }}
+          >
             <AnimatePresence mode="wait">
               {showAlternateName ? (
                 <motion.h2
@@ -194,23 +159,30 @@ const Hero = () => {
                   initial={{ rotateX: 90, opacity: 0 }}
                   animate={{ rotateX: 0, opacity: 1 }}
                   exit={{ rotateX: -90, opacity: 0 }}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     ease: [0.4, 0, 0.2, 1],
                     type: "spring",
                     stiffness: 100,
-                    damping: 15
+                    damping: 15,
                   }}
-                  className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text tracking-tight leading-tight line-through decoration-black decoration-10"
-                  style={{ 
-                    transformStyle: 'preserve-3d',
-                    transformOrigin: 'center bottom'
+                  className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+                  style={{
+                    background:
+                      "white",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    color: "transparent",
+                    textShadow:
+                      "0 0 20px rgba(102, 126, 234, 0.4), 0 0 40px rgba(118, 75, 162, 0.3)",
+                    filter: "drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3))",
+                    transformStyle: "preserve-3d",
+                    backfaceVisibility: "hidden",
+                    willChange: "transform, opacity",
                   }}
+                  aria-live="polite"
                 >
-                  <span className="relative">
-                    realvoidgojo
-                   
-                  </span>
+                  realvoidgojo
                 </motion.h2>
               ) : (
                 <motion.h2
@@ -218,18 +190,20 @@ const Hero = () => {
                   initial={{ rotateX: 90, opacity: 0 }}
                   animate={{ rotateX: 0, opacity: 1 }}
                   exit={{ rotateX: -90, opacity: 0 }}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     ease: [0.4, 0, 0.2, 1],
                     type: "spring",
                     stiffness: 100,
-                    damping: 15
+                    damping: 15,
                   }}
-                  className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight leading-tight"
-                  style={{ 
-                    transformStyle: 'preserve-3d',
-                    transformOrigin: 'center bottom'
+                  className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    backfaceVisibility: "hidden",
+                    willChange: "transform, opacity",
                   }}
+                  aria-live="polite"
                 >
                   Harish Sivaraman
                 </motion.h2>
@@ -238,50 +212,44 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Subtitle with typing effect */}
-        <motion.div
-          className="mb-8 sm:mb-10 md:mb-12"
-          variants={itemVariants}
-        >
+        {/* Subtitle */}
+        <motion.div className="mb-8" variants={itemVariants}>
           <motion.h3
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-neutral-600 dark:text-neutral-400 font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           >
-            <span className="inline-flex items-center min-h-[1.5em]">
-              {typedText}
-              <motion.span 
-                className="w-0.5 h-6 sm:h-7 md:h-9 lg:h-11 bg-blue-500 ml-1"
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-              />
-            </span>
+            Software Developer
           </motion.h3>
         </motion.div>
 
-        {/* Description - Simple fade in */}
+        {/* Description */}
         <motion.p
-          className="max-w-2xl mx-auto text-neutral-600 dark:text-neutral-400 mb-8 sm:mb-10 md:mb-12 text-lg sm:text-xl md:text-2xl leading-relaxed px-4"
+          className="max-w-2xl mx-auto text-neutral-600 dark:text-neutral-400 mb-10 text-lg sm:text-xl md:text-2xl leading-relaxed px-4"
           variants={itemVariants}
         >
-          Passionate about cybersecurity and modern development. Currently pursuing B.Tech at Sri Sairam, Chennai, while building innovative projects and competing in CTFs.
+          Software Engineer with a CS background, experienced in AI projects and
+          cybersecurity.
         </motion.p>
 
-        {/* Action Buttons - Mobile responsive */}
+        {/* Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10 sm:mb-12 md:mb-16 justify-center items-center px-4"
+          className="flex flex-col sm:flex-row gap-4 mb-12 justify-center items-center px-4"
           variants={itemVariants}
         >
           <MagneticElement strength={0.1} distance={60}>
             <Link to="/projects">
               <motion.button
-                className="w-full sm:w-auto btn-primary group flex items-center justify-center space-x-2 px-6 py-4 text-white rounded-xl font-semibold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 performance-optimized"
+                className="btn-primary group flex items-center space-x-2 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 performance-optimized"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span>View My Work</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform duration-200"
+                />
               </motion.button>
             </Link>
           </MagneticElement>
@@ -290,11 +258,14 @@ const Hero = () => {
             <motion.a
               href={resumePDF}
               download="Harish_Sivaraman_Resume.pdf"
-              className="w-full sm:w-auto btn-secondary group flex items-center justify-center space-x-2 px-6 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 performance-optimized"
+              className="btn-secondary group flex items-center space-x-2 rounded-xl font-semibold transition-all duration-300 performance-optimized"
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Download size={18} className="group-hover:scale-110 transition-transform duration-200" />
+              <Download
+                size={18}
+                className="group-hover:scale-110 transition-transform duration-200"
+              />
               <span>Download CV</span>
             </motion.a>
           </MagneticElement>
@@ -302,7 +273,7 @@ const Hero = () => {
           <MagneticElement strength={0.1} distance={60}>
             <Link to="/contact">
               <motion.button
-                className="w-full sm:w-auto btn-ghost px-6 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 performance-optimized"
+                className="btn-ghost rounded-xl font-semibold transition-all duration-300 performance-optimized"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -312,17 +283,13 @@ const Hero = () => {
           </MagneticElement>
         </motion.div>
 
-        {/* Social Links - Mobile responsive */}
+        {/* Social Links */}
         <motion.div
-          className="flex space-x-3 sm:space-x-4 justify-center"
+          className="flex space-x-4 justify-center"
           variants={itemVariants}
         >
           {socialLinks.map((link, index) => (
-            <MagneticElement 
-              key={index} 
-              strength={0.15} 
-              distance={40}
-            >
+            <MagneticElement key={index} strength={0.15} distance={40}>
               <motion.a
                 href={link.url}
                 target="_blank"
