@@ -150,14 +150,21 @@ const Hero = () => {
           {/* Rolling Name */}
           <div
             className="relative flex items-center justify-center overflow-hidden"
-            style={{ minHeight: "5em", perspective: "1000px" }}
+            style={{ 
+              minHeight: "clamp(2em, 4vw + 1em, 5em)", 
+              perspective: "1000px" 
+            }}
           >
             <AnimatePresence mode="wait">
               {showAlternateName ? (
                 <motion.h2
                   key="realvoidgojo"
                   initial={{ rotateX: 90, opacity: 0 }}
-                  animate={{ rotateX: 0, opacity: 1 }}
+                  animate={{ 
+                    rotateX: 0, 
+                    opacity: 1,
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                  }}
                   exit={{ rotateX: -90, opacity: 0 }}
                   transition={{
                     duration: 0.6,
@@ -165,20 +172,25 @@ const Hero = () => {
                     type: "spring",
                     stiffness: 100,
                     damping: 15,
+                    backgroundPosition: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }
                   }}
                   className="absolute inset-0 flex items-center justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
                   style={{
                     background:
-                      "white",
+                      "linear-gradient(110deg, #606060 0%, #8E8E8E 10%, #F5F5F5 20%, #FFFFFF 30%, #F5F5F5 40%, #8E8E8E 50%, #606060 60%, #8E8E8E 70%, #F5F5F5 80%, #FFFFFF 90%, #F5F5F5 100%)",
+                    backgroundSize: "300% 100%",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     color: "transparent",
-                    textShadow:
-                      "0 0 20px rgba(102, 126, 234, 0.4), 0 0 40px rgba(118, 75, 162, 0.3)",
-                    filter: "drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3))",
+                    filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.4)) drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.8))",
                     transformStyle: "preserve-3d",
                     backfaceVisibility: "hidden",
-                    willChange: "transform, opacity",
+                    willChange: "transform, opacity, background-position",
+                    position: "relative",
                   }}
                   aria-live="polite"
                 >

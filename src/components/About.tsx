@@ -126,13 +126,7 @@ const About = () => {
               />
             </span>
           </motion.h1>
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl text-center leading-relaxed"
-          >
-            Passionate cybersecurity enthusiast and developer building the
-            future of digital security
-          </motion.p>
+        
         </div>
 
         {/* Bio Section */}
@@ -183,7 +177,7 @@ const About = () => {
             </h2>
             <div className="space-y-6 text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
               <p>
-                I'm a passionate cybersecurity enthusiast and software developer
+                I'm a  cybersecurity enthusiast and software developer
                 from Chennai, India, with expertise in{" "}
                 <span className="font-jetbrains text-blue-600 dark:text-blue-400 font-medium">
                   CTFs
